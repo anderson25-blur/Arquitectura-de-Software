@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+:root {
+  --bg-dark: #0a0e14;
+  --card-bg: rgba(18, 24, 38, 0.7);
+  --green: #22c55e;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --dark-red: #b91c1c;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background-color: rgba(10, 14, 20, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  color: var(--green);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.logo-text strong {
+  display: block;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.logo-text small {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: var(--green);
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 4rem;
+  min-height: 70vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 550px;
+  z-index: 2;
+}
+
+.welcome-text {
+  color: var(--green);
+  font-size: 1rem;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin: 1rem 0;
+  font-weight: 800;
+}
+
+.hero h1 .highlight {
+  color: var(--green);
+}
+
+.hero p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.btn-outline-green {
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+
+.btn-outline-green:hover {
+  background: var(--green);
+  color: #000;
+}
+
+.btn-outline-white {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mask-image: linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+/* Info Banner */
+.info-banner {
+  margin: 0 4rem;
+  padding: 1.5rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-icon {
+  color: var(--green);
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.info-card strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.info-card p {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Unidades Section */
+.unidades-section {
+  padding: 5rem 4rem;
+  text-align: center;
+}
+
+.unidades-section h2 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 3rem;
+  color: var(--text-main);
+  position: relative;
+  display: inline-block;
+}
+
+.unidades-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background-color: var(--green);
+}
+
+.unidades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-brand {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: var(--green);
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  min-height: 48px;
+}
+
+.btn-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Variantes de color para tarjetas */
+.card-green { border-color: var(--green); }
+.card-red { border-color: var(--red); }
+.card-blue { border-color: var(--blue); }
+.card-darkred { border-color: var(--dark-red); }
+
+.red-text { color: var(--red) !important; }
+.blue-text { color: var(--blue) !important; }
+.darkred-text { color: var(--dark-red) !important; }
+
+/* Footer */
+footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .info-banner, .unidades-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { flex-direction: column; text-align: center; }
+  .hero-image { position: relative; width: 100%; height: 300px; margin-top: 2rem; }
+}
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anderson Mayta | Arquitectura de Software</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">&lt;A/&gt;</span>
+      <div class="logo-text">
+        <strong>ANDERSON MAYTA</strong>
+        <small>ARQUITECTURA DE SOFTWARE</small>
+      </div>
+    </div>
+    <nav>
+      <a href="#inicio" class="active">INICIO</a>
+      <a href="#sobre-mi">SOBRE MÍ</a>
+      <a href="#proyectos">PROYECTOS</a>
+      <a href="#unidades">UNIDADES</a>
+      <a href="#habilidades">HABILIDADES</a>
+      <a href="#contacto">CONTACTO</a>
+      <a href="https://github.com" target="_blank" class="github-icon"><i data-lucide="github"></i></a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="welcome-text">Bienvenido a mi</span>
+      <h1>PORTAFOLIO<br><span class="highlight">DE ARQUITECTURA</span><br>DE SOFTWARE</h1>
+      <p>Este portafolio contiene los trabajos, proyectos y evidencias desarrollados a lo largo del curso de Arquitectura de Software.</p>
+      <div class="hero-buttons">
+        <a href="#proyectos" class="btn btn-outline-green"><i data-lucide="folder"></i> VER PROYECTOS</a>
+        <a href="#" class="btn btn-outline-white"><i data-lucide="download"></i> DESCARGAR CV</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- Reemplazar src por tu imagen de fondo/moto -->
+      <img src="moto.jpg" alt="Motorcycle background">
+    </div>
+  </section>
+
+  <!-- Quick Info Banner -->
+  <section class="info-banner">
+    <div class="info-card">
+      <i data-lucide="user" class="info-icon"></i>
+      <div>
+        <strong>Estudiante</strong>
+        <p>Ingeniería de Sistemas<br>UPLA</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <i data-lucide="code" class="info-icon"></i>
+      <div>
+        <strong>Enfoque</strong>
+        <p>Diseño arquitectónico, patrones y buenas prácticas</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <i data-lucide="layers" class="info-icon"></i>
+      <div>
+        <strong>Tecnologías</strong>
+        <p>UML, Patrones, Python, Java, MySQL, Git, entre otros.</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <i data-lucide="target" class="info-icon"></i>
+      <div>
+        <strong>Objetivo</strong>
+        <p>Diseñar soluciones robustas, escalables y mantenibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unidades Section -->
+  <section class="unidades-section" id="unidades">
+    <h2>UNIDADES DEL CURSO</h2>
+    <div class="unidades-grid">
+
+      <!-- Unidad 1 -->
+      <div class="card card-green">
+        <div class="card-brand">Kawasaki</div>
+        <h3>UNIDAD 1</h3>
+        <p>Fundamentos de la arquitectura de software y análisis de requerimientos.</p>
+        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+      </div>
+
+      <!-- Unidad 2 -->
+      <div class="card card-red">
+        <div class="card-brand red-text">HONDA</div>
+        <h3 class="red-text">UNIDAD 2</h3>
+        <p>Diseño arquitectónico y patrones de diseño de software.</p>
+        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+      </div>
+
+      <!-- Unidad 3 -->
+      <div class="card card-blue">
+        <div class="card-brand blue-text">BMW</div>
+        <h3 class="blue-text">UNIDAD 3</h3>
+        <p>Modelado de software con UML y vistas de arquitectura.</p>
+        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+      </div>
+
+      <!-- Unidad 4 -->
+      <div class="card card-darkred">
+        <div class="card-brand darkred-text">DUCATI</div>
+        <h3 class="darkred-text">UNIDAD 4</h3>
+        <p>Evaluación de arquitecturas, calidad de software y documentación.</p>
+        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <i data-lucide="github"></i> Desarrollado por <strong>Mayta</strong> • 2026 • Todos los derechos reservados
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
