@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anderson Mayta | Arquitectura de Software</title>
-  <!-- Lucide Icons para los íconos de la interfaz -->
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
       --bg-dark: #0a0e14;
@@ -29,6 +27,18 @@
       background-color: var(--bg-dark);
       color: var(--text-main);
       line-height: 1.5;
+    }
+
+    svg.icon {
+      width: 1em;
+      height: 1em;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: -0.15em;
+      flex-shrink: 0;
     }
 
     /* Navbar */
@@ -90,6 +100,7 @@
     .github-icon {
       display: flex;
       align-items: center;
+      font-size: 1.1rem;
     }
 
     /* Hero Section */
@@ -166,6 +177,10 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
+    /* La imagen de fondo del hero ya NO depende de ningún archivo externo.
+       Se dibuja con SVG/CSS directamente, así que siempre se ve, suba
+       donde suba la página. Si además quieres tu propia foto, hay
+       instrucciones justo debajo del HTML del hero. */
     .hero-image {
       position: absolute;
       right: 0;
@@ -173,14 +188,28 @@
       width: 55%;
       height: 100%;
       z-index: 1;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(34, 197, 94, 0.15), transparent 60%),
+        linear-gradient(160deg, #141b2b 0%, #0a0e14 70%);
+      mask-image: linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image svg {
+      width: 70%;
+      height: auto;
+      opacity: 0.9;
     }
 
     .hero-image img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      mask-image: linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     }
 
     /* Info Banner */
@@ -208,6 +237,11 @@
       width: 24px;
       height: 24px;
       flex-shrink: 0;
+    }
+
+    .info-icon svg {
+      width: 24px;
+      height: 24px;
     }
 
     .info-card strong {
@@ -250,6 +284,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
+      align-items: start;
     }
 
     .card {
@@ -259,13 +294,24 @@
       border: 1px solid transparent;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       text-align: center;
       transition: transform 0.3s;
     }
 
     .card:hover {
       transform: translateY(-5px);
+    }
+
+    .card-bike {
+      width: 100%;
+      height: 70px;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-bike svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
     .card-brand {
@@ -283,23 +329,90 @@
     .card p {
       color: var(--text-muted);
       font-size: 0.8rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       min-height: 48px;
     }
 
-    .btn-card {
+    .unit-details {
+      margin-top: auto;
+      text-align: left;
+    }
+
+    .unit-details summary {
+      cursor: pointer;
+      list-style: none;
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
       padding: 0.6rem 1rem;
       border-radius: 6px;
-      text-decoration: none;
       font-size: 0.75rem;
       font-weight: 600;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
     }
+
+    .unit-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .unit-details summary .chevron {
+      transition: transform 0.25s;
+    }
+
+    .unit-details[open] summary .chevron {
+      transform: rotate(90deg);
+    }
+
+    .weeks-list {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .week-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.6rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .week-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #0a0e14;
+    }
+
+    .week-item strong {
+      display: block;
+      font-size: 0.75rem;
+      margin-bottom: 0.15rem;
+      color: var(--text-main);
+    }
+
+    .week-item p {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin: 0;
+      min-height: 0;
+    }
+
+    .card-green .week-num { background: var(--green); }
+    .card-red .week-num { background: var(--red); }
+    .card-blue .week-num { background: var(--blue); }
+    .card-darkred .week-num { background: var(--dark-red); color: #fff; }
 
     /* Variantes de color para tarjetas */
     .card-green { border-color: var(--green); }
@@ -328,7 +441,8 @@
     @media (max-width: 1024px) {
       .navbar { padding: 1.5rem 2rem; }
       .hero { padding: 3rem 2rem; flex-direction: column; text-align: center; }
-      .hero-image { position: relative; width: 100%; height: 300px; margin-top: 2rem; }
+      .hero-image { position: relative; width: 100%; height: 260px; margin-top: 2rem; -webkit-mask-image: none; mask-image: none; }
+      .hero-buttons { justify-content: center; }
       .info-banner { margin: 0 2rem; grid-template-columns: repeat(2, 1fr); }
       .unidades-section { padding: 3rem 2rem; }
       .unidades-grid { grid-template-columns: repeat(2, 1fr); }
@@ -353,12 +467,10 @@
     </div>
     <nav>
       <a href="#inicio" class="active">INICIO</a>
-      <a href="#sobre-mi">SOBRE MÍ</a>
-      <a href="#proyectos">PROYECTOS</a>
       <a href="#unidades">UNIDADES</a>
-      <a href="#habilidades">HABILIDADES</a>
-      <a href="#contacto">CONTACTO</a>
-      <a href="https://github.com" target="_blank" class="github-icon"><i data-lucide="github"></i></a>
+      <a href="https://github.com" target="_blank" class="github-icon" aria-label="GitHub" title="GitHub">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+      </a>
     </nav>
   </header>
 
@@ -369,41 +481,66 @@
       <h1>PORTAFOLIO<br><span class="highlight">DE ARQUITECTURA</span><br>DE SOFTWARE</h1>
       <p>Este portafolio contiene los trabajos, proyectos y evidencias desarrollados a lo largo del curso de Arquitectura de Software.</p>
       <div class="hero-buttons">
-        <a href="#proyectos" class="btn btn-outline-green"><i data-lucide="folder"></i> VER PROYECTOS</a>
-        <a href="#" class="btn btn-outline-white"><i data-lucide="download"></i> DESCARGAR CV</a>
+        <a href="#unidades" class="btn btn-outline-green">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+          VER UNIDADES
+        </a>
+        <a href="#" class="btn btn-outline-white">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          DESCARGAR CV
+        </a>
       </div>
     </div>
     <div class="hero-image">
-      <!-- Cambia 'moto.jpg' por el nombre de la imagen que subas a GitHub -->
-      <img src="moto.jpg" alt="Motorcycle background">
+      <!--
+        AVISO IMPORTANTE:
+        Si quieres tu propia foto de fondo (por ejemplo una moto real),
+        descomenta la línea de abajo y sube tu imagen con el MISMO NOMBRE
+        Y EN LA MISMA CARPETA que este archivo HTML. Si el navegador no
+        encuentra el archivo, se oculta solo (onerror) y se ve el fondo
+        con el ícono de moto que ya está integrado, así nunca queda vacío.
+
+        <img src="moto.jpg" alt="Motocicleta" onerror="this.style.display='none'">
+      -->
+      <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" stroke="#22c55e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="45" cy="75" r="18"/>
+        <circle cx="155" cy="75" r="18"/>
+        <path d="M45 75 70 45h25l15 20"/>
+        <path d="M95 45 105 30h20"/>
+        <path d="M70 45 60 75"/>
+        <path d="M110 45 155 75"/>
+        <path d="M25 45h20l10 10"/>
+        <path d="M105 30h10l6 8"/>
+        <path d="M60 75h95"/>
+      </svg>
     </div>
   </section>
 
   <!-- Quick Info Banner -->
   <section class="info-banner">
     <div class="info-card">
-      <i data-lucide="user" class="info-icon"></i>
+      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 7-7h2a7 7 0 0 1 7 7v1"/></svg></span>
       <div>
         <strong>Estudiante</strong>
         <p>Ingeniería de Sistemas<br>UPLA</p>
       </div>
     </div>
     <div class="info-card">
-      <i data-lucide="code" class="info-icon"></i>
+      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m9 8-5 4 5 4M15 8l5 4-5 4"/></svg></span>
       <div>
         <strong>Enfoque</strong>
         <p>Diseño arquitectónico, patrones y buenas prácticas</p>
       </div>
     </div>
     <div class="info-card">
-      <i data-lucide="layers" class="info-icon"></i>
+      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span>
       <div>
         <strong>Tecnologías</strong>
         <p>UML, Patrones, Python, Java, MySQL, Git, entre otros.</p>
       </div>
     </div>
     <div class="info-card">
-      <i data-lucide="target" class="info-icon"></i>
+      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.7" fill="currentColor"/></svg></span>
       <div>
         <strong>Objetivo</strong>
         <p>Diseñar soluciones robustas, escalables y mantenibles.</p>
@@ -418,34 +555,160 @@
 
       <!-- Unidad 1 -->
       <div class="card card-green">
+        <div class="card-bike" style="color:var(--green)">
+          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="27" cy="68" r="16"/>
+            <circle cx="128" cy="68" r="15"/>
+            <path d="M27 68 20 56 35 50 46 44"/>
+            <path d="M27 68 45 45 70 40 95 35 112 41 128 68"/>
+            <path d="M95 35 105 22 116 32"/>
+            <path d="M116 32 125 41"/>
+            <path d="M125 41 128 55"/>
+            <path d="M14 60 27 62"/>
+          </svg>
+        </div>
         <div class="card-brand">Kawasaki</div>
         <h3>UNIDAD 1</h3>
         <p>Fundamentos de la arquitectura de software y análisis de requerimientos.</p>
-        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+        <details class="unit-details">
+          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
+          <div class="weeks-list">
+            <div class="week-item">
+              <span class="week-num">S1</span>
+              <div><strong>Introducción a la arquitectura de software</strong><p>Concepto, historia y rol del arquitecto de software.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S2</span>
+              <div><strong>Atributos de calidad</strong><p>Requerimientos funcionales y no funcionales del sistema.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S3</span>
+              <div><strong>Técnicas de elicitación</strong><p>Entrevistas, casos de uso y talleres con stakeholders.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S4</span>
+              <div><strong>Documentación de requerimientos</strong><p>Elaboración del SRS (Software Requirements Specification).</p></div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <!-- Unidad 2 -->
       <div class="card card-red">
+        <div class="card-bike" style="color:var(--red)">
+          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="27" cy="68" r="16"/>
+            <circle cx="128" cy="68" r="15"/>
+            <path d="M27 68 22 53 38 49 48 42"/>
+            <path d="M27 68 48 42 72 37 98 34 114 40 128 68"/>
+            <path d="M98 34 107 20 118 30"/>
+            <path d="M118 30 126 40"/>
+            <path d="M126 40 128 55"/>
+            <path d="M55 70 100 70"/>
+          </svg>
+        </div>
         <div class="card-brand red-text">HONDA</div>
         <h3 class="red-text">UNIDAD 2</h3>
         <p>Diseño arquitectónico y patrones de diseño de software.</p>
-        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+        <details class="unit-details">
+          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
+          <div class="weeks-list">
+            <div class="week-item">
+              <span class="week-num">S1</span>
+              <div><strong>Estilos arquitectónicos</strong><p>Cliente-servidor, en capas, MVC y microservicios.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S2</span>
+              <div><strong>Patrones de diseño GoF</strong><p>Patrones creacionales, estructurales y de comportamiento.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S3</span>
+              <div><strong>Principios SOLID</strong><p>Aplicación práctica en el diseño de clases.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S4</span>
+              <div><strong>Arquitectura limpia</strong><p>Separación de responsabilidades y bajo acoplamiento.</p></div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <!-- Unidad 3 -->
       <div class="card card-blue">
+        <div class="card-bike" style="color:var(--blue)">
+          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="26" cy="66" r="17"/>
+            <circle cx="130" cy="63" r="20"/>
+            <path d="M26 66 48 40 78 30 100 28 118 36 130 63"/>
+            <path d="M100 28 108 8 118 26"/>
+            <path d="M118 44 131 39 128 55"/>
+            <path d="M26 66 18 55 33 50 48 40"/>
+          </svg>
+        </div>
         <div class="card-brand blue-text">BMW</div>
         <h3 class="blue-text">UNIDAD 3</h3>
         <p>Modelado de software con UML y vistas de arquitectura.</p>
-        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+        <details class="unit-details">
+          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
+          <div class="weeks-list">
+            <div class="week-item">
+              <span class="week-num">S1</span>
+              <div><strong>Diagramas de casos de uso</strong><p>Actores, escenarios y relaciones del sistema.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S2</span>
+              <div><strong>Diagramas de clases y objetos</strong><p>Modelado estático del sistema.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S3</span>
+              <div><strong>Secuencia y actividad</strong><p>Modelado del comportamiento dinámico.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S4</span>
+              <div><strong>Vista 4+1</strong><p>Integración de las vistas lógica, procesos, física y despliegue.</p></div>
+            </div>
+          </div>
+        </details>
       </div>
 
       <!-- Unidad 4 -->
       <div class="card card-darkred">
+        <div class="card-bike" style="color:var(--dark-red)">
+          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="29" cy="70" r="15"/>
+            <circle cx="127" cy="70" r="15"/>
+            <path d="M29 70 18 60 32 52 50 42"/>
+            <path d="M29 70 50 42 75 36 100 33 115 40 127 70"/>
+            <path d="M100 33 108 24 116 31"/>
+            <path d="M116 31 124 40"/>
+            <path d="M124 40 127 55"/>
+            <rect x="58" y="68" width="22" height="7" rx="3.5"/>
+          </svg>
+        </div>
         <div class="card-brand darkred-text">DUCATI</div>
         <h3 class="darkred-text">UNIDAD 4</h3>
         <p>Evaluación de arquitecturas, calidad de software y documentación.</p>
-        <a href="#" class="btn-card">VER CONTENIDO <i data-lucide="arrow-right"></i></a>
+        <details class="unit-details">
+          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
+          <div class="weeks-list">
+            <div class="week-item">
+              <span class="week-num">S1</span>
+              <div><strong>Métodos de evaluación</strong><p>Introducción a ATAM y SAAM.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S2</span>
+              <div><strong>Métricas de calidad</strong><p>Acoplamiento, cohesión y complejidad ciclomática.</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S3</span>
+              <div><strong>Documentación arquitectónica</strong><p>Elaboración del documento de arquitectura (SAD).</p></div>
+            </div>
+            <div class="week-item">
+              <span class="week-num">S4</span>
+              <div><strong>Sustentación final</strong><p>Presentación y defensa del proyecto de arquitectura.</p></div>
+            </div>
+          </div>
+        </details>
       </div>
 
     </div>
@@ -453,11 +716,9 @@
 
   <!-- Footer -->
   <footer>
-    <i data-lucide="github"></i> Desarrollado por <strong>Mayta</strong> • 2026 • Todos los derechos reservados
+    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+    Desarrollado por <strong>Mayta</strong> • 2026 • Todos los derechos reservados
   </footer>
 
-  <script>
-    lucide.createIcons();
-  </script>
 </body>
 </html>
