@@ -1,724 +1,968 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anderson Mayta | Arquitectura de Software</title>
-  <style>
-    :root {
-      --bg-dark: #0a0e14;
-      --card-bg: rgba(18, 24, 38, 0.7);
-      --green: #22c55e;
-      --red: #ef4444;
-      --blue: #3b82f6;
-      --dark-red: #b91c1c;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio · Desarrollo de Software — Racing Edition</title>
+<meta name="description" content="Portafolio de desarrollo de software organizado en cuatro unidades académicas, con estética de panel de instrumentos de motociclismo deportivo.">
+
+<!--
+  PERSONALIZA AQUÍ:
+  1) Reemplaza [Tu nombre] y [Tu ciudad, país] en la sección "Pase de boxes" (id="contacto").
+  2) Cambia tu-email@ejemplo.com, tu-usuario (GitHub) y tu-usuario (LinkedIn) por tus datos reales.
+  3) En la sección #proyectos, sustituye los 3 proyectos placeholder por tus proyectos reales
+     (título, descripción, tecnologías y enlaces).
+  4) Ajusta las descripciones de cada unidad si el temario de tu curso difiere.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  /* ============================================================
+     1. RESET & VARIABLES
+  ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+  :root {
+    /* Color */
+    --bg: #10131a;
+    --bg-alt: #0c0e13;
+    --surface: #171b24;
+    --surface-2: #1d2330;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.16);
+    --text: #edeff3;
+    --text-dim: #8b93a1;
+    --text-faint: #565f6e;
+    --accent: #f4c10f;
+    --accent-ink: #241c02;
+
+    --kawi:   #74c141;
+    --honda:  #e73a4d;
+    --ducati: #a3132f;
+    --bmw:    #2a7bd6;
+
+    /* Type */
+    --f-display: 'Orbitron', 'Inter', sans-serif;
+    --f-body: 'Inter', sans-serif;
+
+    /* Layout */
+    --sidebar-w: 264px;
+    --header-h: 72px;
+    --cut: 22px;
+    --cut-sm: 12px;
+    --container: 1180px;
+  }
+
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; letter-spacing: 0.01em; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  /* ============================================================
+     2. UTILITIES
+  ============================================================ */
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+
+  .chamfer {
+    clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+  }
+  .chamfer-sm {
+    clip-path: polygon(0 0, calc(100% - var(--cut-sm)) 0, 100% var(--cut-sm), 100% 100%, 0 100%);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--f-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 15px 28px;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:hover { background: #ffd23f; }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .pulse-dot::after {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.5); opacity: 0.8; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  .section-heading {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .section-lead {
+    color: var(--text-dim);
+    max-width: 56ch;
+    font-size: 1.05rem;
+    margin-bottom: 48px;
+  }
+
+  /* ============================================================
+     3. HEADER
+  ============================================================ */
+  #menu-toggle { display: none; }
+
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 4vw, 40px);
+    background: rgba(12, 14, 19, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 200;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+  }
+  .logo-icon {
+    width: 38px; height: 38px;
+    display: grid; place-items: center;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    color: var(--accent);
+    font-size: 1rem;
+  }
+  .logo small {
+    display: block;
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .hamburger-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 32px; height: 24px;
+    cursor: pointer;
+  }
+  .hamburger-btn .bar {
+    height: 2px; width: 100%;
+    background: var(--text);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+
+  /* ============================================================
+     4. SIDEBAR
+  ============================================================ */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--bg-alt);
+    border-right: 1px solid var(--line);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    z-index: 250;
+    transition: transform .3s ease;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sidebar-header h3 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sidebar-header h3 i { color: var(--accent); font-size: 0.8rem; }
+  .close-btn { display: none; font-size: 1.4rem; color: var(--text-dim); line-height: 1; cursor: pointer; }
+
+  .nav-links { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .nav-item a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    border-left: 2px solid transparent;
+    transition: color .18s ease, border-color .18s ease, background-color .18s ease;
+  }
+  .nav-item a i { width: 16px; text-align: center; font-size: 0.85rem; }
+  .nav-item a:hover { color: var(--text); background: var(--surface); }
+  .nav-item.active a {
+    color: var(--text);
+    border-left-color: var(--accent);
+    background: var(--surface);
+  }
+  .nav-item.kawasaki.active a, .nav-item.kawasaki a:hover i { color: var(--kawi); }
+  .nav-item.honda.active a, .nav-item.honda a:hover i { color: var(--honda); }
+  .nav-item.ducati.active a, .nav-item.ducati a:hover i { color: var(--ducati); }
+  .nav-item.bmw.active a, .nav-item.bmw a:hover i { color: var(--bmw); }
+
+  .sidebar-footer {
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 240;
+  }
+
+  /* ============================================================
+     5. MAIN LAYOUT
+  ============================================================ */
+  .content-container {
+    margin-left: var(--sidebar-w);
+    padding-top: var(--header-h);
+  }
+
+  /* ============================================================
+     6. HERO
+  ============================================================ */
+  .hero-section {
+    position: relative;
+    padding: clamp(56px, 10vh, 110px) 0 clamp(48px, 8vh, 90px);
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px);
+    background-size: 28px 28px;
+    background-position: 0 0, 0 0;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 20% 30%, black, transparent 70%);
+    mask-image: radial-gradient(ellipse 80% 60% at 20% 30%, black, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+    gap: 40px;
+    align-items: center;
+    position: relative;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: 26px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    font-weight: 800;
+    margin-bottom: 22px;
+  }
+  .hero-title span { display: block; }
+
+  .hero-description {
+    color: var(--text-dim);
+    font-size: 1.08rem;
+    max-width: 52ch;
+    margin-bottom: 34px;
+  }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
+
+  .telemetry-bar {
+    display: flex;
+    gap: clamp(24px, 4vw, 48px);
+    border-top: 1px solid var(--line);
+    padding-top: 26px;
+  }
+  .stat .num {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--accent);
+  }
+  .stat .lbl {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* Gauge */
+  .gauge-wrap { display: flex; justify-content: center; }
+  .gauge { width: 100%; max-width: 340px; }
+  .gauge .tick { stroke: var(--text-faint); stroke-width: 2; }
+  .gauge .tick-major { stroke: var(--text-dim); stroke-width: 2.5; }
+  .gauge .tick-label {
+    font-family: var(--f-display);
+    font-size: 11px;
+    fill: var(--text-faint);
+  }
+  .gauge-track { fill: none; stroke: var(--line-strong); stroke-width: 8; stroke-linecap: round; }
+  .gauge-progress {
+    fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
+    stroke-dasharray: 100; stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .gauge-needle {
+    stroke: var(--accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transform-box: view-box;
+    transform-origin: 150px 150px;
+    transform: rotate(135deg);
+    transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .gauge-hub { fill: var(--bg-alt); stroke: var(--line-strong); stroke-width: 2; }
+  .gauge-hub-dot { fill: var(--accent); }
+  .gauge-readout {
+    font-family: var(--f-display);
+    font-size: 13px;
+    fill: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* orchestrated load-in, hero only */
+  .reveal { opacity: 0; transform: translateY(14px); animation: reveal .6s ease forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  .r1 { animation-delay: .05s; } .r2 { animation-delay: .18s; }
+  .r3 { animation-delay: .32s; } .r4 { animation-delay: .46s; } .r5 { animation-delay: .6s; }
+
+  /* ============================================================
+     7. UNITS
+  ============================================================ */
+  .units-section { padding: 60px 0 100px; border-top: 1px solid var(--line); }
+
+  .units-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .unit-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent-c, var(--accent));
+    padding: 30px 28px 26px;
+    overflow: hidden;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .unit-card:hover { background: var(--surface-2); }
+
+  .unit-watermark {
+    position: absolute;
+    right: 14px; bottom: 6px;
+    font-size: 6.5rem;
+    color: var(--accent-c, var(--accent));
+    opacity: 0.06;
+    pointer-events: none;
+    transform: rotate(-8deg);
+  }
+
+  .unit-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .unit-index {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--accent-c, var(--accent));
+  }
+  .unit-brand {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+  }
+
+  .unit-icon {
+    width: 46px; height: 46px;
+    display: grid; place-items: center;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    color: var(--accent-c, var(--accent));
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+  }
+
+  .unit-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+  .unit-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 22px; max-width: 46ch; }
+
+  .unit-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; position: relative; z-index: 1; }
+  .unit-tags li {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 11px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+  }
+
+  .unit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+    transition: gap .18s ease, color .18s ease;
+  }
+  .unit-link i { font-size: 0.75rem; transition: transform .18s ease; }
+  .unit-link:hover { color: var(--accent-c, var(--accent)); }
+  .unit-link:hover i { transform: translateX(3px); }
+
+  .u-kawi   { --accent-c: var(--kawi); }
+  .u-honda  { --accent-c: var(--honda); }
+  .u-ducati { --accent-c: var(--ducati); }
+  .u-bmw    { --accent-c: var(--bmw); }
+
+  /* ============================================================
+     8. PROJECTS
+  ============================================================ */
+  .projects-section { padding: 40px 0 100px; border-top: 1px solid var(--line); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .2s ease, background-color .2s ease;
+  }
+  .project-card:hover { border-color: var(--line-strong); background: var(--surface-2); }
+
+  .project-icon {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .project-desc { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 20px; flex: 1; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+  .project-tags li {
+    font-size: 0.7rem; font-weight: 600;
+    padding: 4px 9px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    color: var(--text-faint);
+  }
+
+  .project-links { display: flex; gap: 18px; }
+  .project-links a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; font-weight: 600; color: var(--text-dim);
+    transition: color .18s ease;
+  }
+  .project-links a:hover { color: var(--accent); }
+
+  /* ============================================================
+     9. CONTACT
+  ============================================================ */
+  .contact-section { padding: 40px 0 110px; border-top: 1px solid var(--line); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
+  .contact-links a {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 0.98rem; font-weight: 600; color: var(--text-dim);
+    transition: color .18s ease;
+  }
+  .contact-links a i {
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+  .contact-links a:hover { color: var(--accent); }
+
+  .pit-pass {
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+  }
+  .pit-pass-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .pit-pass-head span:first-child {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+  .pit-pass-head span:last-child { font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; }
+
+  .pit-pass-body { padding: 26px 22px; }
+  .pit-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+  }
+  .pit-row:last-child { border-bottom: none; }
+  .pit-row .k { color: var(--text-faint); font-weight: 600; letter-spacing: 0.04em; font-size: 0.78rem; }
+  .pit-row .v { color: var(--text); font-weight: 600; text-align: right; }
+  .pit-row .v.avail { display: flex; align-items: center; gap: 8px; color: var(--kawi); }
+
+  /* ============================================================
+     10. FOOTER
+  ============================================================ */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+  }
+  .footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+  }
+  .footer a { color: var(--text-dim); font-weight: 600; }
+  .footer a:hover { color: var(--accent); }
+
+  /* ============================================================
+     11. RESPONSIVE
+  ============================================================ */
+  @media (max-width: 1024px) {
+    .sidebar {
+      transform: translateX(-100%);
     }
+    #menu-toggle:checked ~ .sidebar { transform: translateX(0); }
+    #menu-toggle:checked ~ .overlay { display: block; }
+    .close-btn { display: block; }
+    .hamburger-btn { display: flex; }
+    .content-container { margin-left: 0; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .gauge-wrap { order: -1; max-width: 260px; margin: 0 auto 12px; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
+  @media (max-width: 860px) {
+    .units-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      line-height: 1.5;
-    }
+  @media (max-width: 560px) {
+    .telemetry-bar { flex-wrap: wrap; row-gap: 18px; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+  }
 
-    svg.icon {
-      width: 1em;
-      height: 1em;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vertical-align: -0.15em;
-      flex-shrink: 0;
-    }
-
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 4rem;
-      background-color: rgba(10, 14, 20, 0.9);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo-icon {
-      color: var(--green);
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .logo-text strong {
-      display: block;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-
-    .logo-text small {
-      color: var(--text-muted);
-      font-size: 0.65rem;
-      letter-spacing: 1.5px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover, nav a.active {
-      color: var(--green);
-    }
-
-    .github-icon {
-      display: flex;
-      align-items: center;
-      font-size: 1.1rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4rem 4rem;
-      min-height: 70vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      max-width: 550px;
-      z-index: 2;
-    }
-
-    .welcome-text {
-      color: var(--green);
-      font-size: 1rem;
-    }
-
-    .hero h1 {
-      font-size: 2.8rem;
-      line-height: 1.1;
-      margin: 1rem 0;
-      font-weight: 800;
-    }
-
-    .hero h1 .highlight {
-      color: var(--green);
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s;
-    }
-
-    .btn-outline-green {
-      border: 1px solid var(--green);
-      color: var(--green);
-    }
-
-    .btn-outline-green:hover {
-      background: var(--green);
-      color: #000;
-    }
-
-    .btn-outline-white {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-
-    .btn-outline-white:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* La imagen de fondo del hero ya NO depende de ningún archivo externo.
-       Se dibuja con SVG/CSS directamente, así que siempre se ve, suba
-       donde suba la página. Si además quieres tu propia foto, hay
-       instrucciones justo debajo del HTML del hero. */
-    .hero-image {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 55%;
-      height: 100%;
-      z-index: 1;
-      background:
-        radial-gradient(circle at 70% 30%, rgba(34, 197, 94, 0.15), transparent 60%),
-        linear-gradient(160deg, #141b2b 0%, #0a0e14 70%);
-      mask-image: linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-image svg {
-      width: 70%;
-      height: auto;
-      opacity: 0.9;
-    }
-
-    .hero-image img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Info Banner */
-    .info-banner {
-      margin: 0 4rem;
-      padding: 1.5rem 2rem;
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .info-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .info-icon {
-      color: var(--green);
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-    }
-
-    .info-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .info-card strong {
-      display: block;
-      font-size: 0.9rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .info-card p {
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    /* Unidades Section */
-    .unidades-section {
-      padding: 5rem 4rem;
-      text-align: center;
-    }
-
-    .unidades-section h2 {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      margin-bottom: 3rem;
-      color: var(--text-main);
-      position: relative;
-      display: inline-block;
-    }
-
-    .unidades-section h2::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 25%;
-      width: 50%;
-      height: 2px;
-      background-color: var(--green);
-    }
-
-    .unidades-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--card-bg);
-      padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card-bike {
-      width: 100%;
-      height: 70px;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-bike svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .card-brand {
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-
-    .card h3 {
-      font-size: 0.9rem;
-      margin-bottom: 0.75rem;
-      color: var(--green);
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-      min-height: 48px;
-    }
-
-    .unit-details {
-      margin-top: auto;
-      text-align: left;
-    }
-
-    .unit-details summary {
-      cursor: pointer;
-      list-style: none;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .unit-details summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .unit-details summary .chevron {
-      transition: transform 0.25s;
-    }
-
-    .unit-details[open] summary .chevron {
-      transform: rotate(90deg);
-    }
-
-    .weeks-list {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .week-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      padding: 0.6rem;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .week-num {
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 800;
-      color: #0a0e14;
-    }
-
-    .week-item strong {
-      display: block;
-      font-size: 0.75rem;
-      margin-bottom: 0.15rem;
-      color: var(--text-main);
-    }
-
-    .week-item p {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      margin: 0;
-      min-height: 0;
-    }
-
-    .card-green .week-num { background: var(--green); }
-    .card-red .week-num { background: var(--red); }
-    .card-blue .week-num { background: var(--blue); }
-    .card-darkred .week-num { background: var(--dark-red); color: #fff; }
-
-    /* Variantes de color para tarjetas */
-    .card-green { border-color: var(--green); }
-    .card-red { border-color: var(--red); }
-    .card-blue { border-color: var(--blue); }
-    .card-darkred { border-color: var(--dark-red); }
-
-    .red-text { color: var(--red) !important; }
-    .blue-text { color: var(--blue) !important; }
-    .darkred-text { color: var(--dark-red) !important; }
-
-    /* Footer */
-    footer {
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    /* Adaptabilidad a dispositivos móviles */
-    @media (max-width: 1024px) {
-      .navbar { padding: 1.5rem 2rem; }
-      .hero { padding: 3rem 2rem; flex-direction: column; text-align: center; }
-      .hero-image { position: relative; width: 100%; height: 260px; margin-top: 2rem; -webkit-mask-image: none; mask-image: none; }
-      .hero-buttons { justify-content: center; }
-      .info-banner { margin: 0 2rem; grid-template-columns: repeat(2, 1fr); }
-      .unidades-section { padding: 3rem 2rem; }
-      .unidades-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 640px) {
-      .info-banner, .unidades-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+  /* ============================================================
+     12. MOTION PREFERENCES
+  ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; animation: none; }
+    .pulse-dot::after { animation: none; display: none; }
+    .gauge-needle, .gauge-progress { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Header / Navigation -->
-  <header class="navbar">
-    <div class="logo">
-      <span class="logo-icon">&lt;A/&gt;</span>
-      <div class="logo-text">
-        <strong>ANDERSON MAYTA</strong>
-        <small>ARQUITECTURA DE SOFTWARE</small>
-      </div>
-    </div>
-    <nav>
-      <a href="#inicio" class="active">INICIO</a>
-      <a href="#unidades">UNIDADES</a>
-      <a href="https://github.com" target="_blank" class="github-icon" aria-label="GitHub" title="GitHub">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
-      </a>
-    </nav>
-  </header>
+<input type="checkbox" id="menu-toggle" hidden>
 
-  <!-- Hero Section -->
-  <section class="hero" id="inicio">
-    <div class="hero-content">
-      <span class="welcome-text">Bienvenido a mi</span>
-      <h1>PORTAFOLIO<br><span class="highlight">DE ARQUITECTURA</span><br>DE SOFTWARE</h1>
-      <p>Este portafolio contiene los trabajos, proyectos y evidencias desarrollados a lo largo del curso de Arquitectura de Software.</p>
-      <div class="hero-buttons">
-        <a href="#unidades" class="btn btn-outline-green">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
-          VER UNIDADES
-        </a>
-        <a href="#" class="btn btn-outline-white">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-          DESCARGAR CV
-        </a>
-      </div>
-    </div>
-    <div class="hero-image">
-      <!--
-        AVISO IMPORTANTE:
-        Si quieres tu propia foto de fondo (por ejemplo una moto real),
-        descomenta la línea de abajo y sube tu imagen con el MISMO NOMBRE
-        Y EN LA MISMA CARPETA que este archivo HTML. Si el navegador no
-        encuentra el archivo, se oculta solo (onerror) y se ve el fondo
-        con el ícono de moto que ya está integrado, así nunca queda vacío.
+<header class="header">
+  <div class="logo">
+    <span class="logo-icon"><i class="fa-solid fa-gauge-high"></i></span>
+    <span>PORTAFOLIO<small>RACING EDITION</small></span>
+  </div>
+  <label for="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </label>
+</header>
 
-        <img src="moto.jpg" alt="Motocicleta" onerror="this.style.display='none'">
-      -->
-      <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" stroke="#22c55e" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="45" cy="75" r="18"/>
-        <circle cx="155" cy="75" r="18"/>
-        <path d="M45 75 70 45h25l15 20"/>
-        <path d="M95 45 105 30h20"/>
-        <path d="M70 45 60 75"/>
-        <path d="M110 45 155 75"/>
-        <path d="M25 45h20l10 10"/>
-        <path d="M105 30h10l6 8"/>
-        <path d="M60 75h95"/>
-      </svg>
-    </div>
-  </section>
+<label for="menu-toggle" class="overlay" aria-hidden="true"></label>
 
-  <!-- Quick Info Banner -->
-  <section class="info-banner">
-    <div class="info-card">
-      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 7-7h2a7 7 0 0 1 7 7v1"/></svg></span>
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h3><i class="fa-solid fa-flag-checkered"></i> Telemetría</h3>
+    <label for="menu-toggle" class="close-btn" aria-label="Cerrar menú">&times;</label>
+  </div>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="#inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a></li>
+    <li class="nav-item kawasaki"><a href="#u1"><i class="fa-solid fa-motorcycle"></i><span>U1 · Kawasaki</span></a></li>
+    <li class="nav-item honda"><a href="#u2"><i class="fa-solid fa-motorcycle"></i><span>U2 · Honda</span></a></li>
+    <li class="nav-item ducati"><a href="#u3"><i class="fa-solid fa-motorcycle"></i><span>U3 · Ducati</span></a></li>
+    <li class="nav-item bmw"><a href="#u4"><i class="fa-solid fa-motorcycle"></i><span>U4 · BMW</span></a></li>
+    <li class="nav-item"><a href="#proyectos"><i class="fa-solid fa-diagram-project"></i><span>Proyectos</span></a></li>
+    <li class="nav-item"><a href="#contacto"><i class="fa-solid fa-paper-plane"></i><span>Contacto</span></a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <span class="pulse-dot"></span> SISTEMA EN LÍNEA
+  </div>
+</nav>
+
+<main class="content-container">
+
+  <!-- HERO -->
+  <section id="inicio" class="hero-section">
+    <div class="container hero-grid">
       <div>
-        <strong>Estudiante</strong>
-        <p>Ingeniería de Sistemas<br>UPLA</p>
+        <div class="status-badge reveal r1"><span class="pulse-dot"></span> Disponible para nuevos proyectos</div>
+        <h1 class="hero-title reveal r2">
+          <span>Ingeniería de software</span>
+          <span>con precisión de pista</span>
+        </h1>
+        <p class="hero-description reveal r3">
+          Construyo interfaces rápidas y sistemas confiables con la misma disciplina que un equipo de boxes:
+          cada componente probado, cada detalle ajustado antes de salir a producción.
+        </p>
+        <div class="hero-cta reveal r4">
+          <a href="#unidades" class="btn btn-primary">Ver unidades <i class="fa-solid fa-chevron-right"></i></a>
+          <a href="#contacto" class="btn btn-outline">Contactar</a>
+        </div>
+        <div class="telemetry-bar reveal r5">
+          <div class="stat"><span class="num">04</span><span class="lbl">Unidades completadas</span></div>
+          <div class="stat"><span class="num">12</span><span class="lbl">Tecnologías cubiertas</span></div>
+          <div class="stat"><span class="num">100%</span><span class="lbl">Responsivo</span></div>
+        </div>
       </div>
-    </div>
-    <div class="info-card">
-      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m9 8-5 4 5 4M15 8l5 4-5 4"/></svg></span>
-      <div>
-        <strong>Enfoque</strong>
-        <p>Diseño arquitectónico, patrones y buenas prácticas</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span>
-      <div>
-        <strong>Tecnologías</strong>
-        <p>UML, Patrones, Python, Java, MySQL, Git, entre otros.</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <span class="info-icon"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.7" fill="currentColor"/></svg></span>
-      <div>
-        <strong>Objetivo</strong>
-        <p>Diseñar soluciones robustas, escalables y mantenibles.</p>
+
+      <div class="gauge-wrap reveal r3">
+        <svg class="gauge" viewBox="0 0 300 300">
+          <path class="gauge-track" pathLength="100" d="M56,243 A132,132 0 1 1 244,243" />
+          <path class="gauge-progress" pathLength="100" d="M56,243 A132,132 0 1 1 244,243" />
+          <g id="gaugeTicks"></g>
+          <line class="gauge-needle" x1="150" y1="150" x2="264" y2="150" />
+          <circle class="gauge-hub" cx="150" cy="150" r="16" />
+          <circle class="gauge-hub-dot" cx="150" cy="150" r="4" />
+          <text class="gauge-readout" x="150" y="205" text-anchor="middle">RENDIMIENTO</text>
+        </svg>
       </div>
     </div>
   </section>
 
-  <!-- Unidades Section -->
-  <section class="unidades-section" id="unidades">
-    <h2>UNIDADES DEL CURSO</h2>
-    <div class="unidades-grid">
+  <!-- UNIDADES -->
+  <section id="unidades" class="units-section">
+    <div class="container">
+      <h2 class="section-heading">Unidades académicas</h2>
+      <p class="section-lead">
+        Cuatro módulos del curso, cada uno asociado a una moto deportiva cuya personalidad
+        representa el enfoque técnico de esa etapa del aprendizaje.
+      </p>
 
-      <!-- Unidad 1 -->
-      <div class="card card-green">
-        <div class="card-bike" style="color:var(--green)">
-          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="27" cy="68" r="16"/>
-            <circle cx="128" cy="68" r="15"/>
-            <path d="M27 68 20 56 35 50 46 44"/>
-            <path d="M27 68 45 45 70 40 95 35 112 41 128 68"/>
-            <path d="M95 35 105 22 116 32"/>
-            <path d="M116 32 125 41"/>
-            <path d="M125 41 128 55"/>
-            <path d="M14 60 27 62"/>
-          </svg>
-        </div>
-        <div class="card-brand">Kawasaki</div>
-        <h3>UNIDAD 1</h3>
-        <p>Fundamentos de la arquitectura de software y análisis de requerimientos.</p>
-        <details class="unit-details">
-          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
-          <div class="weeks-list">
-            <div class="week-item">
-              <span class="week-num">S1</span>
-              <div><strong>Introducción a la arquitectura de software</strong><p>Concepto, historia y rol del arquitecto de software.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S2</span>
-              <div><strong>Atributos de calidad</strong><p>Requerimientos funcionales y no funcionales del sistema.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S3</span>
-              <div><strong>Técnicas de elicitación</strong><p>Entrevistas, casos de uso y talleres con stakeholders.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S4</span>
-              <div><strong>Documentación de requerimientos</strong><p>Elaboración del SRS (Software Requirements Specification).</p></div>
-            </div>
+      <div class="units-grid">
+        <article id="u1" class="unit-card u-kawi">
+          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <div class="unit-head">
+            <span class="unit-index">01</span>
+            <span class="unit-brand">Kawasaki Ninja</span>
           </div>
-        </details>
-      </div>
+          <div class="unit-icon"><i class="fa-solid fa-cubes"></i></div>
+          <h3 class="unit-title">Fundamentos y estructura</h3>
+          <p class="unit-desc">Arquitectura inicial, lógica de programación y primeros prototipos: la base sobre la que se construye todo lo demás.</p>
+          <ul class="unit-tags"><li>HTML5</li><li>CSS3</li><li>Algoritmos</li></ul>
+          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
 
-      <!-- Unidad 2 -->
-      <div class="card card-red">
-        <div class="card-bike" style="color:var(--red)">
-          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="27" cy="68" r="16"/>
-            <circle cx="128" cy="68" r="15"/>
-            <path d="M27 68 22 53 38 49 48 42"/>
-            <path d="M27 68 48 42 72 37 98 34 114 40 128 68"/>
-            <path d="M98 34 107 20 118 30"/>
-            <path d="M118 30 126 40"/>
-            <path d="M126 40 128 55"/>
-            <path d="M55 70 100 70"/>
-          </svg>
-        </div>
-        <div class="card-brand red-text">HONDA</div>
-        <h3 class="red-text">UNIDAD 2</h3>
-        <p>Diseño arquitectónico y patrones de diseño de software.</p>
-        <details class="unit-details">
-          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
-          <div class="weeks-list">
-            <div class="week-item">
-              <span class="week-num">S1</span>
-              <div><strong>Estilos arquitectónicos</strong><p>Cliente-servidor, en capas, MVC y microservicios.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S2</span>
-              <div><strong>Patrones de diseño GoF</strong><p>Patrones creacionales, estructurales y de comportamiento.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S3</span>
-              <div><strong>Principios SOLID</strong><p>Aplicación práctica en el diseño de clases.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S4</span>
-              <div><strong>Arquitectura limpia</strong><p>Separación de responsabilidades y bajo acoplamiento.</p></div>
-            </div>
+        <article id="u2" class="unit-card u-honda">
+          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <div class="unit-head">
+            <span class="unit-index">02</span>
+            <span class="unit-brand">Honda CBR</span>
           </div>
-        </details>
-      </div>
+          <div class="unit-icon"><i class="fa-solid fa-sliders"></i></div>
+          <h3 class="unit-title">Control y fiabilidad</h3>
+          <p class="unit-desc">Manejo de estado, integración de APIs y programación funcional: hacer que el sistema responda con precisión.</p>
+          <ul class="unit-tags"><li>JavaScript</li><li>DOM</li><li>APIs</li></ul>
+          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
 
-      <!-- Unidad 3 -->
-      <div class="card card-blue">
-        <div class="card-bike" style="color:var(--blue)">
-          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="26" cy="66" r="17"/>
-            <circle cx="130" cy="63" r="20"/>
-            <path d="M26 66 48 40 78 30 100 28 118 36 130 63"/>
-            <path d="M100 28 108 8 118 26"/>
-            <path d="M118 44 131 39 128 55"/>
-            <path d="M26 66 18 55 33 50 48 40"/>
-          </svg>
-        </div>
-        <div class="card-brand blue-text">BMW</div>
-        <h3 class="blue-text">UNIDAD 3</h3>
-        <p>Modelado de software con UML y vistas de arquitectura.</p>
-        <details class="unit-details">
-          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
-          <div class="weeks-list">
-            <div class="week-item">
-              <span class="week-num">S1</span>
-              <div><strong>Diagramas de casos de uso</strong><p>Actores, escenarios y relaciones del sistema.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S2</span>
-              <div><strong>Diagramas de clases y objetos</strong><p>Modelado estático del sistema.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S3</span>
-              <div><strong>Secuencia y actividad</strong><p>Modelado del comportamiento dinámico.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S4</span>
-              <div><strong>Vista 4+1</strong><p>Integración de las vistas lógica, procesos, física y despliegue.</p></div>
-            </div>
+        <article id="u3" class="unit-card u-ducati">
+          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <div class="unit-head">
+            <span class="unit-index">03</span>
+            <span class="unit-brand">Ducati Panigale</span>
           </div>
-        </details>
-      </div>
+          <div class="unit-icon"><i class="fa-solid fa-palette"></i></div>
+          <h3 class="unit-title">Diseño y desempeño</h3>
+          <p class="unit-desc">Diseño de interfaz, componentes visuales y microinteracciones cuidadas al detalle.</p>
+          <ul class="unit-tags"><li>UI/UX</li><li>Frameworks</li><li>Animaciones</li></ul>
+          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
 
-      <!-- Unidad 4 -->
-      <div class="card card-darkred">
-        <div class="card-bike" style="color:var(--dark-red)">
-          <svg viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="29" cy="70" r="15"/>
-            <circle cx="127" cy="70" r="15"/>
-            <path d="M29 70 18 60 32 52 50 42"/>
-            <path d="M29 70 50 42 75 36 100 33 115 40 127 70"/>
-            <path d="M100 33 108 24 116 31"/>
-            <path d="M116 31 124 40"/>
-            <path d="M124 40 127 55"/>
-            <rect x="58" y="68" width="22" height="7" rx="3.5"/>
-          </svg>
-        </div>
-        <div class="card-brand darkred-text">DUCATI</div>
-        <h3 class="darkred-text">UNIDAD 4</h3>
-        <p>Evaluación de arquitecturas, calidad de software y documentación.</p>
-        <details class="unit-details">
-          <summary>VER CONTENIDO <svg class="icon chevron" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></summary>
-          <div class="weeks-list">
-            <div class="week-item">
-              <span class="week-num">S1</span>
-              <div><strong>Métodos de evaluación</strong><p>Introducción a ATAM y SAAM.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S2</span>
-              <div><strong>Métricas de calidad</strong><p>Acoplamiento, cohesión y complejidad ciclomática.</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S3</span>
-              <div><strong>Documentación arquitectónica</strong><p>Elaboración del documento de arquitectura (SAD).</p></div>
-            </div>
-            <div class="week-item">
-              <span class="week-num">S4</span>
-              <div><strong>Sustentación final</strong><p>Presentación y defensa del proyecto de arquitectura.</p></div>
-            </div>
+        <article id="u4" class="unit-card u-bmw">
+          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <div class="unit-head">
+            <span class="unit-index">04</span>
+            <span class="unit-brand">BMW S1000RR</span>
           </div>
-        </details>
+          <div class="unit-icon"><i class="fa-solid fa-server"></i></div>
+          <h3 class="unit-title">Telemetría y backend</h3>
+          <p class="unit-desc">Bases de datos, despliegue y arquitectura cliente-servidor: la infraestructura que sostiene todo el sistema.</p>
+          <ul class="unit-tags"><li>Node.js</li><li>Bases de datos</li><li>Cloud</li></ul>
+          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
       </div>
-
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
-    Desarrollado por <strong>Mayta</strong> • 2026 • Todos los derechos reservados
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="projects-section">
+    <div class="container">
+      <h2 class="section-heading">Proyectos</h2>
+      <p class="section-lead">Una selección de trabajos aplicados durante el curso. Reemplaza estos tres bloques con tus proyectos reales.</p>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-icon"><i class="fa-solid fa-globe"></i></div>
+          <h3 class="project-title">[Título del proyecto 1]</h3>
+          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
+          <ul class="project-tags"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+          <div class="project-links">
+            <a href="#"><i class="fa-brands fa-github"></i> Código</a>
+            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <h3 class="project-title">[Título del proyecto 2]</h3>
+          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
+          <ul class="project-tags"><li>React</li><li>API</li></ul>
+          <div class="project-links">
+            <a href="#"><i class="fa-brands fa-github"></i> Código</a>
+            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3 class="project-title">[Título del proyecto 3]</h3>
+          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
+          <ul class="project-tags"><li>Node.js</li><li>Base de datos</li></ul>
+          <div class="project-links">
+            <a href="#"><i class="fa-brands fa-github"></i> Código</a>
+            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact-section">
+    <div class="container contact-grid">
+      <div>
+        <h2 class="section-heading">Hablemos</h2>
+        <p class="section-lead" style="margin-bottom: 0;">
+          ¿Tienes un proyecto en mente o buscas a alguien que trabaje con la misma exigencia
+          que un box de carreras? Escríbeme y lo revisamos juntos.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:tu-email@ejemplo.com"><i class="fa-solid fa-envelope"></i> tu-email@ejemplo.com</a>
+          <a href="https://github.com/tu-usuario" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/tu-usuario</a>
+          <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> linkedin.com/in/tu-usuario</a>
+        </div>
+      </div>
+
+      <div class="pit-pass chamfer-sm">
+        <div class="pit-pass-head">
+          <span>PASE DE BOXES</span>
+          <span>N.º 2026-04</span>
+        </div>
+        <div class="pit-pass-body">
+          <div class="pit-row"><span class="k">NOMBRE</span><span class="v">[Tu nombre]</span></div>
+          <div class="pit-row"><span class="k">ROL</span><span class="v">Desarrollador de software</span></div>
+          <div class="pit-row"><span class="k">UBICACIÓN</span><span class="v">[Tu ciudad, país]</span></div>
+          <div class="pit-row"><span class="k">DISPONIBILIDAD</span><span class="v avail"><span class="pulse-dot"></span>Inmediata</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <span>© 2026 Portafolio Racing Edition</span>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
   </footer>
+
+</main>
+
+<script>
+  // Cerrar el menú móvil al hacer clic en un enlace
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('menu-toggle').checked = false;
+    });
+  });
+
+  // Resaltar el enlace activo del sidebar según la sección visible
+  const sections = document.querySelectorAll('main section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          const link = item.querySelector('a');
+          item.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  // Construir las marcas del velocímetro y animar la aguja al cargar
+  (function buildGauge() {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const ticksGroup = document.getElementById('gaugeTicks');
+    if (!ticksGroup) return;
+    const cx = 150, cy = 150, rOuter = 132, steps = 10, start = 135, sweep = 270;
+
+    for (let i = 0; i <= steps; i++) {
+      const isMajor = i % 2 === 0;
+      const theta = (start + (sweep / steps) * i) * Math.PI / 180;
+      const rInner = isMajor ? 112 : 120;
+      const x1 = cx + rInner * Math.cos(theta), y1 = cy + rInner * Math.sin(theta);
+      const x2 = cx + rOuter * Math.cos(theta), y2 = cy + rOuter * Math.sin(theta);
+
+      const line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      line.setAttribute('class', isMajor ? 'tick tick-major' : 'tick tick-minor');
+      ticksGroup.appendChild(line);
+
+      if (isMajor) {
+        const lr = 96;
+        const lx = cx + lr * Math.cos(theta), ly = cy + lr * Math.sin(theta);
+        const text = document.createElementNS(svgNS, 'text');
+        text.setAttribute('x', lx); text.setAttribute('y', ly);
+        text.setAttribute('class', 'tick-label');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'middle');
+        text.textContent = Math.round((i / steps) * 200);
+        ticksGroup.appendChild(text);
+      }
+    }
+
+    const value = 0.82; // posición decorativa de la aguja
+    const finalAngle = start + value * sweep;
+    const needle = document.querySelector('.gauge-needle');
+    const progress = document.querySelector('.gauge-progress');
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        needle.style.transform = `rotate(${finalAngle}deg)`;
+        progress.style.strokeDashoffset = String(100 - value * 100);
+      }, 250);
+    });
+  })();
+</script>
 
 </body>
 </html>
