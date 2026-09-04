@@ -4,16 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portafolio · Desarrollo de Software — Racing Edition</title>
-<meta name="description" content="Portafolio de desarrollo de software organizado en cuatro unidades académicas, con estética de panel de instrumentos de motociclismo deportivo.">
-
-<!--
-  PERSONALIZA AQUÍ:
-  1) Reemplaza [Tu nombre] y [Tu ciudad, país] en la sección "Pase de boxes" (id="contacto").
-  2) Cambia tu-email@ejemplo.com, tu-usuario (GitHub) y tu-usuario (LinkedIn) por tus datos reales.
-  3) En la sección #proyectos, sustituye los 3 proyectos placeholder por tus proyectos reales
-     (título, descripción, tecnologías y enlaces).
-  4) Ajusta las descripciones de cada unidad si el temario de tu curso difiere.
--->
+<meta name="description" content="Portafolio de desarrollo de software organizado en cuatro unidades académicas de 4 semanas cada una, con estética de panel de instrumentos de motociclismo deportivo.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,65 +16,60 @@
      1. RESET & VARIABLES
   ============================================================ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
   :root {
-    /* Color */
-    --bg: #10131a;
-    --bg-alt: #0c0e13;
-    --surface: #171b24;
-    --surface-2: #1d2330;
-    --line: rgba(255,255,255,0.08);
-    --line-strong: rgba(255,255,255,0.16);
+    /* Color Palette */
+    --bg: #0e1117;
+    --bg-alt: #080a0e;
+    --surface: #151922;
+    --surface-2: #1c222f;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.18);
     --text: #edeff3;
     --text-dim: #8b93a1;
     --text-faint: #565f6e;
     --accent: #f4c10f;
     --accent-ink: #241c02;
 
+    /* Racing Team Colors */
     --kawi:   #74c141;
     --honda:  #e73a4d;
-    --ducati: #a3132f;
+    --ducati: #d61c38;
     --bmw:    #2a7bd6;
 
-    /* Type */
+    /* Typography */
     --f-display: 'Orbitron', 'Inter', sans-serif;
     --f-body: 'Inter', sans-serif;
 
-    /* Layout */
-    --sidebar-w: 264px;
-    --header-h: 72px;
-    --cut: 22px;
-    --cut-sm: 12px;
-    --container: 1180px;
+    /* Layout Parameters */
+    --header-h: 76px;
+    --cut: 20px;
+    --cut-sm: 10px;
+    --container: 1200px;
   }
 
   html, body { background: var(--bg); color: var(--text); }
   body {
     font-family: var(--f-body);
     font-size: 16px;
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; letter-spacing: 0.01em; }
+  h1, h2, h3, h4 { font-family: var(--f-display); line-height: 1.2; letter-spacing: 0.02em; }
   a { color: inherit; text-decoration: none; }
   ul { list-style: none; }
   img, svg { display: block; max-width: 100%; }
-  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   ::selection { background: var(--accent); color: var(--accent-ink); }
 
   /* ============================================================
      2. UTILITIES
   ============================================================ */
-  .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
 
   .chamfer {
     clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
@@ -98,71 +84,68 @@
     gap: 10px;
     font-family: var(--f-body);
     font-weight: 700;
-    font-size: 0.95rem;
-    padding: 15px 28px;
-    transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
+    font-size: 0.9rem;
+    padding: 14px 26px;
+    border-radius: 2px;
+    transition: all .2s ease;
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   .btn:active { transform: translateY(1px); }
-  .btn-primary {
-    background: var(--accent);
-    color: var(--accent-ink);
-  }
-  .btn-primary:hover { background: #ffd23f; }
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--line-strong);
-  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: #ffd23f; box-shadow: 0 0 15px rgba(244, 193, 15, 0.3); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--line-strong); }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
   .pulse-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--accent);
     position: relative;
+    display: inline-block;
     flex-shrink: 0;
   }
   .pulse-dot::after {
     content: '';
-    position: absolute; inset: -6px;
+    position: absolute; inset: -5px;
     border-radius: 50%;
     border: 1px solid var(--accent);
     animation: pulse-ring 2s ease-out infinite;
   }
   @keyframes pulse-ring {
     0% { transform: scale(0.5); opacity: 0.8; }
-    100% { transform: scale(1.8); opacity: 0; }
+    100% { transform: scale(2); opacity: 0; }
   }
 
   .section-heading {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 700;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .section-lead {
     color: var(--text-dim);
-    max-width: 56ch;
-    font-size: 1.05rem;
-    margin-bottom: 48px;
+    max-width: 60ch;
+    font-size: 1rem;
+    margin-bottom: 40px;
   }
 
   /* ============================================================
-     3. HEADER
+     3. HEADER & NAVIGATION (DESKTOP / MOBILE RESPONSIVE)
   ============================================================ */
-  #menu-toggle { display: none; }
-
   .header {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--header-h);
+    background: rgba(8, 10, 14, 0.90);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    z-index: 1000;
+  }
+  .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 clamp(20px, 4vw, 40px);
-    background: rgba(12, 14, 19, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-    z-index: 200;
+    height: 100%;
   }
   .logo {
     display: flex;
@@ -170,8 +153,8 @@
     gap: 12px;
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: 0.03em;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
   }
   .logo-icon {
     width: 38px; height: 38px;
@@ -179,206 +162,92 @@
     background: var(--surface-2);
     border: 1px solid var(--line-strong);
     color: var(--accent);
-    font-size: 1rem;
   }
   .logo small {
     display: block;
     font-family: var(--f-body);
-    font-weight: 500;
-    font-size: 0.62rem;
+    font-weight: 600;
+    font-size: 0.6rem;
     letter-spacing: 0.12em;
     color: var(--text-dim);
-    margin-top: 2px;
   }
 
-  .hamburger-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    width: 32px; height: 24px;
-    cursor: pointer;
-  }
-  .hamburger-btn .bar {
-    height: 2px; width: 100%;
-    background: var(--text);
-    transition: transform .25s ease, opacity .25s ease;
-  }
-
-  /* ============================================================
-     4. SIDEBAR
-  ============================================================ */
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    width: var(--sidebar-w);
-    background: var(--bg-alt);
-    border-right: 1px solid var(--line);
-    padding: 28px 22px;
-    display: flex;
-    flex-direction: column;
-    z-index: 250;
-    transition: transform .3s ease;
-  }
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 22px;
-    margin-bottom: 22px;
-    border-bottom: 1px solid var(--line);
-  }
-  .sidebar-header h3 {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+  .top-nav { display: flex; gap: 8px; }
+  .top-nav a {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: 1px solid transparent;
+    transition: all .2s ease;
   }
-  .sidebar-header h3 i { color: var(--accent); font-size: 0.8rem; }
-  .close-btn { display: none; font-size: 1.4rem; color: var(--text-dim); line-height: 1; cursor: pointer; }
-
-  .nav-links { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-  .nav-item a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 11px 12px;
-    font-size: 0.92rem;
-    font-weight: 500;
-    color: var(--text-dim);
-    border-left: 2px solid transparent;
-    transition: color .18s ease, border-color .18s ease, background-color .18s ease;
-  }
-  .nav-item a i { width: 16px; text-align: center; font-size: 0.85rem; }
-  .nav-item a:hover { color: var(--text); background: var(--surface); }
-  .nav-item.active a {
+  .top-nav a:hover {
     color: var(--text);
-    border-left-color: var(--accent);
     background: var(--surface);
-  }
-  .nav-item.kawasaki.active a, .nav-item.kawasaki a:hover i { color: var(--kawi); }
-  .nav-item.honda.active a, .nav-item.honda a:hover i { color: var(--honda); }
-  .nav-item.ducati.active a, .nav-item.ducati a:hover i { color: var(--ducati); }
-  .nav-item.bmw.active a, .nav-item.bmw a:hover i { color: var(--bmw); }
-
-  .sidebar-footer {
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    color: var(--text-faint);
-  }
-
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 240;
+    border-color: var(--line);
   }
 
   /* ============================================================
-     5. MAIN LAYOUT
-  ============================================================ */
-  .content-container {
-    margin-left: var(--sidebar-w);
-    padding-top: var(--header-h);
-  }
-
-  /* ============================================================
-     6. HERO
+     4. HERO SECTION
   ============================================================ */
   .hero-section {
+    padding: calc(var(--header-h) + 40px) 0 80px;
     position: relative;
-    padding: clamp(56px, 10vh, 110px) 0 clamp(48px, 8vh, 90px);
     overflow: hidden;
   }
-  .hero-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px),
-      repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px);
-    background-size: 28px 28px;
-    background-position: 0 0, 0 0;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 20% 30%, black, transparent 70%);
-    mask-image: radial-gradient(ellipse 80% 60% at 20% 30%, black, transparent 70%);
-    pointer-events: none;
-  }
-
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+    grid-template-columns: 1fr 340px;
     gap: 40px;
     align-items: center;
-    position: relative;
   }
-
   .status-badge {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 16px;
+    padding: 6px 14px;
     border: 1px solid var(--line-strong);
     background: var(--surface);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-dim);
-    margin-bottom: 26px;
+    margin-bottom: 24px;
   }
-
   .hero-title {
-    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 800;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
   }
-  .hero-title span { display: block; }
-
+  .hero-title span { display: block; color: var(--accent); }
   .hero-description {
     color: var(--text-dim);
-    font-size: 1.08rem;
-    max-width: 52ch;
-    margin-bottom: 34px;
+    font-size: 1.05rem;
+    max-width: 54ch;
+    margin-bottom: 32px;
   }
-
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 40px; }
 
   .telemetry-bar {
     display: flex;
-    gap: clamp(24px, 4vw, 48px);
+    gap: 40px;
     border-top: 1px solid var(--line);
-    padding-top: 26px;
+    padding-top: 24px;
   }
   .stat .num {
     display: block;
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     color: var(--accent);
   }
-  .stat .lbl {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin-top: 4px;
-  }
+  .stat .lbl { display: block; font-size: 0.78rem; color: var(--text-dim); }
 
-  /* Gauge */
+  /* Gauge Dashboard */
   .gauge-wrap { display: flex; justify-content: center; }
-  .gauge { width: 100%; max-width: 340px; }
-  .gauge .tick { stroke: var(--text-faint); stroke-width: 2; }
+  .gauge { width: 100%; max-width: 300px; }
+  .gauge .tick { stroke: var(--text-faint); stroke-width: 1.5; }
   .gauge .tick-major { stroke: var(--text-dim); stroke-width: 2.5; }
-  .gauge .tick-label {
-    font-family: var(--f-display);
-    font-size: 11px;
-    fill: var(--text-faint);
-  }
+  .gauge .tick-label { font-family: var(--f-display); font-size: 10px; fill: var(--text-faint); }
   .gauge-track { fill: none; stroke: var(--line-strong); stroke-width: 8; stroke-linecap: round; }
   .gauge-progress {
     fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
@@ -386,358 +255,233 @@
     transition: stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1);
   }
   .gauge-needle {
-    stroke: var(--accent);
-    stroke-width: 3;
-    stroke-linecap: round;
-    transform-box: view-box;
-    transform-origin: 150px 150px;
+    stroke: var(--accent); stroke-width: 3; stroke-linecap: round;
+    transform-box: view-box; transform-origin: 150px 150px;
     transform: rotate(135deg);
     transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
   }
   .gauge-hub { fill: var(--bg-alt); stroke: var(--line-strong); stroke-width: 2; }
   .gauge-hub-dot { fill: var(--accent); }
-  .gauge-readout {
-    font-family: var(--f-display);
-    font-size: 13px;
-    fill: var(--text-dim);
-    letter-spacing: 0.1em;
-  }
-
-  /* orchestrated load-in, hero only */
-  .reveal { opacity: 0; transform: translateY(14px); animation: reveal .6s ease forwards; }
-  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
-  .r1 { animation-delay: .05s; } .r2 { animation-delay: .18s; }
-  .r3 { animation-delay: .32s; } .r4 { animation-delay: .46s; } .r5 { animation-delay: .6s; }
+  .gauge-readout { font-family: var(--f-display); font-size: 12px; fill: var(--text-dim); letter-spacing: 0.1em; }
 
   /* ============================================================
-     7. UNITS
+     5. UNITS & WEEKS STRUCTURE
   ============================================================ */
-  .units-section { padding: 60px 0 100px; border-top: 1px solid var(--line); }
+  .units-section { padding: 80px 0; border-top: 1px solid var(--line); }
 
   .units-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
+    gap: 28px;
   }
 
   .unit-card {
-    position: relative;
     background: var(--surface);
     border: 1px solid var(--line);
     border-top: 3px solid var(--accent-c, var(--accent));
-    padding: 30px 28px 26px;
-    overflow: hidden;
-    transition: background-color .2s ease, border-color .2s ease;
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color .2s ease;
   }
-  .unit-card:hover { background: var(--surface-2); }
+  .unit-card:hover { border-color: var(--line-strong); }
 
   .unit-watermark {
     position: absolute;
-    right: 14px; bottom: 6px;
-    font-size: 6.5rem;
+    right: 20px; top: 15px;
+    font-size: 5rem;
     color: var(--accent-c, var(--accent));
-    opacity: 0.06;
+    opacity: 0.05;
     pointer-events: none;
-    transform: rotate(-8deg);
   }
 
-  .unit-head {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 18px;
+  .unit-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .unit-index { font-family: var(--f-display); font-weight: 700; font-size: 0.85rem; color: var(--accent-c, var(--accent)); }
+  .unit-brand { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text-faint); text-transform: uppercase; }
+
+  .unit-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+  .unit-desc { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 24px; }
+
+  /* Accordion - Weeks */
+  .weeks-container { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .week-item {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
   }
-  .unit-index {
-    font-family: var(--f-display);
-    font-weight: 700;
+  .week-item summary {
+    padding: 12px 16px;
     font-size: 0.85rem;
-    color: var(--accent-c, var(--accent));
-  }
-  .unit-brand {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--text-faint);
-  }
-
-  .unit-icon {
-    width: 46px; height: 46px;
-    display: grid; place-items: center;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    color: var(--accent-c, var(--accent));
-    font-size: 1.1rem;
-    margin-bottom: 18px;
-  }
-
-  .unit-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
-  .unit-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 22px; max-width: 46ch; }
-
-  .unit-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; position: relative; z-index: 1; }
-  .unit-tags li {
-    font-size: 0.75rem;
     font-weight: 600;
-    padding: 5px 11px;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    color: var(--text-dim);
-  }
-
-  .unit-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.88rem;
-    font-weight: 700;
     color: var(--text);
-    position: relative;
-    z-index: 1;
-    transition: gap .18s ease, color .18s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background-color .2s ease;
   }
-  .unit-link i { font-size: 0.75rem; transition: transform .18s ease; }
-  .unit-link:hover { color: var(--accent-c, var(--accent)); }
-  .unit-link:hover i { transform: translateX(3px); }
+  .week-item summary:hover { background: var(--surface-2); color: var(--accent-c, var(--accent)); }
+  .week-item summary::-webkit-details-marker { display: none; }
+  .week-item summary::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    transition: transform .2s ease;
+  }
+  .week-item[open] summary::after { transform: rotate(180deg); color: var(--accent-c, var(--accent)); }
 
+  .week-content {
+    padding: 14px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    background: var(--surface);
+  }
+  .week-content ul { padding-left: 18px; list-style-type: disc; }
+  .week-content li { margin-bottom: 4px; }
+
+  /* Colors setup per unit */
   .u-kawi   { --accent-c: var(--kawi); }
   .u-honda  { --accent-c: var(--honda); }
   .u-ducati { --accent-c: var(--ducati); }
   .u-bmw    { --accent-c: var(--bmw); }
 
   /* ============================================================
-     8. PROJECTS
+     6. PROJECTS SECTION
   ============================================================ */
-  .projects-section { padding: 40px 0 100px; border-top: 1px solid var(--line); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-  }
+  .projects-section { padding: 80px 0; border-top: 1px solid var(--line); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
   .project-card {
     background: var(--surface);
     border: 1px solid var(--line);
-    padding: 28px 26px;
+    padding: 28px 24px;
     display: flex;
     flex-direction: column;
-    transition: border-color .2s ease, background-color .2s ease;
+    transition: border-color .2s ease, transform .2s ease;
   }
-  .project-card:hover { border-color: var(--line-strong); background: var(--surface-2); }
-
+  .project-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
   .project-icon {
-    width: 44px; height: 44px;
+    width: 42px; height: 42px;
     display: grid; place-items: center;
     background: var(--bg-alt);
     border: 1px solid var(--line);
     color: var(--accent);
-    font-size: 1rem;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
-
-  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-  .project-desc { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 20px; flex: 1; }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .project-desc { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 20px; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
   .project-tags li {
-    font-size: 0.7rem; font-weight: 600;
-    padding: 4px 9px;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    color: var(--text-faint);
+    font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+    background: var(--bg-alt); border: 1px solid var(--line); color: var(--text-faint);
   }
-
-  .project-links { display: flex; gap: 18px; }
-  .project-links a {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.82rem; font-weight: 600; color: var(--text-dim);
-    transition: color .18s ease;
-  }
+  .project-links { display: flex; gap: 16px; }
+  .project-links a { font-size: 0.82rem; font-weight: 600; color: var(--text-dim); transition: color .2s ease; }
   .project-links a:hover { color: var(--accent); }
 
   /* ============================================================
-     9. CONTACT
+     7. CONTACT SECTION
   ============================================================ */
-  .contact-section { padding: 40px 0 110px; border-top: 1px solid var(--line); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .contact-links { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
+  .contact-section { padding: 80px 0; border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 380px; gap: 48px; }
+  .contact-links { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
   .contact-links a {
     display: inline-flex; align-items: center; gap: 12px;
-    font-size: 0.98rem; font-weight: 600; color: var(--text-dim);
-    transition: color .18s ease;
-  }
-  .contact-links a i {
-    width: 34px; height: 34px;
-    display: grid; place-items: center;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    color: var(--text);
-    font-size: 0.9rem;
+    font-size: 0.95rem; font-weight: 600; color: var(--text-dim); transition: color .2s ease;
   }
   .contact-links a:hover { color: var(--accent); }
-
-  .pit-pass {
-    background: var(--surface);
-    border: 1px solid var(--line-strong);
+  .contact-links i {
+    width: 36px; height: 36px; display: grid; place-items: center;
+    background: var(--surface); border: 1px solid var(--line); color: var(--text);
   }
+
+  .pit-pass { background: var(--surface); border: 1px solid var(--line-strong); }
   .pit-pass-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 22px;
-    background: var(--accent);
-    color: var(--accent-ink);
+    display: flex; justify-content: space-between; padding: 14px 20px;
+    background: var(--accent); color: var(--accent-ink);
+    font-family: var(--f-display); font-weight: 700; font-size: 0.8rem;
   }
-  .pit-pass-head span:first-child {
-    font-family: var(--f-display);
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-  }
-  .pit-pass-head span:last-child { font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; }
-
-  .pit-pass-body { padding: 26px 22px; }
+  .pit-pass-body { padding: 24px 20px; }
   .pit-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.92rem;
+    display: flex; justify-content: space-between; padding: 10px 0;
+    border-bottom: 1px solid var(--line); font-size: 0.88rem;
   }
   .pit-row:last-child { border-bottom: none; }
-  .pit-row .k { color: var(--text-faint); font-weight: 600; letter-spacing: 0.04em; font-size: 0.78rem; }
-  .pit-row .v { color: var(--text); font-weight: 600; text-align: right; }
-  .pit-row .v.avail { display: flex; align-items: center; gap: 8px; color: var(--kawi); }
+  .pit-row .k { color: var(--text-faint); font-weight: 600; font-size: 0.75rem; }
+  .pit-row .v { color: var(--text); font-weight: 600; }
 
   /* ============================================================
-     10. FOOTER
+     8. FOOTER
   ============================================================ */
-  .footer {
-    border-top: 1px solid var(--line);
-    padding: 28px 0;
-  }
-  .footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 0.82rem;
-    color: var(--text-faint);
-  }
-  .footer a { color: var(--text-dim); font-weight: 600; }
-  .footer a:hover { color: var(--accent); }
+  .footer { border-top: 1px solid var(--line); padding: 24px 0; background: var(--bg-alt); }
+  .footer-inner { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-faint); }
 
   /* ============================================================
-     11. RESPONSIVE
+     9. RESPONSIVE DESIGN
   ============================================================ */
-  @media (max-width: 1024px) {
-    .sidebar {
-      transform: translateX(-100%);
-    }
-    #menu-toggle:checked ~ .sidebar { transform: translateX(0); }
-    #menu-toggle:checked ~ .overlay { display: block; }
-    .close-btn { display: block; }
-    .hamburger-btn { display: flex; }
-    .content-container { margin-left: 0; }
+  @media (max-width: 992px) {
+    .units-grid { grid-template-columns: 1fr; }
     .hero-grid { grid-template-columns: 1fr; }
-    .gauge-wrap { order: -1; max-width: 260px; margin: 0 auto 12px; }
+    .gauge-wrap { display: none; }
     .contact-grid { grid-template-columns: 1fr; }
   }
-
-  @media (max-width: 860px) {
-    .units-grid { grid-template-columns: 1fr; }
+  @media (max-width: 768px) {
+    .top-nav { display: none; } /* Ocultar menú en móviles muy pequeños sin generar barra rota */
     .projects-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 560px) {
-    .telemetry-bar { flex-wrap: wrap; row-gap: 18px; }
-    .hero-cta .btn { width: 100%; justify-content: center; }
-  }
-
-  /* ============================================================
-     12. MOTION PREFERENCES
-  ============================================================ */
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; animation: none; }
-    .pulse-dot::after { animation: none; display: none; }
-    .gauge-needle, .gauge-progress { transition: none; }
-    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<input type="checkbox" id="menu-toggle" hidden>
-
+<!-- HEADER -->
 <header class="header">
-  <div class="logo">
-    <span class="logo-icon"><i class="fa-solid fa-gauge-high"></i></span>
-    <span>PORTAFOLIO<small>RACING EDITION</small></span>
+  <div class="container header-inner">
+    <div class="logo">
+      <span class="logo-icon"><i class="fa-solid fa-gauge-high"></i></span>
+      <span>PORTAFOLIO<small>RACING EDITION</small></span>
+    </div>
+    <nav class="top-nav">
+      <a href="#inicio"><i class="fa-solid fa-house"></i> Inicio</a>
+      <a href="#unidades"><i class="fa-solid fa-motorcycle"></i> Unidades</a>
+      <a href="#proyectos"><i class="fa-solid fa-diagram-project"></i> Proyectos</a>
+      <a href="#contacto"><i class="fa-solid fa-paper-plane"></i> Contacto</a>
+    </nav>
   </div>
-  <label for="menu-toggle" class="hamburger-btn" aria-label="Abrir menú">
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-  </label>
 </header>
 
-<label for="menu-toggle" class="overlay" aria-hidden="true"></label>
+<main>
 
-<nav class="sidebar">
-  <div class="sidebar-header">
-    <h3><i class="fa-solid fa-flag-checkered"></i> Telemetría</h3>
-    <label for="menu-toggle" class="close-btn" aria-label="Cerrar menú">&times;</label>
-  </div>
-  <ul class="nav-links">
-    <li class="nav-item"><a href="#inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a></li>
-    <li class="nav-item kawasaki"><a href="#u1"><i class="fa-solid fa-motorcycle"></i><span>U1 · Kawasaki</span></a></li>
-    <li class="nav-item honda"><a href="#u2"><i class="fa-solid fa-motorcycle"></i><span>U2 · Honda</span></a></li>
-    <li class="nav-item ducati"><a href="#u3"><i class="fa-solid fa-motorcycle"></i><span>U3 · Ducati</span></a></li>
-    <li class="nav-item bmw"><a href="#u4"><i class="fa-solid fa-motorcycle"></i><span>U4 · BMW</span></a></li>
-    <li class="nav-item"><a href="#proyectos"><i class="fa-solid fa-diagram-project"></i><span>Proyectos</span></a></li>
-    <li class="nav-item"><a href="#contacto"><i class="fa-solid fa-paper-plane"></i><span>Contacto</span></a></li>
-  </ul>
-  <div class="sidebar-footer">
-    <span class="pulse-dot"></span> SISTEMA EN LÍNEA
-  </div>
-</nav>
-
-<main class="content-container">
-
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section id="inicio" class="hero-section">
     <div class="container hero-grid">
       <div>
-        <div class="status-badge reveal r1"><span class="pulse-dot"></span> Disponible para nuevos proyectos</div>
-        <h1 class="hero-title reveal r2">
-          <span>Ingeniería de software</span>
-          <span>con precisión de pista</span>
-        </h1>
-        <p class="hero-description reveal r3">
+        <div class="status-badge"><span class="pulse-dot"></span> Disponible para nuevos proyectos</div>
+        <h1 class="hero-title">Ingeniería de software <span>con precisión de pista</span></h1>
+        <p class="hero-description">
           Construyo interfaces rápidas y sistemas confiables con la misma disciplina que un equipo de boxes:
           cada componente probado, cada detalle ajustado antes de salir a producción.
         </p>
-        <div class="hero-cta reveal r4">
-          <a href="#unidades" class="btn btn-primary">Ver unidades <i class="fa-solid fa-chevron-right"></i></a>
+        <div class="hero-cta">
+          <a href="#unidades" class="btn btn-primary">Ver Unidades <i class="fa-solid fa-chevron-right"></i></a>
           <a href="#contacto" class="btn btn-outline">Contactar</a>
         </div>
-        <div class="telemetry-bar reveal r5">
-          <div class="stat"><span class="num">04</span><span class="lbl">Unidades completadas</span></div>
-          <div class="stat"><span class="num">12</span><span class="lbl">Tecnologías cubiertas</span></div>
-          <div class="stat"><span class="num">100%</span><span class="lbl">Responsivo</span></div>
+        <div class="telemetry-bar">
+          <div class="stat"><span class="num">04</span><span class="lbl">Unidades</span></div>
+          <div class="stat"><span class="num">16</span><span class="lbl">Semanas</span></div>
+          <div class="stat"><span class="num">100%</span><span class="lbl">Rendimiento</span></div>
         </div>
       </div>
 
-      <div class="gauge-wrap reveal r3">
+      <div class="gauge-wrap">
         <svg class="gauge" viewBox="0 0 300 300">
           <path class="gauge-track" pathLength="100" d="M56,243 A132,132 0 1 1 244,243" />
-          <path class="gauge-progress" pathLength="100" d="M56,243 A132,132 0 1 1 244,243" />
+          <path class="gauge-progress" id="gaugeProgress" pathLength="100" d="M56,243 A132,132 0 1 1 244,243" />
           <g id="gaugeTicks"></g>
-          <line class="gauge-needle" x1="150" y1="150" x2="264" y2="150" />
+          <line class="gauge-needle" id="gaugeNeedle" x1="150" y1="150" x2="264" y2="150" />
           <circle class="gauge-hub" cx="150" cy="150" r="16" />
           <circle class="gauge-hub-dot" cx="150" cy="150" r="4" />
           <text class="gauge-readout" x="150" y="205" text-anchor="middle">RENDIMIENTO</text>
@@ -746,67 +490,230 @@
     </div>
   </section>
 
-  <!-- UNIDADES -->
+  <!-- UNIDADES Y SEMANAS -->
   <section id="unidades" class="units-section">
     <div class="container">
-      <h2 class="section-heading">Unidades académicas</h2>
-      <p class="section-lead">
-        Cuatro módulos del curso, cada uno asociado a una moto deportiva cuya personalidad
-        representa el enfoque técnico de esa etapa del aprendizaje.
-      </p>
+      <h2 class="section-heading">Unidades Académicas</h2>
+      <p class="section-lead">Estructura curricular de 16 semanas organizadas en 4 unidades. Haz clic en cada semana para revisar el temario y avances.</p>
 
       <div class="units-grid">
+
+        <!-- UNIDAD 1 -->
         <article id="u1" class="unit-card u-kawi">
-          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <i class="fa-solid fa-motorcycle unit-watermark"></i>
           <div class="unit-head">
-            <span class="unit-index">01</span>
+            <span class="unit-index">UNIDAD 01</span>
             <span class="unit-brand">Kawasaki Ninja</span>
           </div>
-          <div class="unit-icon"><i class="fa-solid fa-cubes"></i></div>
-          <h3 class="unit-title">Fundamentos y estructura</h3>
-          <p class="unit-desc">Arquitectura inicial, lógica de programación y primeros prototipos: la base sobre la que se construye todo lo demás.</p>
-          <ul class="unit-tags"><li>HTML5</li><li>CSS3</li><li>Algoritmos</li></ul>
-          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+          <h3 class="unit-title">Fundamentos y Estructura</h3>
+          <p class="unit-desc">Arquitectura inicial, maquetación estándar y semántica del proyecto.</p>
+
+          <div class="weeks-container">
+            <details class="week-item">
+              <summary>Semana 1: Introducción & Configuración</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Configuración del entorno de desarrollo (VS Code, Git).</li>
+                  <li>Estructura básica e historia del lenguaje.</li>
+                  <li>Creación del primer repositorio de trabajo.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 2: Estructura HTML5 & Semántica</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Etiquetas semánticas (`header`, `nav`, `main`, `section`).</li>
+                  <li>Formularios y validaciones nativas.</li>
+                  <li>Buenas prácticas de accesibilidad web (A11y).</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 3: Estilos Fundamentales CSS3</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Modelo de caja (Box Model) y posicionamiento.</li>
+                  <li>Selectores avanzados y especificidad.</li>
+                  <li>Variables CSS y arquitectura de código limpio.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 4: Diseños Flexibles (Flexbox)</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Alineación de componentes con Flexbox.</li>
+                  <li>Creación de estructuras responsivas.</li>
+                  <li>Entrega del primer hito del proyecto.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
         </article>
 
+        <!-- UNIDAD 2 -->
         <article id="u2" class="unit-card u-honda">
-          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <i class="fa-solid fa-motorcycle unit-watermark"></i>
           <div class="unit-head">
-            <span class="unit-index">02</span>
+            <span class="unit-index">UNIDAD 02</span>
             <span class="unit-brand">Honda CBR</span>
           </div>
-          <div class="unit-icon"><i class="fa-solid fa-sliders"></i></div>
-          <h3 class="unit-title">Control y fiabilidad</h3>
-          <p class="unit-desc">Manejo de estado, integración de APIs y programación funcional: hacer que el sistema responda con precisión.</p>
-          <ul class="unit-tags"><li>JavaScript</li><li>DOM</li><li>APIs</li></ul>
-          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+          <h3 class="unit-title">Lógica e Interacción</h3>
+          <p class="unit-desc">Control de flujo, eventos e interacción con el usuario mediante JavaScript.</p>
+
+          <div class="weeks-container">
+            <details class="week-item">
+              <summary>Semana 5: Fundamentos de JavaScript</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Tipos de datos, variables y operadores.</li>
+                  <li>Estructuras de control condicionales y bucles.</li>
+                  <li>Funciones puras y scope de variables.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 6: Manipulación del DOM</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Selección y modificación dinámica de elementos HTML.</li>
+                  <li>Manejo de eventos (Click, Keydown, Submit).</li>
+                  <li>Creación interactiva de elementos dinámicos.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 7: Asincronía y Fetch API</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Promesas y síntaxis `async / await`.</li>
+                  <li>Consumo de datos desde APIs REST públicas.</li>
+                  <li>Manejo estructurado de errores (`try/catch`).</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 8: Almacenamiento Local & Estado</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Persistencia de datos con `localStorage` y `sessionStorage`.</li>
+                  <li>Manejo básico del estado de la aplicación.</li>
+                  <li>Evaluación parcial y presentación de la app.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
         </article>
 
+        <!-- UNIDAD 3 -->
         <article id="u3" class="unit-card u-ducati">
-          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <i class="fa-solid fa-motorcycle unit-watermark"></i>
           <div class="unit-head">
-            <span class="unit-index">03</span>
+            <span class="unit-index">UNIDAD 03</span>
             <span class="unit-brand">Ducati Panigale</span>
           </div>
-          <div class="unit-icon"><i class="fa-solid fa-palette"></i></div>
-          <h3 class="unit-title">Diseño y desempeño</h3>
-          <p class="unit-desc">Diseño de interfaz, componentes visuales y microinteracciones cuidadas al detalle.</p>
-          <ul class="unit-tags"><li>UI/UX</li><li>Frameworks</li><li>Animaciones</li></ul>
-          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+          <h3 class="unit-title">Diseño Avanzado y Frameworks</h3>
+          <p class="unit-desc">Construcción de interfaces complejas y experiencia de usuario (UX/UI).</p>
+
+          <div class="weeks-container">
+            <details class="week-item">
+              <summary>Semana 9: CSS Grid Layout</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Maquetación bidimensional con CSS Grid.</li>
+                  <li>Grid dinámico y plantillas responsivas.</li>
+                  <li>Comparativa y combinación Flexbox vs Grid.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 10: Animaciones & Microinteracciones</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Transiciones avanzadas y Keyframes en CSS.</li>
+                  <li>Optimización de rendimiento gráfico (GPU Acceleration).</li>
+                  <li>Efectos interactivos de entrada y salida.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 11: Frameworks Componentizados</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Introducción a librerías avanzadas de desarrollo.</li>
+                  <li>Diseño modular mediante componentes reutilizables.</li>
+                  <li>Manejo de propiedades y flujos de información.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 12: Arquitectura UI & Optimización</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Patrones de diseño de interfaces.</li>
+                  <li>Auditoría de rendimiento de carga (Lighthouse).</li>
+                  <li>Entrega del prototipo funcional.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
         </article>
 
+        <!-- UNIDAD 4 -->
         <article id="u4" class="unit-card u-bmw">
-          <i class="fa-solid fa-motorcycle unit-watermark" aria-hidden="true"></i>
+          <i class="fa-solid fa-motorcycle unit-watermark"></i>
           <div class="unit-head">
-            <span class="unit-index">04</span>
+            <span class="unit-index">UNIDAD 04</span>
             <span class="unit-brand">BMW S1000RR</span>
           </div>
-          <div class="unit-icon"><i class="fa-solid fa-server"></i></div>
-          <h3 class="unit-title">Telemetría y backend</h3>
-          <p class="unit-desc">Bases de datos, despliegue y arquitectura cliente-servidor: la infraestructura que sostiene todo el sistema.</p>
-          <ul class="unit-tags"><li>Node.js</li><li>Bases de datos</li><li>Cloud</li></ul>
-          <a href="#proyectos" class="unit-link">Ver proyectos relacionados <i class="fa-solid fa-arrow-right"></i></a>
+          <h3 class="unit-title">Backend, Datos y Despliegue</h3>
+          <p class="unit-desc">Conexión con servicios, servidores y la puesta en producción del proyecto.</p>
+
+          <div class="weeks-container">
+            <details class="week-item">
+              <summary>Semana 13: Fundamentos de Backend</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Entornos de ejecución de servidor (Node.js).</li>
+                  <li>Creación de un servidor web y manejo de rutas.</li>
+                  <li>Servicios web y protocolos de comunicación HTTP.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 14: Bases de Datos & Modelado</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Introducción a bases de datos relacionales y no relacionales.</li>
+                  <li>Diseño de esquemas y consultas de datos básicas.</li>
+                  <li>Conexión e integración del backend con la base de datos.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 15: Pruebas y Seguridad</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Pruebas unitarias de código (Testing básico).</li>
+                  <li>Autenticación de usuarios y protección de variables.</li>
+                  <li>Control de versiones para producción.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="week-item">
+              <summary>Semana 16: Despliegue Final & Presentación</summary>
+              <div class="week-content">
+                <ul>
+                  <li>Publicación del proyecto en servidores Cloud.</li>
+                  <li>Configuración de dominios y certificados SSL.</li>
+                  <li>Sustentación final del Portafolio completo.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
         </article>
+
       </div>
     </div>
   </section>
@@ -814,15 +721,15 @@
   <!-- PROYECTOS -->
   <section id="proyectos" class="projects-section">
     <div class="container">
-      <h2 class="section-heading">Proyectos</h2>
-      <p class="section-lead">Una selección de trabajos aplicados durante el curso. Reemplaza estos tres bloques con tus proyectos reales.</p>
+      <h2 class="section-heading">Proyectos Destacados</h2>
+      <p class="section-lead">A continuación se muestran proyectos clave desarrollados a lo largo del curso.</p>
 
       <div class="projects-grid">
         <article class="project-card">
-          <div class="project-icon"><i class="fa-solid fa-globe"></i></div>
-          <h3 class="project-title">[Título del proyecto 1]</h3>
-          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
-          <ul class="project-tags"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+          <div class="project-icon"><i class="fa-solid fa-code"></i></div>
+          <h3 class="project-title">Sistema de Gestión Web</h3>
+          <p class="project-desc">Aplicación web enfocada en el rendimiento y optimización de flujos de trabajo.</p>
+          <ul class="project-tags"><li>HTML5</li><li>CSS Grid</li><li>JavaScript</li></ul>
           <div class="project-links">
             <a href="#"><i class="fa-brands fa-github"></i> Código</a>
             <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
@@ -830,10 +737,10 @@
         </article>
 
         <article class="project-card">
-          <div class="project-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-          <h3 class="project-title">[Título del proyecto 2]</h3>
-          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
-          <ul class="project-tags"><li>React</li><li>API</li></ul>
+          <div class="project-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="project-title">App Dashboard Interactivo</h3>
+          <p class="project-desc">Panel de monitoreo en tiempo real con consumo de servicios asíncronos.</p>
+          <ul class="project-tags"><li>APIs</li><li>JS Async</li><li>UI/UX</li></ul>
           <div class="project-links">
             <a href="#"><i class="fa-brands fa-github"></i> Código</a>
             <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
@@ -841,10 +748,10 @@
         </article>
 
         <article class="project-card">
-          <div class="project-icon"><i class="fa-solid fa-chart-line"></i></div>
-          <h3 class="project-title">[Título del proyecto 3]</h3>
-          <p class="project-desc">Describe aquí qué problema resuelve este proyecto, qué hiciste tú específicamente y qué resultado obtuviste.</p>
-          <ul class="project-tags"><li>Node.js</li><li>Base de datos</li></ul>
+          <div class="project-icon"><i class="fa-solid fa-server"></i></div>
+          <h3 class="project-title">API & Servidor de Datos</h3>
+          <p class="project-desc">Infraestructura backend para la administración y almacenamiento seguro de datos.</p>
+          <ul class="project-tags"><li>Node.js</li><li>Database</li><li>Cloud</li></ul>
           <div class="project-links">
             <a href="#"><i class="fa-brands fa-github"></i> Código</a>
             <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
@@ -858,110 +765,79 @@
   <section id="contacto" class="contact-section">
     <div class="container contact-grid">
       <div>
-        <h2 class="section-heading">Hablemos</h2>
-        <p class="section-lead" style="margin-bottom: 0;">
-          ¿Tienes un proyecto en mente o buscas a alguien que trabaje con la misma exigencia
-          que un box de carreras? Escríbeme y lo revisamos juntos.
-        </p>
+        <h2 class="section-heading">Contacto</h2>
+        <p class="section-lead">¿Tienes alguna pregunta o propuesta académica / laboral? Puedes contactarme a través de las siguientes vías.</p>
+
         <div class="contact-links">
-          <a href="mailto:tu-email@ejemplo.com"><i class="fa-solid fa-envelope"></i> tu-email@ejemplo.com</a>
-          <a href="https://github.com/tu-usuario" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/tu-usuario</a>
-          <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> linkedin.com/in/tu-usuario</a>
+          <a href="mailto:anderson.mayta@ejemplo.com"><i class="fa-solid fa-envelope"></i> tu-email@ejemplo.com</a>
+          <a href="https://github.com" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/tu-usuario</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> linkedin.com/in/tu-usuario</a>
         </div>
       </div>
 
       <div class="pit-pass chamfer-sm">
         <div class="pit-pass-head">
           <span>PASE DE BOXES</span>
-          <span>N.º 2026-04</span>
+          <span>PERFIL</span>
         </div>
         <div class="pit-pass-body">
-          <div class="pit-row"><span class="k">NOMBRE</span><span class="v">[Tu nombre]</span></div>
-          <div class="pit-row"><span class="k">ROL</span><span class="v">Desarrollador de software</span></div>
-          <div class="pit-row"><span class="k">UBICACIÓN</span><span class="v">[Tu ciudad, país]</span></div>
-          <div class="pit-row"><span class="k">DISPONIBILIDAD</span><span class="v avail"><span class="pulse-dot"></span>Inmediata</span></div>
+          <div class="pit-row"><span class="k">ESTUDIANTE</span><span class="v">Anderson Mayta</span></div>
+          <div class="pit-row"><span class="k">ESPECIALIDAD</span><span class="v">Ingeniería de Sistemas</span></div>
+          <div class="pit-row"><span class="k">DISPONIBILIDAD</span><span class="v" style="color: var(--kawi);">Inmediata</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <span>© 2026 Portafolio Racing Edition</span>
-      <a href="#inicio">Volver arriba ↑</a>
-    </div>
-  </footer>
-
 </main>
 
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 Portafolio Racing Edition</span>
+    <a href="#inicio" style="color: var(--text-dim);">Volver arriba ↑</a>
+  </div>
+</footer>
+
 <script>
-  // Cerrar el menú móvil al hacer clic en un enlace
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('menu-toggle').checked = false;
-    });
-  });
-
-  // Resaltar el enlace activo del sidebar según la sección visible
-  const sections = document.querySelectorAll('main section[id]');
-  const navItems = document.querySelectorAll('.nav-item');
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navItems.forEach(item => {
-          const link = item.querySelector('a');
-          item.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
-        });
-      }
-    });
-  }, { rootMargin: '-40% 0px -50% 0px' });
-  sections.forEach(s => spy.observe(s));
-
-  // Construir las marcas del velocímetro y animar la aguja al cargar
-  (function buildGauge() {
-    const svgNS = 'http://www.w3.org/2000/svg';
+  // Script para generar dinámicamente las marcas (ticks) y mover la aguja del Tacómetro/Gauge
+  document.addEventListener('DOMContentLoaded', () => {
     const ticksGroup = document.getElementById('gaugeTicks');
-    if (!ticksGroup) return;
-    const cx = 150, cy = 150, rOuter = 132, steps = 10, start = 135, sweep = 270;
+    const needle = document.getElementById('gaugeNeedle');
+    const progress = document.getElementById('gaugeProgress');
 
-    for (let i = 0; i <= steps; i++) {
-      const isMajor = i % 2 === 0;
-      const theta = (start + (sweep / steps) * i) * Math.PI / 180;
-      const rInner = isMajor ? 112 : 120;
-      const x1 = cx + rInner * Math.cos(theta), y1 = cy + rInner * Math.sin(theta);
-      const x2 = cx + rOuter * Math.cos(theta), y2 = cy + rOuter * Math.sin(theta);
+    const totalTicks = 21;
+    const startAngle = 135;
+    const endAngle = 405;
 
-      const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-      line.setAttribute('class', isMajor ? 'tick tick-major' : 'tick tick-minor');
+    for (let i = 0; i < totalTicks; i++) {
+      const angle = startAngle + (i * (endAngle - startAngle) / (totalTicks - 1));
+      const rad = (angle * Math.PI) / 180;
+      const isMajor = i % 5 === 0;
+
+      const r1 = 126;
+      const r2 = isMajor ? 112 : 118;
+
+      const x1 = 150 + r1 * Math.cos(rad);
+      const y1 = 150 + r1 * Math.sin(rad);
+      const x2 = 150 + r2 * Math.cos(rad);
+      const y2 = 150 + r2 * Math.sin(rad);
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+      line.setAttribute('class', isMajor ? 'tick-major' : 'tick');
       ticksGroup.appendChild(line);
-
-      if (isMajor) {
-        const lr = 96;
-        const lx = cx + lr * Math.cos(theta), ly = cy + lr * Math.sin(theta);
-        const text = document.createElementNS(svgNS, 'text');
-        text.setAttribute('x', lx); text.setAttribute('y', ly);
-        text.setAttribute('class', 'tick-label');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'middle');
-        text.textContent = Math.round((i / steps) * 200);
-        ticksGroup.appendChild(text);
-      }
     }
 
-    const value = 0.82; // posición decorativa de la aguja
-    const finalAngle = start + value * sweep;
-    const needle = document.querySelector('.gauge-needle');
-    const progress = document.querySelector('.gauge-progress');
-
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        needle.style.transform = `rotate(${finalAngle}deg)`;
-        progress.style.strokeDashoffset = String(100 - value * 100);
-      }, 250);
-    });
-  })();
+    // Animación de aguja hacia el 90%
+    setTimeout(() => {
+      const targetAngle = 135 + (0.88 * 270); // Rotación
+      if (needle) needle.style.transform = `rotate(${targetAngle}deg)`;
+      if (progress) progress.style.strokeDashoffset = '12';
+    }, 300);
+  });
 </script>
 
 </body>
