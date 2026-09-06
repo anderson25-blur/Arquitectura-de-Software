@@ -1,20 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MAYTA — Software & Systems Lab</title>
+<title>MAYTA | Systems Engineering Portfolio</title>
 
 <meta name="description"
-content="Portafolio académico y tecnológico de Mayta — Ingeniería de Sistemas, Arquitectura de Software, Inteligencia Artificial, Ciberseguridad y Cloud Computing.">
+content="Portafolio académico de MAYTA — Ingeniería de Sistemas, Arquitectura de Software, Inteligencia Artificial, Ciberseguridad, Cloud y Datos.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   DESIGN SYSTEM
+========================================================= */
+
+:root{
+
+    --bg:#03050a;
+    --bg2:#070a12;
+    --bg3:#0b101a;
+
+    --surface:#0e1522;
+    --surface2:#131c2c;
+    --surface3:#172235;
+
+    --text:#f4f7ff;
+    --muted:#8d99af;
+    --dim:#465168;
+
+    --cyan:#58e6ff;
+    --blue:#648cff;
+    --purple:#a477ff;
+    --green:#65efb5;
+    --pink:#ff69cf;
+    --yellow:#eaff70;
+
+    --border:rgba(255,255,255,.07);
+    --border2:rgba(255,255,255,.14);
+
+    --sidebar:285px;
+    --header:72px;
+
+    --shadow:
+        0 30px 100px rgba(0,0,0,.5);
+
+}
 
 /* =========================================================
    RESET
@@ -31,10 +68,29 @@ html{
 }
 
 body{
-    background:#05070d;
-    color:#f3f7ff;
+
+    background:
+        radial-gradient(
+            circle at 80% 5%,
+            rgba(100,140,255,.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 15% 70%,
+            rgba(88,230,255,.045),
+            transparent 30%
+        ),
+        var(--bg);
+
+    color:var(--text);
+
     font-family:"Space Grotesk",sans-serif;
+
     overflow-x:hidden;
+}
+
+a{
+    color:inherit;
 }
 
 button,
@@ -42,47 +98,35 @@ input{
     font-family:inherit;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
+button{
+    cursor:pointer;
 }
 
 /* =========================================================
-   VARIABLES
+   SCROLLBAR
 ========================================================= */
 
-:root{
+::-webkit-scrollbar{
+    width:5px;
+}
 
-    --bg:#05070d;
-    --bg2:#080b14;
-    --bg3:#0d1320;
+::-webkit-scrollbar-track{
+    background:var(--bg);
+}
 
-    --surface:#101725;
-    --surface2:#151d2d;
-
-    --text:#f3f7ff;
-    --muted:#8994aa;
-    --dim:#414b61;
-
-    --cyan:#5ee7ff;
-    --blue:#638cff;
-    --purple:#a77bff;
-    --green:#68f0bd;
-    --pink:#ff6fcf;
-
-    --border:rgba(255,255,255,.09);
-
-    --sidebar:285px;
-    --header:74px;
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(
+        var(--cyan),
+        var(--purple)
+    );
+    border-radius:20px;
 }
 
 /* =========================================================
    BACKGROUND
 ========================================================= */
 
-body::before{
-
-    content:"";
+.ai-background{
 
     position:fixed;
 
@@ -90,83 +134,83 @@ body::before{
 
     pointer-events:none;
 
-    z-index:-3;
+    z-index:-10;
 
-    background:
+    background-image:
 
-    linear-gradient(
-        rgba(94,231,255,.025) 1px,
-        transparent 1px
-    ),
+        linear-gradient(
+            rgba(88,230,255,.025) 1px,
+            transparent 1px
+        ),
 
-    linear-gradient(
-        90deg,
-        rgba(94,231,255,.025) 1px,
-        transparent 1px
-    );
+        linear-gradient(
+            90deg,
+            rgba(88,230,255,.025) 1px,
+            transparent 1px
+        );
 
-    background-size:60px 60px;
+    background-size:55px 55px;
 
-    mask-image:linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 95%
+        );
 }
 
-body::after{
-
-    content:"";
+.ai-orb{
 
     position:fixed;
 
-    width:700px;
-    height:700px;
+    width:520px;
+    height:520px;
 
-    top:-300px;
-    right:-200px;
+    border-radius:50%;
 
-    background:radial-gradient(
-        circle,
-        rgba(94,231,255,.08),
-        transparent 65%
-    );
+    filter:blur(110px);
+
+    opacity:.11;
 
     pointer-events:none;
 
-    z-index:-2;
+    z-index:-8;
 }
 
-/* =========================================================
-   SCROLL PROGRESS
-========================================================= */
+.orb-a{
 
-#scrollProgress{
+    background:var(--cyan);
 
-    position:fixed;
+    top:-280px;
+    right:-200px;
+}
 
-    top:0;
-    left:0;
+.orb-b{
 
-    height:3px;
+    background:var(--purple);
 
-    width:0%;
+    bottom:-280px;
+    left:-220px;
+}
 
-    background:linear-gradient(
-        90deg,
-        var(--cyan),
-        var(--purple),
-        var(--pink)
-    );
+.orb-c{
 
-    z-index:9999;
+    background:var(--blue);
+
+    width:350px;
+    height:350px;
+
+    top:45%;
+    right:30%;
+
+    opacity:.05;
 }
 
 /* =========================================================
    HEADER
 ========================================================= */
 
-header{
+.header{
 
     position:fixed;
 
@@ -179,81 +223,123 @@ header{
     z-index:1000;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    padding:0 35px;
+    padding:0 28px;
 
-    background:rgba(5,7,13,.75);
+    background:rgba(3,5,10,.78);
+
+    backdrop-filter:blur(25px);
 
     border-bottom:1px solid var(--border);
+}
 
-    backdrop-filter:blur(20px);
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
 }
 
 .brand{
 
     display:flex;
+
     align-items:center;
-    gap:14px;
+
+    gap:11px;
+
+    text-decoration:none;
 }
 
-.brandIcon{
+.brand-icon{
 
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
 
-    border:1px solid rgba(94,231,255,.4);
+    display:flex;
 
-    display:grid;
-    place-items:center;
+    align-items:center;
+    justify-content:center;
 
-    color:var(--cyan);
+    border-radius:11px;
 
-    font-family:"DM Mono";
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--blue),
+            var(--purple)
+        );
+
+    color:#02050a;
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:12px;
+
+    font-weight:900;
 
     box-shadow:
-        0 0 25px rgba(94,231,255,.12);
+        0 0 30px rgba(88,230,255,.2);
 }
 
-.brandText strong{
+.brand-text{
 
-    display:block;
+    display:flex;
 
-    letter-spacing:2px;
-
-    font-size:15px;
+    flex-direction:column;
 }
 
-.brandText span{
+.brand-name{
 
-    display:block;
+    font-size:13px;
 
-    font-family:"DM Mono";
+    font-weight:700;
+
+    letter-spacing:.04em;
+}
+
+.brand-sub{
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
 
     color:var(--muted);
+
+    letter-spacing:.14em;
+}
+
+.header-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:8px 13px;
+
+    border:1px solid var(--border2);
+
+    border-radius:30px;
+
+    background:rgba(14,21,34,.8);
+
+    font-family:"DM Mono",monospace;
 
     font-size:9px;
 
-    letter-spacing:1.5px;
-
-    margin-top:3px;
-}
-
-.status{
-
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    font-family:"DM Mono";
-
-    font-size:10px;
-
     color:var(--muted);
 }
 
-.statusDot{
+.status-dot{
 
     width:7px;
     height:7px;
@@ -262,7 +348,41 @@ header{
 
     background:var(--green);
 
-    box-shadow:0 0 12px var(--green);
+    box-shadow:
+        0 0 15px var(--green);
+
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.4;
+        transform:scale(.7);
+    }
+}
+
+.menu{
+
+    display:none;
+
+    width:40px;
+    height:40px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border2);
+
+    background:var(--surface);
+
+    color:white;
+
+    font-size:18px;
 }
 
 /* =========================================================
@@ -274,166 +394,185 @@ header{
     position:fixed;
 
     top:var(--header);
-    left:0;
     bottom:0;
+    left:0;
 
     width:var(--sidebar);
 
+    padding:25px 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7,10,18,.98),
+            rgba(3,5,10,.98)
+        );
+
     border-right:1px solid var(--border);
 
-    background:rgba(7,10,17,.9);
-
-    backdrop-filter:blur(20px);
-
-    padding:30px 18px;
+    overflow-y:auto;
 
     z-index:900;
+
+    transition:.35s ease;
 }
 
-.sideLabel{
+.side-title{
 
-    font-family:"DM Mono";
+    padding:0 10px 13px;
 
-    font-size:9px;
+    font-family:"DM Mono",monospace;
+
+    font-size:8px;
 
     color:var(--dim);
 
-    letter-spacing:2px;
+    letter-spacing:.18em;
 
-    margin:0 14px 15px;
+    text-transform:uppercase;
 }
 
-.nav{
+.side-link{
 
     display:flex;
 
-    flex-direction:column;
-
-    gap:5px;
-}
-
-.nav a{
-
-    display:flex;
     align-items:center;
 
-    gap:12px;
+    gap:10px;
 
-    padding:12px 14px;
+    width:100%;
 
-    border-radius:10px;
+    padding:10px;
+
+    border-radius:9px;
 
     color:var(--muted);
 
-    font-size:13px;
+    text-decoration:none;
 
-    transition:.3s;
+    font-size:11px;
+
+    transition:.25s;
 }
 
-.nav a:hover,
-.nav a.active{
+.side-link:hover{
 
     color:white;
 
-    background:rgba(94,231,255,.07);
+    background:rgba(255,255,255,.035);
 
-    border-left:2px solid var(--cyan);
+    transform:translateX(3px);
 }
 
-.navIcon{
+.side-number{
 
-    width:20px;
+    width:30px;
+    height:24px;
 
-    color:var(--cyan);
+    display:flex;
 
-    font-family:"DM Mono";
-}
+    align-items:center;
+    justify-content:center;
 
-.profileMini{
+    border-radius:6px;
 
-    position:absolute;
-
-    bottom:20px;
-
-    left:18px;
-    right:18px;
-
-    padding:18px;
+    background:var(--surface);
 
     border:1px solid var(--border);
 
-    border-radius:15px;
+    font-family:"DM Mono",monospace;
 
-    background:linear-gradient(
-        135deg,
-        rgba(94,231,255,.06),
-        rgba(167,123,255,.04)
-    );
+    font-size:8px;
 }
 
-.profileMiniTop{
+.side-link.active{
 
-    display:flex;
-    align-items:center;
-    gap:12px;
+    color:var(--cyan);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(88,230,255,.09),
+            transparent
+        );
 }
 
-.avatar{
+.side-link.active .side-number{
 
-    width:42px;
-    height:42px;
+    color:var(--cyan);
 
-    border-radius:12px;
+    border-color:rgba(88,230,255,.3);
 
-    display:grid;
-    place-items:center;
-
-    background:linear-gradient(
-        135deg,
-        var(--cyan),
-        var(--purple)
-    );
-
-    color:#05070d;
-
-    font-weight:700;
+    background:rgba(88,230,255,.08);
 }
 
-.profileMini strong{
+.side-divider{
 
-    display:block;
-    font-size:14px;
+    height:1px;
+
+    background:var(--border);
+
+    margin:15px 5px;
 }
 
-.profileMini span{
+.side-info{
 
-    font-size:10px;
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,230,255,.04),
+            rgba(164,119,255,.04)
+        );
+}
+
+.side-info-label{
+
+    color:var(--dim);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+
+    letter-spacing:.14em;
+
+    margin-bottom:7px;
+}
+
+.side-info-value{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:3px;
+}
+
+.side-info-small{
+
     color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.6;
 }
 
 /* =========================================================
    MAIN
 ========================================================= */
 
-main{
+.main{
 
     margin-left:var(--sidebar);
 
     padding-top:var(--header);
-}
-
-section{
-
-    padding:110px 6vw;
-
-    position:relative;
-}
-
-.container{
-
-    max-width:1450px;
-
-    margin:auto;
 }
 
 /* =========================================================
@@ -444,19 +583,28 @@ section{
 
     min-height:calc(100vh - var(--header));
 
-    display:grid;
+    position:relative;
 
-    grid-template-columns:
-        minmax(350px, .9fr)
-        minmax(500px, 1.1fr);
+    display:flex;
 
     align-items:center;
 
-    gap:50px;
-
-    padding-top:70px;
+    padding:70px;
 
     overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(3,5,10,.99) 0%,
+            rgba(3,5,10,.94) 38%,
+            rgba(3,5,10,.65) 70%,
+            rgba(3,5,10,.35) 100%
+        ),
+
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
 }
 
 .hero::before{
@@ -465,327 +613,167 @@ section{
 
     position:absolute;
 
-    width:500px;
-    height:500px;
+    inset:0;
 
-    left:-200px;
-    top:30%;
+    background:
+        linear-gradient(
+            transparent 95%,
+            var(--bg)
+        );
 
-    background:radial-gradient(
-        circle,
-        rgba(167,123,255,.12),
-        transparent 70%
-    );
+    pointer-events:none;
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:10;
+
+    width:48%;
+
+    max-width:720px;
 }
 
 .eyebrow{
 
-    font-family:"DM Mono";
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:7px 12px;
+
+    margin-bottom:23px;
+
+    border-radius:30px;
+
+    border:1px solid rgba(88,230,255,.25);
+
+    background:rgba(88,230,255,.07);
 
     color:var(--cyan);
 
-    font-size:11px;
+    font-family:"DM Mono",monospace;
 
-    letter-spacing:2px;
+    font-size:8px;
 
-    margin-bottom:20px;
+    letter-spacing:.1em;
 }
 
 .hero h1{
 
-    font-size:clamp(55px,7vw,105px);
+    font-size:clamp(52px,6.5vw,88px);
 
-    line-height:.88;
+    line-height:.9;
 
-    letter-spacing:-5px;
+    letter-spacing:-.06em;
 
-    margin-bottom:28px;
+    margin-bottom:18px;
 }
 
-.hero h1 span{
+.gradient-text{
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue),
+            var(--purple)
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
 
     color:transparent;
-
-    -webkit-text-stroke:1px rgba(255,255,255,.5);
 }
 
-.heroDescription{
-
-    max-width:620px;
+.hero-role{
 
     color:var(--muted);
 
-    font-size:16px;
+    font-family:"DM Mono",monospace;
 
-    line-height:1.8;
+    font-size:12px;
+
+    margin-bottom:23px;
+}
+
+.hero-desc{
+
+    max-width:650px;
+
+    color:#9da8ba;
+
+    font-size:14px;
+
+    line-height:1.85;
 
     margin-bottom:30px;
 }
 
-.heroActions{
+.hero-actions{
 
     display:flex;
 
-    gap:12px;
-
     flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:32px;
 }
 
 .btn{
 
-    border:1px solid var(--border);
+    display:inline-flex;
 
-    padding:13px 19px;
+    align-items:center;
 
-    border-radius:8px;
+    gap:8px;
 
-    font-family:"DM Mono";
+    padding:12px 17px;
 
-    font-size:11px;
+    border-radius:9px;
 
-    cursor:pointer;
+    border:1px solid var(--border2);
 
-    transition:.3s;
-}
-
-.btnPrimary{
-
-    color:#061018;
-
-    background:var(--cyan);
-
-    border-color:var(--cyan);
-}
-
-.btnPrimary:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 10px 30px rgba(94,231,255,.2);
-}
-
-.btnSecondary{
+    background:rgba(14,21,34,.8);
 
     color:white;
 
-    background:rgba(255,255,255,.03);
-}
-
-.btnSecondary:hover{
-
-    background:rgba(255,255,255,.08);
-}
-
-/* =========================================================
-   CAROUSEL
-========================================================= */
-
-.heroCarousel{
-
-    position:relative;
-
-    height:590px;
-
-    border:1px solid var(--border);
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    background:#090d16;
-
-    box-shadow:
-        0 40px 100px rgba(0,0,0,.5);
-}
-
-.slide{
-
-    position:absolute;
-
-    inset:0;
-
-    opacity:0;
-
-    transform:scale(1.04);
-
-    transition:
-        opacity .8s ease,
-        transform 1.5s ease;
-
-    background-size:cover;
-
-    background-position:center;
-}
-
-.slide.active{
-
-    opacity:1;
-
-    transform:scale(1);
-}
-
-.slide::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            rgba(5,7,13,.05),
-            rgba(5,7,13,.25) 35%,
-            rgba(5,7,13,.95)
-        );
-}
-
-.slideContent{
-
-    position:absolute;
-
-    z-index:2;
-
-    left:35px;
-    right:35px;
-    bottom:40px;
-}
-
-.slideNumber{
-
-    font-family:"DM Mono";
-
-    color:var(--cyan);
+    text-decoration:none;
 
     font-size:10px;
 
-    letter-spacing:2px;
-
-    margin-bottom:12px;
+    transition:.25s;
 }
 
-.slideContent h2{
+.btn:hover{
 
-    font-size:42px;
+    transform:translateY(-3px);
 
-    line-height:1;
+    border-color:rgba(88,230,255,.4);
 
-    margin-bottom:15px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.3);
 }
 
-.slideContent p{
+.btn-primary{
 
-    color:#bdc7d9;
+    border:0;
 
-    max-width:500px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--blue)
+        );
 
-    line-height:1.6;
+    color:#02050a;
 
-    font-size:14px;
-}
-
-.tags{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-
-    margin-top:20px;
-}
-
-.tag{
-
-    padding:6px 9px;
-
-    border:1px solid rgba(255,255,255,.15);
-
-    border-radius:5px;
-
-    background:rgba(0,0,0,.25);
-
-    backdrop-filter:blur(8px);
-
-    font-family:"DM Mono";
-
-    font-size:9px;
-
-    color:#d8e1f2;
-}
-
-.carouselControls{
-
-    position:absolute;
-
-    z-index:5;
-
-    top:25px;
-    right:25px;
-
-    display:flex;
-
-    gap:8px;
-}
-
-.carouselBtn{
-
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.2);
-
-    background:rgba(0,0,0,.35);
-
-    color:white;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(10px);
-}
-
-.carouselBtn:hover{
-
-    border-color:var(--cyan);
-
-    color:var(--cyan);
-}
-
-.carouselDots{
-
-    position:absolute;
-
-    z-index:5;
-
-    bottom:20px;
-    right:35px;
-
-    display:flex;
-
-    gap:7px;
-}
-
-.dot{
-
-    width:25px;
-    height:3px;
-
-    background:rgba(255,255,255,.25);
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.dot.active{
-
-    width:45px;
-
-    background:var(--cyan);
+    font-weight:700;
 }
 
 /* =========================================================
@@ -794,381 +782,111 @@ section{
 
 .stats{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    width:max-content;
 
-    border:1px solid var(--border);
+    max-width:100%;
 
-    background:rgba(255,255,255,.02);
+    border:1px solid var(--border2);
 
-    border-radius:16px;
-
-    margin-top:35px;
+    border-radius:13px;
 
     overflow:hidden;
+
+    background:rgba(5,8,15,.72);
+
+    backdrop-filter:blur(15px);
 }
 
 .stat{
 
-    padding:18px;
+    min-width:115px;
+
+    padding:14px 18px;
 
     border-right:1px solid var(--border);
 }
 
 .stat:last-child{
-
     border-right:0;
 }
 
-.stat strong{
+.stat-number{
 
-    display:block;
+    font-size:21px;
 
-    font-size:24px;
-
-    margin-bottom:4px;
+    font-weight:700;
 }
 
-.stat span{
-
-    font-family:"DM Mono";
-
-    font-size:9px;
+.stat-label{
 
     color:var(--muted);
 
-    text-transform:uppercase;
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+
+    letter-spacing:.1em;
 }
 
 /* =========================================================
-   SECTION HEADER
+   HERO CAROUSEL
 ========================================================= */
 
-.sectionHeader{
+.hero-carousel{
 
-    display:flex;
+    position:absolute;
 
-    justify-content:space-between;
+    right:4%;
 
-    align-items:end;
+    top:50%;
 
-    gap:30px;
+    transform:translateY(-50%);
 
-    margin-bottom:45px;
-}
+    width:46%;
 
-.sectionNumber{
+    height:530px;
 
-    font-family:"DM Mono";
+    z-index:5;
 
-    color:var(--cyan);
-
-    font-size:10px;
-
-    margin-bottom:10px;
-}
-
-.sectionHeader h2{
-
-    font-size:clamp(35px,5vw,60px);
-
-    letter-spacing:-3px;
-}
-
-.sectionHeader p{
-
-    max-width:500px;
-
-    color:var(--muted);
-
-    line-height:1.7;
-
-    font-size:14px;
-}
-
-/* =========================================================
-   SPECIALTIES
-========================================================= */
-
-.specialties{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
-}
-
-.specialty{
-
-    position:relative;
-
-    min-height:270px;
+    border-radius:24px;
 
     overflow:hidden;
 
-    border:1px solid var(--border);
+    border:1px solid rgba(255,255,255,.12);
 
-    border-radius:18px;
-
-    background:var(--surface);
-
-    transition:.4s;
+    box-shadow:
+        0 40px 120px rgba(0,0,0,.6);
 }
 
-.specialty:hover{
-
-    transform:translateY(-7px);
-
-    border-color:rgba(94,231,255,.35);
-
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
-}
-
-.specialtyImage{
-
-    height:145px;
-
-    background-size:cover;
-
-    background-position:center;
-
-    position:relative;
-}
-
-.specialtyImage::after{
-
-    content:"";
+.carousel-slide{
 
     position:absolute;
 
     inset:0;
 
-    background:linear-gradient(
-        transparent,
-        var(--surface)
-    );
-}
+    opacity:0;
 
-.specialtyBody{
+    transform:scale(1.05);
 
-    padding:0 22px 22px;
-}
-
-.specialtyIcon{
-
-    font-size:24px;
-
-    margin-bottom:10px;
-}
-
-.specialty h3{
-
-    font-size:19px;
-
-    margin-bottom:8px;
-}
-
-.specialty p{
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    line-height:1.6;
-}
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.aboutGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        .8fr 1.2fr;
-
-    gap:50px;
-
-    align-items:center;
-}
-
-.aboutVisual{
-
-    min-height:480px;
-
-    border:1px solid var(--border);
-
-    border-radius:22px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(94,231,255,.08),
-            rgba(167,123,255,.04)
-        );
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.aboutVisual::before{
-
-    content:"SYSTEM";
-
-    position:absolute;
-
-    font-size:110px;
-
-    font-weight:700;
-
-    color:rgba(255,255,255,.02);
-
-    transform:rotate(-20deg);
-}
-
-.aboutAvatar{
-
-    width:190px;
-    height:190px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(94,231,255,.5);
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:65px;
-
-    color:var(--cyan);
-
-    background:rgba(94,231,255,.04);
-
-    box-shadow:
-        0 0 70px rgba(94,231,255,.1);
-}
-
-.aboutContent h3{
-
-    font-size:38px;
-
-    margin-bottom:20px;
-}
-
-.aboutContent p{
-
-    color:var(--muted);
-
-    line-height:1.9;
-
-    font-size:15px;
-
-    margin-bottom:18px;
-}
-
-.infoGrid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:10px;
-
-    margin-top:30px;
-}
-
-.infoBox{
-
-    padding:15px;
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    background:rgba(255,255,255,.025);
-}
-
-.infoBox span{
-
-    display:block;
-
-    color:var(--dim);
-
-    font-family:"DM Mono";
-
-    font-size:9px;
-
-    margin-bottom:5px;
-}
-
-.infoBox strong{
-
-    font-size:13px;
-}
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:20px;
-}
-
-.project{
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    background:var(--surface);
-
-    transition:.4s;
-}
-
-.project:hover{
-
-    transform:translateY(-6px);
-
-    border-color:rgba(94,231,255,.35);
-}
-
-.projectImage{
-
-    height:260px;
-
-    background-size:cover;
+    transition:
+        opacity .8s ease,
+        transform 6s ease;
 
     background-position:center;
 
-    position:relative;
+    background-size:cover;
 }
 
-.projectImage::after{
+.carousel-slide.active{
 
-    content:"";
+    opacity:1;
+
+    transform:scale(1);
+}
+
+.carousel-overlay{
 
     position:absolute;
 
@@ -1177,156 +895,525 @@ section{
     background:
         linear-gradient(
             180deg,
-            transparent 45%,
-            rgba(5,7,13,.95)
+            rgba(3,5,10,.05),
+            rgba(3,5,10,.25) 35%,
+            rgba(3,5,10,.95) 100%
         );
 }
 
-.projectIndex{
+.carousel-content{
 
     position:absolute;
 
-    z-index:2;
+    left:30px;
+    right:30px;
+    bottom:28px;
 
-    top:18px;
-    left:18px;
+    z-index:5;
+}
 
-    font-family:"DM Mono";
+.slide-number{
+
+    color:var(--cyan);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:8px;
+
+    letter-spacing:.15em;
+
+    margin-bottom:9px;
+}
+
+.carousel-content h2{
+
+    font-size:31px;
+
+    line-height:1;
+
+    margin-bottom:9px;
+
+    letter-spacing:-.04em;
+}
+
+.carousel-content p{
+
+    color:#b0b8c8;
 
     font-size:10px;
 
+    line-height:1.6;
+
+    max-width:460px;
+
+    margin-bottom:13px;
+}
+
+.tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:5px;
+}
+
+.tag{
+
+    padding:5px 8px;
+
+    border-radius:5px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    background:rgba(3,5,10,.5);
+
+    backdrop-filter:blur(10px);
+
+    color:#dce4f2;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+}
+
+.carousel-controls{
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    display:flex;
+
+    gap:6px;
+
+    z-index:20;
+}
+
+.carousel-btn{
+
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    border:1px solid rgba(255,255,255,.16);
+
+    background:rgba(3,5,10,.55);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    transition:.2s;
+}
+
+.carousel-btn:hover{
+
+    border-color:var(--cyan);
+
     color:var(--cyan);
+}
 
-    background:rgba(0,0,0,.4);
+.carousel-dots{
 
-    padding:7px 9px;
+    position:absolute;
+
+    bottom:20px;
+
+    right:25px;
+
+    display:flex;
+
+    gap:5px;
+
+    z-index:20;
+}
+
+.dot{
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    border:0;
+
+    padding:0;
+
+    background:rgba(255,255,255,.3);
+
+}
+
+.dot.active{
+
+    width:22px;
+
+    border-radius:10px;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 12px rgba(88,230,255,.6);
+}
+
+/* =========================================================
+   FLOATING SYSTEM LABEL
+========================================================= */
+
+.system-label{
+
+    position:absolute;
+
+    top:30px;
+
+    right:30px;
+
+    padding:8px 11px;
+
+    border-radius:8px;
+
+    background:rgba(3,5,10,.6);
 
     border:1px solid rgba(255,255,255,.1);
 
-    border-radius:5px;
-}
-
-.projectBody{
-
-    padding:25px;
-}
-
-.projectCategory{
-
-    font-family:"DM Mono";
-
-    color:var(--cyan);
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    margin-bottom:10px;
-}
-
-.project h3{
-
-    font-size:24px;
-
-    margin-bottom:10px;
-}
-
-.project p{
+    backdrop-filter:blur(12px);
 
     color:var(--muted);
 
-    line-height:1.7;
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+
+    z-index:15;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-area{
+
+    padding:23px 70px;
+
+    border-bottom:1px solid var(--border);
+
+    background:rgba(255,255,255,.012);
+}
+
+.search-box{
+
+    position:relative;
+
+    max-width:760px;
+}
+
+.search-box input{
+
+    width:100%;
+
+    padding:14px 18px 14px 43px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border2);
+
+    background:var(--surface);
+
+    color:white;
+
+    outline:none;
+
+    font-size:11px;
+}
+
+.search-box input:focus{
+
+    border-color:rgba(88,230,255,.4);
+
+    box-shadow:
+        0 0 0 4px rgba(88,230,255,.04);
+}
+
+.search-icon{
+
+    position:absolute;
+
+    left:16px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--muted);
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+
+    padding:75px 70px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    gap:30px;
+
+    margin-bottom:35px;
+}
+
+.section-kicker{
+
+    color:var(--cyan);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:8px;
+
+    letter-spacing:.17em;
+
+    margin-bottom:8px;
+}
+
+.section-title{
+
+    font-size:34px;
+
+    letter-spacing:-.04em;
+}
+
+.section-description{
+
+    max-width:500px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+/* =========================================================
+   DOMAIN CARDS
+========================================================= */
+
+.arch-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap:12px;
+}
+
+.arch-card{
+
+    position:relative;
+
+    min-height:200px;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.arch-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+    height:110px;
+
+    right:-50px;
+    top:-50px;
+
+    border-radius:50%;
+
+    background:rgba(88,230,255,.08);
+
+    filter:blur(20px);
+}
+
+.arch-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:rgba(88,230,255,.28);
+
+    box-shadow:var(--shadow);
+}
+
+.arch-index{
+
+    position:absolute;
+
+    top:14px;
+
+    right:15px;
+
+    color:var(--dim);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+}
+
+.arch-icon{
+
+    width:43px;
+    height:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+    background:rgba(88,230,255,.07);
+
+    border:1px solid rgba(88,230,255,.14);
+
+    color:var(--cyan);
+
+    font-size:18px;
+}
+
+.arch-name{
 
     font-size:13px;
 
-    margin-bottom:18px;
+    font-weight:600;
+
+    margin-bottom:8px;
 }
 
-.projectFooter{
+.arch-description{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.65;
+}
+
+/* =========================================================
+   TECHNOLOGY STACK
+========================================================= */
+
+.stack-section{
+
+    padding:50px 70px;
+
+    overflow:hidden;
+
+    border-bottom:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(88,230,255,.025),
+            transparent,
+            rgba(164,119,255,.025)
+        );
+}
+
+.stack-header{
 
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
+
+    margin-bottom:20px;
 }
 
-.projectLink{
+.stack-title{
 
-    color:var(--cyan);
+    font-family:"DM Mono",monospace;
 
-    font-family:"DM Mono";
+    font-size:8px;
 
-    font-size:10px;
+    color:var(--dim);
+
+    letter-spacing:.16em;
 }
 
-/* =========================================================
-   TECH STACK
-========================================================= */
-
-.techSection{
-
-    overflow:hidden;
-
-    padding-left:0;
-    padding-right:0;
-}
-
-.techTitle{
-
-    text-align:center;
-
-    margin-bottom:35px;
-}
-
-.techTitle span{
-
-    color:var(--muted);
-
-    font-family:"DM Mono";
-
-    font-size:10px;
-
-    letter-spacing:2px;
-}
-
-.techMarquee{
-
-    overflow:hidden;
-
-    border-top:1px solid var(--border);
-
-    border-bottom:1px solid var(--border);
-
-    padding:25px 0;
-}
-
-.techTrack{
+.stack-line{
 
     display:flex;
 
+    gap:10px;
+
     width:max-content;
 
-    animation:marquee 25s linear infinite;
+    animation:marquee 30s linear infinite;
 }
 
-.techItem{
+.stack-track{
 
-    padding:0 35px;
+    overflow:hidden;
 
-    color:#69758c;
+    width:100%;
+}
 
-    font-family:"DM Mono";
+.tech{
 
-    font-size:13px;
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:10px 13px;
+
+    border-radius:8px;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    color:#b8c3d5;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:8px;
 
     white-space:nowrap;
-
-    transition:.3s;
 }
 
-.techItem:hover{
-
+.tech b{
     color:var(--cyan);
 }
 
@@ -1342,201 +1429,6 @@ section{
 }
 
 /* =========================================================
-   UNITS
-========================================================= */
-
-.units{
-
-    display:grid;
-
-    gap:20px;
-}
-
-.unit{
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.035),
-        rgba(255,255,255,.015)
-    );
-
-    overflow:hidden;
-}
-
-.unitHeader{
-
-    padding:25px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    cursor:pointer;
-}
-
-.unitTitle{
-
-    display:flex;
-
-    gap:16px;
-
-    align-items:center;
-}
-
-.unitNumber{
-
-    width:48px;
-    height:48px;
-
-    display:grid;
-
-    place-items:center;
-
-    border-radius:12px;
-
-    border:1px solid rgba(94,231,255,.2);
-
-    color:var(--cyan);
-
-    font-family:"DM Mono";
-}
-
-.unitHeader h3{
-
-    font-size:20px;
-}
-
-.unitHeader span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:11px;
-
-    margin-top:4px;
-}
-
-.unitArrow{
-
-    font-size:20px;
-
-    color:var(--muted);
-
-    transition:.3s;
-}
-
-.unit.open .unitArrow{
-
-    transform:rotate(180deg);
-
-    color:var(--cyan);
-}
-
-.weeks{
-
-    display:none;
-
-    padding:0 25px 25px;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:12px;
-}
-
-.unit.open .weeks{
-
-    display:grid;
-}
-
-.week{
-
-    border:1px solid var(--border);
-
-    border-radius:12px;
-
-    padding:18px;
-
-    background:#0b101b;
-
-    transition:.3s;
-}
-
-.week:hover{
-
-    border-color:rgba(94,231,255,.25);
-
-    transform:translateY(-3px);
-}
-
-.weekNumber{
-
-    font-family:"DM Mono";
-
-    font-size:9px;
-
-    color:var(--cyan);
-
-    margin-bottom:12px;
-}
-
-.week h4{
-
-    font-size:14px;
-
-    margin-bottom:10px;
-}
-
-.week p{
-
-    font-size:10px;
-
-    color:var(--muted);
-
-    line-height:1.5;
-
-    margin-bottom:15px;
-}
-
-.weekActions{
-
-    display:flex;
-
-    gap:6px;
-
-    flex-wrap:wrap;
-}
-
-.weekActions a{
-
-    font-family:"DM Mono";
-
-    font-size:8px;
-
-    padding:6px 8px;
-
-    border:1px solid var(--border);
-
-    border-radius:5px;
-
-    color:var(--muted);
-}
-
-.weekActions a:hover{
-
-    color:var(--cyan);
-
-    border-color:var(--cyan);
-}
-
-/* =========================================================
    EXPLORING
 ========================================================= */
 
@@ -1544,19 +1436,18 @@ section{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:1fr 1fr;
 
-    gap:12px;
+    gap:18px;
 }
 
-.explore{
+.explore-card{
 
     padding:25px;
 
     border:1px solid var(--border);
 
-    border-radius:15px;
+    border-radius:16px;
 
     background:var(--surface);
 
@@ -1565,457 +1456,931 @@ section{
     overflow:hidden;
 }
 
-.explore::after{
+.explore-card::after{
 
     content:"";
 
     position:absolute;
 
-    width:100px;
-    height:100px;
+    right:-100px;
+    bottom:-100px;
 
-    right:-50px;
-    bottom:-50px;
+    width:250px;
+    height:250px;
 
     border-radius:50%;
 
-    background:rgba(94,231,255,.07);
+    background:rgba(164,119,255,.07);
+
+    filter:blur(35px);
 }
 
-.explore span{
+.explore-top{
 
-    font-family:"DM Mono";
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.explore-code{
+
+    font-family:"DM Mono",monospace;
 
     color:var(--cyan);
 
-    font-size:10px;
+    font-size:8px;
 }
 
-.explore h3{
+.explore-status{
 
-    margin-top:20px;
+    font-family:"DM Mono",monospace;
 
-    font-size:17px;
+    font-size:7px;
+
+    color:var(--green);
 }
 
-.explore p{
+.explore-card h3{
 
-    margin-top:8px;
+    font-size:21px;
+
+    margin-bottom:8px;
+}
+
+.explore-card p{
 
     color:var(--muted);
 
-    font-size:11px;
+    font-size:10px;
 
-    line-height:1.6;
+    line-height:1.7;
+
+    max-width:500px;
 }
 
-/* =========================================================
-   INFOGRAPHIC
-========================================================= */
+.progress{
 
-.architectureVisual{
+    margin-top:18px;
 
-    min-height:520px;
+    height:5px;
 
-    border:1px solid var(--border);
-
-    border-radius:25px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(94,231,255,.08),
-            transparent 35%
-        ),
-        #070b13;
-}
-
-.architectureVisual::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        linear-gradient(
-            rgba(94,231,255,.04) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(94,231,255,.04) 1px,
-            transparent 1px
-        );
-
-    background-size:45px 45px;
-}
-
-.archCore{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:160px;
-    height:160px;
-
-    border-radius:50%;
-
-    border:1px solid var(--cyan);
-
-    display:grid;
-
-    place-items:center;
-
-    color:var(--cyan);
-
-    font-family:"DM Mono";
-
-    font-size:11px;
-
-    box-shadow:
-        0 0 60px rgba(94,231,255,.1);
-}
-
-.archNode{
-
-    position:absolute;
-
-    padding:13px 18px;
-
-    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
 
     border-radius:10px;
 
-    background:rgba(8,11,20,.85);
-
-    backdrop-filter:blur(10px);
-
-    font-family:"DM Mono";
-
-    font-size:10px;
-
-    color:#b9c4d6;
+    overflow:hidden;
 }
 
-.node1{
-    left:10%;
-    top:20%;
-}
+.progress span{
 
-.node2{
-    right:10%;
-    top:20%;
-}
+    display:block;
 
-.node3{
-    left:10%;
-    bottom:20%;
-}
+    height:100%;
 
-.node4{
-    right:10%;
-    bottom:20%;
+    width:70%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--purple)
+        );
 }
 
 /* =========================================================
-   OWNER CARD
+   UNITS
 ========================================================= */
 
-.ownerCard{
+.unit{
 
-    position:fixed;
+    padding:70px;
 
-    right:25px;
-    bottom:25px;
+    border-bottom:1px solid var(--border);
+}
 
-    width:275px;
+.unit-header{
 
-    padding:17px;
+    display:flex;
 
-    border-radius:16px;
+    align-items:center;
 
-    background:rgba(10,15,25,.88);
+    gap:18px;
 
-    border:1px solid rgba(94,231,255,.2);
+    margin-bottom:28px;
+}
 
-    backdrop-filter:blur(22px);
+.unit-number{
 
-    z-index:950;
+    width:48px;
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    border:1px solid rgba(88,230,255,.25);
+
+    background:rgba(88,230,255,.06);
+
+    color:var(--cyan);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+}
+
+.unit-title{
+
+    font-size:27px;
+
+    letter-spacing:-.035em;
+}
+
+.unit-subtitle{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:4px;
+}
+
+.unit-meta{
+
+    margin-left:auto;
+
+    text-align:right;
+}
+
+.unit-meta-number{
+
+    font-size:18px;
+
+    font-weight:700;
+}
+
+.unit-meta-text{
+
+    color:var(--muted);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+}
+
+/* =========================================================
+   WEEKS
+========================================================= */
+
+.weeks{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+}
+
+.week{
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    background:var(--bg3);
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.week:hover{
+
+    border-color:rgba(88,230,255,.18);
+}
+
+.week.open{
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.45);
-
-    transition:.4s;
+        0 20px 60px rgba(0,0,0,.35);
 }
 
-.ownerCard:hover{
+.week-head{
 
-    border-color:rgba(94,231,255,.45);
+    min-height:74px;
 
-    transform:translateY(-4px);
+    padding:15px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    cursor:pointer;
 }
 
-.ownerTop{
+.week-left{
 
     display:flex;
 
     align-items:center;
 
     gap:12px;
+
+    min-width:0;
 }
 
-.ownerAvatar{
+.week-number{
 
-    width:48px;
-    height:48px;
-
-    border-radius:14px;
-
-    background:linear-gradient(
-        135deg,
-        rgba(94,231,255,.2),
-        rgba(167,123,255,.2)
-    );
-
-    border:1px solid rgba(94,231,255,.25);
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:20px;
+    flex-shrink:0;
 
     color:var(--cyan);
-}
 
-.ownerTitle{
-
-    font-family:"DM Mono";
-
-    color:var(--cyan);
+    font-family:"DM Mono",monospace;
 
     font-size:8px;
 
-    letter-spacing:2px;
+    padding:6px 8px;
 
-    margin-bottom:4px;
+    border-radius:5px;
+
+    background:rgba(88,230,255,.07);
+
+    border:1px solid rgba(88,230,255,.17);
 }
 
-.ownerName{
+.week-name{
 
-    font-weight:600;
+    font-size:12px;
 
-    font-size:15px;
+    font-weight:500;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
-.ownerInfo{
+.week-plus{
 
-    display:grid;
+    flex-shrink:0;
 
-    gap:7px;
+    width:29px;
+    height:29px;
 
-    margin-top:15px;
+    display:flex;
 
-    padding-top:15px;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:1px solid var(--border2);
+
+    color:var(--muted);
+
+    transition:.3s;
+}
+
+.week.open .week-plus{
+
+    transform:rotate(45deg);
+
+    color:#000;
+
+    background:var(--cyan);
+
+    border-color:var(--cyan);
+}
+
+.week-body{
+
+    display:none;
 
     border-top:1px solid var(--border);
 }
 
-.ownerRow{
+.week.open .week-body{
+    display:block;
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.tabs{
 
     display:flex;
 
-    justify-content:space-between;
+    background:var(--bg2);
 
-    gap:10px;
-
-    font-size:9px;
+    border-bottom:1px solid var(--border);
 }
 
-.ownerRow span:first-child{
+.tab{
 
-    color:var(--dim);
+    padding:10px 15px;
 
-    font-family:"DM Mono";
-}
+    border:0;
 
-.ownerRow span:last-child{
+    border-bottom:2px solid transparent;
 
-    color:#cbd4e3;
+    background:none;
 
-    text-align:right;
-}
+    color:var(--muted);
 
-.ownerStatus{
-
-    margin-top:13px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    color:var(--green);
-
-    font-family:"DM Mono";
+    font-family:"DM Mono",monospace;
 
     font-size:8px;
 }
 
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.searchBox{
-
-    max-width:650px;
-
-    margin:0 auto 55px;
-
-    position:relative;
-}
-
-.searchBox input{
-
-    width:100%;
-
-    padding:17px 20px 17px 48px;
-
-    border:1px solid var(--border);
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.03);
-
-    color:white;
-
-    outline:none;
-
-    font-size:13px;
-}
-
-.searchBox input:focus{
-
-    border-color:rgba(94,231,255,.4);
-
-    box-shadow:
-        0 0 30px rgba(94,231,255,.05);
-}
-
-.searchIcon{
-
-    position:absolute;
-
-    left:18px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    color:var(--cyan);
-}
-
-/* =========================================================
-   BOT
-========================================================= */
-
-.botButton{
-
-    position:fixed;
-
-    right:25px;
-    bottom:210px;
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(94,231,255,.35);
-
-    background:#0a111c;
+.tab.active{
 
     color:var(--cyan);
 
-    display:grid;
-
-    place-items:center;
-
-    cursor:pointer;
-
-    z-index:1000;
-
-    box-shadow:
-        0 0 30px rgba(94,231,255,.12);
+    border-bottom-color:var(--cyan);
 }
 
-.botPanel{
+/* =========================================================
+   CONTENT
+========================================================= */
 
-    position:fixed;
-
-    right:25px;
-    bottom:280px;
-
-    width:340px;
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    background:#080d17;
-
-    overflow:hidden;
-
-    z-index:1001;
+.panel{
 
     display:none;
 
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.6);
+    padding:16px;
 }
 
-.botPanel.open{
-
+.panel.active{
     display:block;
 }
 
-.botHeader{
-
-    padding:16px;
-
-    border-bottom:1px solid var(--border);
+.content-list{
 
     display:flex;
 
-    justify-content:space-between;
+    flex-direction:column;
+
+    gap:8px;
+}
+
+.content-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:11px;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    background:var(--surface);
+
+    transition:.2s;
+}
+
+.content-item:hover{
+
+    transform:translateX(3px);
+
+    border-color:rgba(88,230,255,.22);
+}
+
+.content-icon{
+
+    width:34px;
+    height:34px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:rgba(88,230,255,.07);
+
+    color:var(--cyan);
+
+    font-size:14px;
+}
+
+.content-info{
+
+    flex:1;
+
+    min-width:0;
+}
+
+.content-title{
+
+    font-size:10px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.content-type{
+
+    color:var(--muted);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+
+    margin-top:3px;
+}
+
+.open-content{
+
+    padding:6px 8px;
+
+    border-radius:5px;
+
+    border:1px solid rgba(88,230,255,.18);
+
+    background:none;
+
+    color:var(--cyan);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+}
+
+/* =========================================================
+   INFOGRAPHIC
+========================================================= */
+
+.infographic{
+
+    padding:80px 70px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-bottom:1px solid var(--border);
+
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(164,119,255,.11),
+            transparent 35%
+        );
+}
+
+.info-layout{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:50px;
 
     align-items:center;
 }
 
-.botHeader strong{
+.info-title{
 
-    font-family:"DM Mono";
+    font-size:47px;
+
+    line-height:1;
+
+    letter-spacing:-.05em;
+
+    margin-bottom:20px;
+}
+
+.info-text{
+
+    color:var(--muted);
+
+    max-width:550px;
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    margin-bottom:22px;
+}
+
+.info-button{
+
+    display:inline-flex;
+
+    padding:11px 16px;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--blue)
+        );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    font-weight:600;
+}
+
+/* =========================================================
+   INFO VISUAL
+========================================================= */
+
+.info-visual{
+
+    min-height:350px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.info-network{
+
+    width:270px;
+    height:270px;
+
+    border:1px solid rgba(164,119,255,.25);
+
+    border-radius:50%;
+
+    position:relative;
+
+    animation:rotate 25s linear infinite;
+}
+
+.info-network::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:35px;
+
+    border:1px dashed rgba(88,230,255,.18);
+
+    border-radius:50%;
+}
+
+.node{
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:var(--surface2);
+
+    border:1px solid rgba(88,230,255,.3);
+
+    font-size:17px;
+
+    animation:counterRotate 25s linear infinite;
+}
+
+.node:nth-child(1){
+
+    top:-22px;
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+.node:nth-child(2){
+
+    right:-22px;
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
+.node:nth-child(3){
+
+    bottom:-22px;
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+.node:nth-child(4){
+
+    left:-22px;
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
+.node:nth-child(5){
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:82px;
+    height:82px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,230,255,.18),
+            rgba(164,119,255,.18)
+        );
+
+    border-color:rgba(88,230,255,.4);
+}
+
+@keyframes rotate{
+
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes counterRotate{
+
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+/* =========================================================
+   PROJECT CARDS
+========================================================= */
+
+.projects{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+}
+
+.project{
+
+    min-height:220px;
+
+    padding:23px;
+
+    position:relative;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.project:hover{
+
+    transform:translateY(-5px);
+
+    border-color:rgba(88,230,255,.25);
+}
+
+.project-number{
 
     color:var(--cyan);
 
-    font-size:11px;
+    font-family:"DM Mono",monospace;
+
+    font-size:8px;
+
+    margin-bottom:35px;
 }
 
-.botMessages{
+.project h3{
 
-    height:300px;
+    font-size:18px;
 
-    overflow:auto;
+    margin-bottom:8px;
+}
+
+.project p{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.project-icon{
+
+    position:absolute;
+
+    right:20px;
+
+    top:20px;
+
+    font-size:26px;
+
+    opacity:.7;
+}
+
+/* =========================================================
+   AI BOT
+========================================================= */
+
+.ai-bot{
+
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:2000;
+}
+
+.bot-button{
+
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(88,230,255,.4);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0c2633,
+            #18213b
+        );
+
+    color:var(--cyan);
+
+    font-size:23px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.5),
+        0 0 30px rgba(88,230,255,.08);
+
+    transition:.3s;
+}
+
+.bot-button:hover{
+
+    transform:translateY(-4px) scale(1.03);
+}
+
+.bot-window{
+
+    position:absolute;
+
+    right:0;
+
+    bottom:72px;
+
+    width:350px;
+
+    height:480px;
+
+    display:none;
+
+    flex-direction:column;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border2);
+
+    background:
+        linear-gradient(
+            180deg,
+            #0c111d,
+            #070a12
+        );
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.65);
+}
+
+.bot-window.open{
+    display:flex;
+}
+
+.bot-head{
+
+    padding:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.bot-avatar{
+
+    width:35px;
+    height:35px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--purple)
+        );
+
+    color:#000;
+
+    font-family:"Orbitron",sans-serif;
+
+    font-size:9px;
+}
+
+.bot-name{
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+.bot-status{
+
+    color:var(--green);
+
+    font-family:"DM Mono",monospace;
+
+    font-size:7px;
+}
+
+.bot-messages{
+
+    flex:1;
+
+    overflow-y:auto;
 
     padding:15px;
 
@@ -2023,189 +2388,208 @@ section{
 
     flex-direction:column;
 
-    gap:10px;
+    gap:9px;
 }
 
 .message{
+
+    max-width:86%;
 
     padding:10px 12px;
 
     border-radius:10px;
 
-    font-size:11px;
+    font-size:9px;
 
-    line-height:1.5;
-
-    max-width:85%;
+    line-height:1.65;
 }
 
 .message.bot{
 
-    background:#111827;
-
-    color:#c6d0df;
-
     align-self:flex-start;
+
+    background:var(--surface);
+
+    color:#bdc7d8;
+
+    border:1px solid var(--border);
 }
 
 .message.user{
 
-    background:rgba(94,231,255,.12);
-
-    color:#eafcff;
-
     align-self:flex-end;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,230,255,.13),
+            rgba(100,140,255,.13)
+        );
+
+    border:1px solid rgba(88,230,255,.14);
 }
 
-.botInput{
+.bot-suggestions{
+
+    padding:9px 11px;
 
     display:flex;
+
+    flex-wrap:wrap;
+
+    gap:5px;
 
     border-top:1px solid var(--border);
 }
 
-.botInput input{
+.suggestion{
 
-    flex:1;
+    padding:5px 8px;
 
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    color:white;
-
-    padding:14px;
-
-    font-size:11px;
-}
-
-.botInput button{
-
-    border:0;
-
-    background:var(--cyan);
-
-    color:#071018;
-
-    width:50px;
-
-    cursor:pointer;
-}
-
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-#topButton{
-
-    position:fixed;
-
-    right:25px;
-    bottom:25px;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
+    border-radius:6px;
 
     border:1px solid var(--border);
 
-    background:#0b111d;
+    background:var(--surface);
+
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+.bot-input{
+
+    display:flex;
+
+    gap:6px;
+
+    padding:10px;
+
+    border-top:1px solid var(--border);
+}
+
+.bot-input input{
+
+    flex:1;
+
+    min-width:0;
+
+    padding:9px;
+
+    border-radius:8px;
+
+    border:1px solid var(--border2);
+
+    background:var(--bg);
 
     color:white;
 
-    cursor:pointer;
+    outline:none;
 
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-
-    z-index:999;
+    font-size:9px;
 }
 
-#topButton.show{
+.bot-input button{
 
-    opacity:1;
+    width:40px;
 
-    pointer-events:auto;
+    border:0;
+
+    border-radius:8px;
+
+    background:var(--cyan);
+
+    color:#000;
+
+    font-weight:bold;
 }
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
-footer{
+.footer{
 
-    padding:50px 6vw;
-
-    border-top:1px solid var(--border);
-
-    background:#04060b;
-}
-
-.footerInner{
-
-    max-width:1450px;
-
-    margin:auto;
+    padding:35px 70px;
 
     display:flex;
 
+    align-items:center;
+
     justify-content:space-between;
 
-    gap:30px;
+    flex-wrap:wrap;
 
-    align-items:center;
+    gap:20px;
 }
 
-.footerBrand{
+.footer-name{
 
-    font-size:20px;
+    font-size:13px;
 
-    font-weight:700;
+    font-weight:600;
 }
 
-.footerBrand span{
+.footer-info{
 
-    display:block;
+    margin-top:4px;
 
     color:var(--muted);
 
-    font-family:"DM Mono";
+    font-family:"DM Mono",monospace;
 
-    font-size:9px;
-
-    font-weight:400;
-
-    margin-top:5px;
+    font-size:7px;
 }
 
-.footerCopy{
+.footer-tech{
 
     color:var(--dim);
 
-    font-family:"DM Mono";
+    font-family:"DM Mono",monospace;
 
-    font-size:9px;
+    font-size:7px;
 }
 
 /* =========================================================
-   REVEAL
+   TOP
+========================================================= */
+
+#top{
+
+    position:fixed;
+
+    right:25px;
+    bottom:95px;
+
+    width:40px;
+    height:40px;
+
+    display:none;
+
+    border-radius:10px;
+
+    border:1px solid var(--border2);
+
+    background:var(--surface2);
+
+    color:var(--cyan);
+
+    z-index:1500;
+}
+
+/* =========================================================
+   REVEAL ANIMATION
 ========================================================= */
 
 .reveal{
 
     opacity:0;
 
-    transform:translateY(30px);
+    transform:translateY(25px);
 
     transition:
-        opacity .8s ease,
-        transform .8s ease;
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .reveal.visible{
@@ -2216,188 +2600,231 @@ footer{
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
-.mobileMenu{
+@media(max-width:1250px){
 
-    display:none;
+    .arch-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
 
-    width:40px;
-    height:40px;
+    .hero-carousel{
+        width:43%;
+        right:3%;
+    }
 
-    border:1px solid var(--border);
-
-    background:transparent;
-
-    color:white;
-
-    border-radius:8px;
-
-    cursor:pointer;
 }
 
-@media(max-width:1100px){
+@media(max-width:1000px){
+
+    .hero{
+        padding:55px 45px;
+
+        min-height:auto;
+
+        display:block;
+    }
+
+    .hero-content{
+        width:100%;
+        max-width:750px;
+    }
+
+    .hero-carousel{
+
+        position:relative;
+
+        width:100%;
+
+        right:auto;
+
+        top:auto;
+
+        transform:none;
+
+        margin-top:45px;
+
+        height:430px;
+    }
+
+    .exploring,
+    .info-layout{
+        grid-template-columns:1fr;
+    }
+
+    .projects{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    :root{
+        --sidebar:0px;
+    }
+
+    .header{
+        padding:0 15px;
+    }
+
+    .menu{
+        display:block;
+    }
 
     .sidebar{
 
+        width:280px;
+
         transform:translateX(-100%);
 
-        transition:.3s;
+        box-shadow:
+            20px 0 70px rgba(0,0,0,.6);
     }
 
     .sidebar.open{
-
         transform:translateX(0);
     }
 
-    main{
-
+    .main{
         margin-left:0;
     }
 
-    .mobileMenu{
-
-        display:block;
+    .header-status{
+        display:none;
     }
 
     .hero{
 
-        grid-template-columns:1fr;
-    }
-
-    .heroCarousel{
-
-        height:520px;
-    }
-
-    .specialties{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .weeks{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .exploring{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .ownerCard{
-
-        display:none;
-    }
-
-    .botButton{
-
-        bottom:25px;
-    }
-
-    .botPanel{
-
-        bottom:90px;
-    }
-
-}
-
-@media(max-width:700px){
-
-    header{
-
-        padding:0 18px;
-    }
-
-    .status{
-
-        display:none;
-    }
-
-    section{
-
-        padding:80px 22px;
-    }
-
-    .hero{
-
-        padding-top:45px;
+        padding:50px 24px;
     }
 
     .hero h1{
-
-        font-size:55px;
-
-        letter-spacing:-3px;
+        font-size:50px;
     }
 
-    .heroCarousel{
-
-        height:460px;
+    .hero-carousel{
+        height:390px;
     }
 
-    .slideContent h2{
-
-        font-size:30px;
+    .section,
+    .unit,
+    .infographic{
+        padding:55px 24px;
     }
 
-    .stats{
-
-        grid-template-columns:repeat(2,1fr);
+    .stack-section{
+        padding:40px 24px;
     }
 
-    .stat{
-
-        border-bottom:1px solid var(--border);
+    .search-area{
+        padding:20px 24px;
     }
 
-    .specialties,
-    .projects,
-    .aboutGrid{
-
-        grid-template-columns:1fr;
-    }
-
-    .exploring{
-
-        grid-template-columns:1fr;
-    }
-
-    .weeks{
-
-        grid-template-columns:1fr;
-    }
-
-    .sectionHeader{
-
-        display:block;
-    }
-
-    .sectionHeader p{
-
-        margin-top:15px;
-    }
-
-    .infoGrid{
-
-        grid-template-columns:1fr;
-    }
-
-    .botPanel{
-
-        left:15px;
-        right:15px;
-
-        width:auto;
-    }
-
-    .footerInner{
-
+    .section-header{
         flex-direction:column;
 
         align-items:flex-start;
     }
+
+    .arch-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .weeks{
+        grid-template-columns:1fr;
+    }
+
+    .unit-header{
+        align-items:flex-start;
+    }
+
+    .unit-meta{
+        display:none;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .footer{
+        padding:30px 24px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero-role{
+        font-size:10px;
+    }
+
+    .hero-desc{
+        font-size:12px;
+    }
+
+    .stats{
+        width:100%;
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat{
+        min-width:0;
+
+        border-bottom:1px solid var(--border);
+    }
+
+    .stat:nth-child(2){
+        border-right:0;
+    }
+
+    .stat:nth-child(3){
+        border-bottom:0;
+    }
+
+    .stat:nth-child(4){
+        border-right:0;
+
+        border-bottom:0;
+    }
+
+    .hero-carousel{
+        height:350px;
+    }
+
+    .carousel-content h2{
+        font-size:25px;
+    }
+
+    .carousel-content{
+        left:20px;
+        right:20px;
+        bottom:20px;
+    }
+
+    .arch-grid{
+        grid-template-columns:1fr;
+    }
+
+    .info-title{
+        font-size:36px;
+    }
+
+    .bot-window{
+        width:calc(100vw - 30px);
+        right:-5px;
+    }
+
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -2405,134 +2832,163 @@ footer{
     *,
     *::before,
     *::after{
-
         animation-duration:.01ms !important;
-
-        animation-iteration-count:1 !important;
-
-        scroll-behavior:auto !important;
-
         transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
     }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div id="scrollProgress"></div>
+<div class="ai-background"></div>
+<div class="ai-orb orb-a"></div>
+<div class="ai-orb orb-b"></div>
+<div class="ai-orb orb-c"></div>
 
-<!-- =====================================================
+
+<!-- =======================================================
      HEADER
-===================================================== -->
+======================================================= -->
 
-<header>
+<header class="header">
 
-    <div class="brand">
+    <div class="header-left">
 
-        <div class="brandIcon">
-            &lt;/&gt;
-        </div>
+        <button
+            class="menu"
+            onclick="toggleSidebar()"
+            aria-label="Abrir menú"
+        >
+            ☰
+        </button>
 
-        <div class="brandText">
+        <a href="#inicio" class="brand">
 
-            <strong>MAYTA</strong>
+            <div class="brand-icon">
+                MY
+            </div>
 
-            <span>SOFTWARE & SYSTEMS LAB</span>
+            <div class="brand-text">
 
-        </div>
+                <div class="brand-name">
+                    MAYTA
+                </div>
+
+                <div class="brand-sub">
+                    SYSTEMS · AI · ARCHITECTURE
+                </div>
+
+            </div>
+
+        </a>
 
     </div>
 
-    <div class="status">
 
-        <span class="statusDot"></span>
+    <div class="header-status">
 
-        PORTAFOLIO ONLINE · 2026
+        <span class="status-dot"></span>
+
+        SYSTEM ONLINE · 2026
 
     </div>
-
-    <button
-        class="mobileMenu"
-        onclick="toggleSidebar()"
-        aria-label="Abrir menú">
-
-        ☰
-
-    </button>
 
 </header>
 
 
-<!-- =====================================================
+<!-- =======================================================
      SIDEBAR
-===================================================== -->
+======================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
-    <div class="sideLabel">
-        NAVEGACIÓN
+    <div class="side-title">
+        Navegación
     </div>
 
-    <nav class="nav">
+    <a href="#inicio" class="side-link active">
+        <span class="side-number">00</span>
+        Inicio
+    </a>
 
-        <a href="#inicio" class="active">
-            <span class="navIcon">01</span>
-            Inicio
-        </a>
+    <a href="#arquitectura" class="side-link">
+        <span class="side-number">01</span>
+        Especialidades
+    </a>
 
-        <a href="#sobre-mi">
-            <span class="navIcon">02</span>
-            Sobre mí
-        </a>
+    <a href="#stack" class="side-link">
+        <span class="side-number">02</span>
+        Technology Stack
+    </a>
 
-        <a href="#especialidades">
-            <span class="navIcon">03</span>
-            Especialidades
-        </a>
+    <a href="#explorando" class="side-link">
+        <span class="side-number">03</span>
+        Explorando
+    </a>
 
-        <a href="#proyectos">
-            <span class="navIcon">04</span>
-            Proyectos
-        </a>
+    <div class="side-divider"></div>
 
-        <a href="#unidades">
-            <span class="navIcon">05</span>
-            Unidades
-        </a>
+    <div class="side-title">
+        Portafolio académico
+    </div>
 
-        <a href="#tecnologias">
-            <span class="navIcon">06</span>
-            Tecnologías
-        </a>
+    <a href="#unidad-1" class="side-link">
+        <span class="side-number">U1</span>
+        Fundamentos
+    </a>
 
-        <a href="#arquitectura">
-            <span class="navIcon">07</span>
-            Arquitectura
-        </a>
+    <a href="#unidad-2" class="side-link">
+        <span class="side-number">U2</span>
+        Diseño
+    </a>
 
-    </nav>
+    <a href="#unidad-3" class="side-link">
+        <span class="side-number">U3</span>
+        Arquitecturas
+    </a>
 
+    <a href="#unidad-4" class="side-link">
+        <span class="side-number">U4</span>
+        Integración
+    </a>
 
-    <div class="profileMini">
+    <div class="side-divider"></div>
 
-        <div class="profileMiniTop">
+    <a href="#proyectos" class="side-link">
+        <span class="side-number">04</span>
+        Proyectos
+    </a>
 
-            <div class="avatar">
-                M
-            </div>
+    <a href="#infografia" class="side-link">
+        <span class="side-number">IF</span>
+        Infografía
+    </a>
 
-            <div>
+    <div class="side-info">
 
-                <strong>Mayta</strong>
+        <div class="side-info-label">
+            PERFIL ACADÉMICO
+        </div>
 
-                <span>
-                    Ingeniería de Sistemas
-                </span>
+        <div class="side-info-value">
+            MAYTA
+        </div>
 
-            </div>
+        <div class="side-info-small">
+            Ingeniería de Sistemas
+        </div>
 
+        <div class="side-info-small">
+            8vo Ciclo · UPLA
+        </div>
+
+        <div class="side-info-small">
+            Huancayo · Perú
         </div>
 
     </div>
@@ -2540,80 +2996,115 @@ footer{
 </aside>
 
 
-<!-- =====================================================
+<!-- =======================================================
      MAIN
-===================================================== -->
+======================================================= -->
 
-<main>
+<main class="main">
 
 
-<!-- =====================================================
+<!-- =======================================================
      HERO
-===================================================== -->
+======================================================= -->
 
-<section id="inicio" class="hero">
+<section class="hero" id="inicio">
 
-    <div class="container">
+    <div class="hero-content">
 
         <div class="eyebrow">
-            ◉ INGENIERÍA DE SISTEMAS · UPLA
+            ◉ SYSTEMS ENGINEERING · SOFTWARE · AI
         </div>
 
         <h1>
-            SOFTWARE<br>
-            <span>& SYSTEMS</span>
+            Diseño sistemas.
+            <br>
+            <span class="gradient-text">
+                Exploro el futuro.
+            </span>
         </h1>
 
-        <p class="heroDescription">
+        <div class="hero-role">
+            MAYTA · 8VO CICLO · INGENIERÍA DE SISTEMAS
+        </div>
 
-            Portafolio académico y tecnológico de
-            <strong>Mayta</strong>, estudiante de Ingeniería
-            de Sistemas enfocado en arquitectura de software,
-            inteligencia artificial, ciberseguridad,
-            cloud computing y desarrollo de soluciones modernas.
+        <p class="hero-desc">
+
+            Portafolio académico enfocado en arquitectura de software,
+            inteligencia artificial, ciberseguridad, cloud computing,
+            datos y desarrollo de soluciones tecnológicas modernas.
+
+            Cada unidad representa una etapa de aprendizaje,
+            experimentación y evolución profesional.
 
         </p>
 
-        <div class="heroActions">
+        <div class="hero-actions">
 
             <a
-                href="#proyectos"
-                class="btn btnPrimary">
-
-                EXPLORAR PROYECTOS →
-
+                href="#arquitectura"
+                class="btn btn-primary"
+            >
+                Explorar especialidades →
             </a>
 
             <a
-                href="#sobre-mi"
-                class="btn btnSecondary">
-
-                CONOCER AL AUTOR
-
+                href="#unidad-1"
+                class="btn"
+            >
+                Ver portafolio académico
             </a>
 
         </div>
+
 
         <div class="stats">
 
             <div class="stat">
-                <strong>04</strong>
-                <span>Unidades</span>
+
+                <div class="stat-number">
+                    4
+                </div>
+
+                <div class="stat-label">
+                    UNIDADES
+                </div>
+
             </div>
 
             <div class="stat">
-                <strong>16</strong>
-                <span>Semanas</span>
+
+                <div class="stat-number">
+                    16
+                </div>
+
+                <div class="stat-label">
+                    SEMANAS
+                </div>
+
             </div>
 
             <div class="stat">
-                <strong>08</strong>
-                <span>Ciclo</span>
+
+                <div class="stat-number">
+                    8°
+                </div>
+
+                <div class="stat-label">
+                    CICLO
+                </div>
+
             </div>
 
             <div class="stat">
-                <strong>AI</strong>
-                <span>Enfoque</span>
+
+                <div class="stat-number">
+                    AI
+                </div>
+
+                <div class="stat-label">
+                    ENFOQUE
+                </div>
+
             </div>
 
         </div>
@@ -2621,35 +3112,50 @@ footer{
     </div>
 
 
-    <!-- CARRUSEL -->
+    <!-- ===================================================
+         CAROUSEL
+    =================================================== -->
 
-    <div class="heroCarousel" id="carousel">
+    <div class="hero-carousel" id="carousel">
+
+        <div class="system-label">
+            MAYTA / DIGITAL LAB
+        </div>
+
 
         <div
-            class="slide active"
-            style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=85')">
+            class="carousel-slide active"
+            style="
+            background-image:
+            url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=90');
+            "
+        >
 
-            <div class="slideContent">
+            <div class="carousel-overlay"></div>
 
-                <div class="slideNumber">
-                    SYSTEM 01 / AI
+            <div class="carousel-content">
+
+                <div class="slide-number">
+                    01 / ARTIFICIAL INTELLIGENCE
                 </div>
 
                 <h2>
-                    Inteligencia<br>Artificial
+                    Inteligencia Artificial
                 </h2>
 
                 <p>
-                    Exploración de sistemas inteligentes,
-                    modelos de IA, automatización y nuevas
-                    formas de interacción entre personas y tecnología.
+                    Exploración de modelos inteligentes,
+                    automatización, análisis de información
+                    e integración de IA en sistemas modernos.
                 </p>
 
                 <div class="tags">
+
                     <span class="tag">AI</span>
-                    <span class="tag">LLM</span>
+                    <span class="tag">MACHINE LEARNING</span>
                     <span class="tag">PYTHON</span>
-                    <span class="tag">AUTOMATION</span>
+                    <span class="tag">DATA</span>
+
                 </div>
 
             </div>
@@ -2658,30 +3164,37 @@ footer{
 
 
         <div
-            class="slide"
-            style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1600&q=85')">
+            class="carousel-slide"
+            style="
+            background-image:
+            url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=90');
+            "
+        >
 
-            <div class="slideContent">
+            <div class="carousel-overlay"></div>
 
-                <div class="slideNumber">
-                    SYSTEM 02 / CYBER
+            <div class="carousel-content">
+
+                <div class="slide-number">
+                    02 / CYBERSECURITY
                 </div>
 
                 <h2>
-                    Cybersecurity<br>& Linux
+                    Ciberseguridad
                 </h2>
 
                 <p>
-                    Interés en seguridad informática,
-                    sistemas Linux, análisis de redes,
-                    defensa y fundamentos de ciberseguridad.
+                    Seguridad, redes, análisis de vulnerabilidades
+                    y exploración de herramientas de seguridad
+                    como Kali Linux.
                 </p>
 
                 <div class="tags">
+
                     <span class="tag">KALI LINUX</span>
-                    <span class="tag">NETWORK</span>
+                    <span class="tag">NETWORKING</span>
                     <span class="tag">SECURITY</span>
-                    <span class="tag">WIRESHARK</span>
+
                 </div>
 
             </div>
@@ -2690,30 +3203,38 @@ footer{
 
 
         <div
-            class="slide"
-            style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=85')">
+            class="carousel-slide"
+            style="
+            background-image:
+            url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=90');
+            "
+        >
 
-            <div class="slideContent">
+            <div class="carousel-overlay"></div>
 
-                <div class="slideNumber">
-                    SYSTEM 03 / CLOUD
+            <div class="carousel-content">
+
+                <div class="slide-number">
+                    03 / CLOUD COMPUTING
                 </div>
 
                 <h2>
-                    Cloud<br>Computing
+                    Azure & Cloud
                 </h2>
 
                 <p>
-                    Diseño y comprensión de infraestructura
-                    tecnológica moderna y servicios desplegados
-                    en la nube.
+                    Infraestructura, servicios cloud,
+                    despliegue de aplicaciones y arquitectura
+                    orientada a la nube.
                 </p>
 
                 <div class="tags">
+
                     <span class="tag">AZURE</span>
                     <span class="tag">CLOUD</span>
                     <span class="tag">APP SERVICE</span>
-                    <span class="tag">DEVOPS</span>
+                    <span class="tag">DEPLOYMENT</span>
+
                 </div>
 
             </div>
@@ -2722,30 +3243,37 @@ footer{
 
 
         <div
-            class="slide"
-            style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85')">
+            class="carousel-slide"
+            style="
+            background-image:
+            url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=90');
+            "
+        >
 
-            <div class="slideContent">
+            <div class="carousel-overlay"></div>
 
-                <div class="slideNumber">
-                    SYSTEM 04 / ARCHITECTURE
+            <div class="carousel-content">
+
+                <div class="slide-number">
+                    04 / SOFTWARE ENGINEERING
                 </div>
 
                 <h2>
-                    Software<br>Architecture
+                    Arquitectura de Software
                 </h2>
 
                 <p>
-                    Diseño de sistemas modulares, arquitecturas
-                    distribuidas, patrones, componentes,
-                    decisiones arquitectónicas y calidad.
+                    Decisiones arquitectónicas, patrones,
+                    componentes, sistemas distribuidos
+                    y diseño de soluciones escalables.
                 </p>
 
                 <div class="tags">
+
+                    <span class="tag">ARCHITECTURE</span>
                     <span class="tag">UML</span>
-                    <span class="tag">REST</span>
                     <span class="tag">MICROSERVICES</span>
-                    <span class="tag">SOLID</span>
+
                 </div>
 
             </div>
@@ -2754,30 +3282,38 @@ footer{
 
 
         <div
-            class="slide"
-            style="background-image:url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=85')">
+            class="carousel-slide"
+            style="
+            background-image:
+            url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1600&q=90');
+            "
+        >
 
-            <div class="slideContent">
+            <div class="carousel-overlay"></div>
 
-                <div class="slideNumber">
-                    SYSTEM 05 / DATA
+            <div class="carousel-content">
+
+                <div class="slide-number">
+                    05 / DATA ENGINEERING
                 </div>
 
                 <h2>
-                    Python<br>& Data
+                    Python & Datos
                 </h2>
 
                 <p>
-                    Programación, análisis de datos,
-                    bases de datos y construcción de
-                    soluciones orientadas a información.
+                    Procesamiento de información,
+                    bases de datos, análisis y construcción
+                    de soluciones basadas en datos.
                 </p>
 
                 <div class="tags">
+
                     <span class="tag">PYTHON</span>
                     <span class="tag">SQL</span>
                     <span class="tag">POSTGRESQL</span>
                     <span class="tag">DATA</span>
+
                 </div>
 
             </div>
@@ -2785,44 +3321,32 @@ footer{
         </div>
 
 
-        <div class="carouselControls">
+        <div class="carousel-controls">
 
             <button
-                class="carouselBtn"
-                onclick="previousSlide()">
+                class="carousel-btn"
+                onclick="prevSlide()"
+            >
                 ←
             </button>
 
             <button
-                class="carouselBtn"
-                onclick="nextSlide()">
+                class="carousel-btn"
+                onclick="nextSlide()"
+            >
                 →
             </button>
 
         </div>
 
 
-        <div class="carouselDots">
+        <div class="carousel-dots">
 
-            <span class="dot active"
-                onclick="goSlide(0)">
-            </span>
-
-            <span class="dot"
-                onclick="goSlide(1)">
-            </span>
-
-            <span class="dot"
-                onclick="goSlide(2)">
-            </span>
-
-            <span class="dot"
-                onclick="goSlide(3)">
-            </span>
-
-            <span class="dot"
-                onclick="goSlide(4)">
-            </span>
+            <button class="dot active" onclick="goSlide(0)"></button>
+            <button class="dot" onclick="goSlide(1)"></button>
+            <button class="dot" onclick="goSlide(2)"></button>
+            <button class="dot" onclick="goSlide(3)"></button>
+            <button class="dot" onclick="goSlide(4)"></button>
 
         </div>
 
@@ -2831,1159 +3355,1336 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     SOBRE MI
-===================================================== -->
+<!-- =======================================================
+     SEARCH
+======================================================= -->
 
-<section id="sobre-mi">
+<section class="search-area">
 
-    <div class="container">
+    <div class="search-box">
 
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    01 / PERFIL
-                </div>
-
-                <h2>
-                    Sobre el<br>autor.
-                </h2>
-
-            </div>
-
-            <p>
-                Un espacio para presentar la identidad,
-                formación y dirección profesional detrás
-                del laboratorio tecnológico.
-            </p>
-
-        </div>
-
-
-        <div class="aboutGrid">
-
-            <div class="aboutVisual reveal">
-
-                <div class="aboutAvatar">
-                    M
-                </div>
-
-            </div>
-
-
-            <div class="aboutContent reveal">
-
-                <h3>
-                    Hola, soy Mayta.
-                </h3>
-
-                <p>
-                    Soy estudiante de Ingeniería de Sistemas
-                    en la Universidad Peruana Los Andes (UPLA).
-                    Mi formación está orientada al diseño,
-                    análisis y construcción de soluciones
-                    tecnológicas.
-                </p>
-
-                <p>
-                    Este portafolio reúne mis trabajos,
-                    evidencias académicas, proyectos y
-                    conocimientos desarrollados durante
-                    mi formación universitaria.
-                </p>
-
-                <p>
-                    Mis principales áreas de interés son la
-                    arquitectura de software, inteligencia
-                    artificial, ciberseguridad, cloud computing,
-                    datos y sistemas distribuidos.
-                </p>
-
-
-                <div class="infoGrid">
-
-                    <div class="infoBox">
-                        <span>UNIVERSIDAD</span>
-                        <strong>UPLA</strong>
-                    </div>
-
-                    <div class="infoBox">
-                        <span>CARRERA</span>
-                        <strong>Ingeniería de Sistemas</strong>
-                    </div>
-
-                    <div class="infoBox">
-                        <span>CICLO</span>
-                        <strong>8.º Ciclo</strong>
-                    </div>
-
-                    <div class="infoBox">
-                        <span>UBICACIÓN</span>
-                        <strong>Huancayo · Perú</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ESPECIALIDADES
-===================================================== -->
-
-<section id="especialidades">
-
-    <div class="container">
-
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    02 / ESPECIALIDADES
-                </div>
-
-                <h2>
-                    Áreas de<br>exploración.
-                </h2>
-
-            </div>
-
-            <p>
-                Tecnologías y disciplinas que forman parte
-                de mi desarrollo académico y profesional.
-            </p>
-
-        </div>
-
-
-        <div class="specialties">
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ◈
-                    </div>
-
-                    <h3>
-                        Inteligencia Artificial
-                    </h3>
-
-                    <p>
-                        IA, automatización, modelos inteligentes
-                        y aplicaciones emergentes.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ◉
-                    </div>
-
-                    <h3>
-                        Ciberseguridad
-                    </h3>
-
-                    <p>
-                        Linux, Kali, redes, análisis y fundamentos
-                        de seguridad informática.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ☁
-                    </div>
-
-                    <h3>
-                        Cloud Computing
-                    </h3>
-
-                    <p>
-                        Azure, infraestructura, servicios cloud
-                        y despliegue de aplicaciones.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ◫
-                    </div>
-
-                    <h3>
-                        Arquitectura
-                    </h3>
-
-                    <p>
-                        Diseño modular, patrones, UML,
-                        sistemas distribuidos y decisiones arquitectónicas.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ◇
-                    </div>
-
-                    <h3>
-                        Datos & Python
-                    </h3>
-
-                    <p>
-                        Programación, SQL, PostgreSQL,
-                        análisis y visualización de datos.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="specialty reveal">
-
-                <div
-                    class="specialtyImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80')">
-                </div>
-
-                <div class="specialtyBody">
-
-                    <div class="specialtyIcon">
-                        ⌁
-                    </div>
-
-                    <h3>
-                        Redes
-                    </h3>
-
-                    <p>
-                        Packet Tracer, Wireshark, TCP/IP,
-                        infraestructura y comunicación.
-                    </p>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PROYECTOS
-===================================================== -->
-
-<section id="proyectos">
-
-    <div class="container">
-
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    03 / PROYECTOS
-                </div>
-
-                <h2>
-                    Trabajo<br>académico.
-                </h2>
-
-            </div>
-
-            <p>
-                Una selección visual de proyectos,
-                investigaciones y soluciones desarrolladas
-                durante mi formación.
-            </p>
-
-        </div>
-
-
-        <div class="searchBox reveal">
-
-            <span class="searchIcon">
-                ⌕
-            </span>
-
-            <input
-                id="projectSearch"
-                type="text"
-                placeholder="Buscar proyecto, tecnología o concepto..."
-                oninput="searchProjects()">
-
-        </div>
-
-
-        <div class="projects" id="projectGrid">
-
-
-            <article class="project reveal"
-                data-search="arquitectura software uml sistemas distribuidos">
-
-                <div
-                    class="projectImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=85')">
-
-                    <div class="projectIndex">
-                        PROJECT 01
-                    </div>
-
-                </div>
-
-                <div class="projectBody">
-
-                    <div class="projectCategory">
-                        SOFTWARE ARCHITECTURE
-                    </div>
-
-                    <h3>
-                        Diseño de Arquitectura de Software
-                    </h3>
-
-                    <p>
-                        Modelamiento arquitectónico,
-                        componentes, vistas, responsabilidades,
-                        integración y decisiones de diseño.
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">UML</span>
-                        <span class="tag">REST</span>
-                        <span class="tag">POSTGRESQL</span>
-
-                    </div>
-
-                    <div class="projectFooter">
-
-                        <span class="projectLink">
-                            VER PROYECTO →
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="project reveal"
-                data-search="inteligencia artificial python datos">
-
-                <div
-                    class="projectImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1400&q=85')">
-
-                    <div class="projectIndex">
-                        PROJECT 02
-                    </div>
-
-                </div>
-
-                <div class="projectBody">
-
-                    <div class="projectCategory">
-                        ARTIFICIAL INTELLIGENCE
-                    </div>
-
-                    <h3>
-                        Exploración de Inteligencia Artificial
-                    </h3>
-
-                    <p>
-                        Conceptos y aplicaciones de IA,
-                        automatización y herramientas
-                        utilizadas en soluciones modernas.
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">AI</span>
-                        <span class="tag">PYTHON</span>
-                        <span class="tag">DATA</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="project reveal"
-                data-search="ciberseguridad kali linux redes">
-
-                <div
-                    class="projectImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1400&q=85')">
-
-                    <div class="projectIndex">
-                        PROJECT 03
-                    </div>
-
-                </div>
-
-                <div class="projectBody">
-
-                    <div class="projectCategory">
-                        CYBERSECURITY
-                    </div>
-
-                    <h3>
-                        Laboratorio de Seguridad
-                    </h3>
-
-                    <p>
-                        Exploración académica de Linux,
-                        redes, seguridad informática y
-                        herramientas de análisis.
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">KALI</span>
-                        <span class="tag">LINUX</span>
-                        <span class="tag">WIRESHARK</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article class="project reveal"
-                data-search="cloud azure infraestructura">
-
-                <div
-                    class="projectImage"
-                    style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=85')">
-
-                    <div class="projectIndex">
-                        PROJECT 04
-                    </div>
-
-                </div>
-
-                <div class="projectBody">
-
-                    <div class="projectCategory">
-                        CLOUD COMPUTING
-                    </div>
-
-                    <h3>
-                        Despliegue en Azure
-                    </h3>
-
-                    <p>
-                        Implementación de un portafolio web
-                        utilizando infraestructura cloud
-                        mediante Azure App Service.
-                    </p>
-
-                    <div class="tags">
-
-                        <span class="tag">AZURE</span>
-                        <span class="tag">CLOUD</span>
-                        <span class="tag">WEB</span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     TECH STACK
-===================================================== -->
-
-<section id="tecnologias" class="techSection">
-
-    <div class="techTitle">
-
-        <span>
-            TECHNOLOGY STACK
+        <span class="search-icon">
+            ⌕
         </span>
 
-    </div>
-
-    <div class="techMarquee">
-
-        <div class="techTrack">
-
-            <div class="techItem">PYTHON</div>
-            <div class="techItem">JAVASCRIPT</div>
-            <div class="techItem">HTML</div>
-            <div class="techItem">CSS</div>
-            <div class="techItem">SQL</div>
-            <div class="techItem">POSTGRESQL</div>
-            <div class="techItem">AZURE</div>
-            <div class="techItem">LINUX</div>
-            <div class="techItem">KALI LINUX</div>
-            <div class="techItem">UML</div>
-            <div class="techItem">BPMN</div>
-            <div class="techItem">WIRESHARK</div>
-            <div class="techItem">PACKET TRACER</div>
-            <div class="techItem">GIT</div>
-
-            <div class="techItem">PYTHON</div>
-            <div class="techItem">JAVASCRIPT</div>
-            <div class="techItem">HTML</div>
-            <div class="techItem">CSS</div>
-            <div class="techItem">SQL</div>
-            <div class="techItem">POSTGRESQL</div>
-            <div class="techItem">AZURE</div>
-            <div class="techItem">LINUX</div>
-            <div class="techItem">KALI LINUX</div>
-            <div class="techItem">UML</div>
-            <div class="techItem">BPMN</div>
-            <div class="techItem">WIRESHARK</div>
-            <div class="techItem">PACKET TRACER</div>
-            <div class="techItem">GIT</div>
-
-        </div>
+        <input
+            type="search"
+            id="search"
+            placeholder="Buscar semana, unidad, IA, cloud, arquitectura..."
+            oninput="searchPortfolio(this.value)"
+        >
 
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     UNIDADES
-===================================================== -->
-
-<section id="unidades">
-
-    <div class="container">
-
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    04 / PORTAFOLIO ACADÉMICO
-                </div>
-
-                <h2>
-                    Unidades<br>académicas.
-                </h2>
-
-            </div>
-
-            <p>
-                Accede a las cuatro unidades y revisa
-                el contenido desarrollado durante las
-                dieciséis semanas.
-            </p>
-
-        </div>
-
-
-        <div class="units" id="units">
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     EXPLORANDO
-===================================================== -->
-
-<section>
-
-    <div class="container">
-
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    05 / FUTURO
-                </div>
-
-                <h2>
-                    Actualmente<br>explorando.
-                </h2>
-
-            </div>
-
-            <p>
-                El aprendizaje tecnológico no termina
-                con una asignatura. Estas son las áreas
-                que continúan despertando mi interés.
-            </p>
-
-        </div>
-
-
-        <div class="exploring">
-
-            <div class="explore reveal">
-
-                <span>01</span>
-
-                <h3>
-                    Inteligencia Artificial
-                </h3>
-
-                <p>
-                    Modelos generativos, agentes y
-                    automatización inteligente.
-                </p>
-
-            </div>
-
-
-            <div class="explore reveal">
-
-                <span>02</span>
-
-                <h3>
-                    Ciberseguridad
-                </h3>
-
-                <p>
-                    Seguridad de sistemas, redes
-                    y fundamentos de ethical hacking.
-                </p>
-
-            </div>
-
-
-            <div class="explore reveal">
-
-                <span>03</span>
-
-                <h3>
-                    Cloud
-                </h3>
-
-                <p>
-                    Arquitecturas cloud y despliegue
-                    de aplicaciones.
-                </p>
-
-            </div>
-
-
-            <div class="explore reveal">
-
-                <span>04</span>
-
-                <h3>
-                    Sistemas Distribuidos
-                </h3>
-
-                <p>
-                    Microservicios, comunicación
-                    y escalabilidad.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ARQUITECTURA
-===================================================== -->
-
-<section id="arquitectura">
-
-    <div class="container">
-
-        <div class="sectionHeader reveal">
-
-            <div>
-
-                <div class="sectionNumber">
-                    06 / ARQUITECTURA
-                </div>
-
-                <h2>
-                    Pensar en<br>sistemas.
-                </h2>
-
-            </div>
-
-            <p>
-                La arquitectura conecta requisitos,
-                componentes, datos, procesos e
-                infraestructura en una solución coherente.
-            </p>
-
-        </div>
-
-
-        <div class="architectureVisual reveal">
-
-            <div class="archCore">
-                SYSTEM<br>CORE
-            </div>
-
-            <div class="archNode node1">
-                FRONTEND
-            </div>
-
-            <div class="archNode node2">
-                BACKEND
-            </div>
-
-            <div class="archNode node3">
-                DATABASE
-            </div>
-
-            <div class="archNode node4">
-                CLOUD
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =====================================================
-     OWNER CARD
-===================================================== -->
-
-<div class="ownerCard">
-
-    <div class="ownerTop">
-
-        <div class="ownerAvatar">
-            ◉
-        </div>
+<!-- =======================================================
+     SPECIALTIES
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="arquitectura"
+>
+
+    <div class="section-header">
 
         <div>
 
-            <div class="ownerTitle">
-                PROPIETARIO
+            <div class="section-kicker">
+                ENGINEERING DOMAINS
             </div>
 
-            <div class="ownerName">
-                MAYTA
-            </div>
+            <h2 class="section-title">
+                Áreas de especialización
+            </h2>
 
         </div>
+
+        <p class="section-description">
+
+            Una visión multidisciplinaria de la Ingeniería de Sistemas:
+            arquitectura, inteligencia artificial, seguridad, nube,
+            datos y conectividad.
+
+        </p>
 
     </div>
 
 
-    <div class="ownerInfo">
-
-        <div class="ownerRow">
-            <span>ROL</span>
-            <span>Estudiante</span>
-        </div>
-
-        <div class="ownerRow">
-            <span>CARRERA</span>
-            <span>Ingeniería de Sistemas</span>
-        </div>
-
-        <div class="ownerRow">
-            <span>UNIVERSIDAD</span>
-            <span>UPLA</span>
-        </div>
-
-        <div class="ownerRow">
-            <span>CICLO</span>
-            <span>8.º Ciclo · 2026</span>
-        </div>
-
-        <div class="ownerRow">
-            <span>UBICACIÓN</span>
-            <span>Huancayo · Perú</span>
-        </div>
-
-    </div>
+    <div class="arch-grid">
 
 
-    <div class="ownerStatus">
+        <article class="arch-card">
 
-        <span class="statusDot"></span>
-
-        ESTUDIANTE ACTIVO
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     ARQ BOT
-===================================================== -->
-
-<button
-    class="botButton"
-    onclick="toggleBot()">
-
-    ◈
-
-</button>
-
-
-<div class="botPanel" id="botPanel">
-
-    <div class="botHeader">
-
-        <strong>
-            ARQ-BOT
-        </strong>
-
-        <span class="status">
-            <span class="statusDot"></span>
-            ONLINE
-        </span>
-
-    </div>
-
-
-    <div
-        class="botMessages"
-        id="botMessages">
-
-        <div class="message bot">
-
-            Hola. Soy ARQ-BOT,
-            el asistente del laboratorio
-            tecnológico de Mayta.
-
-            ¿Qué quieres explorar?
-
-        </div>
-
-        <div class="message bot">
-
-            Puedes preguntar por:
-            proyectos, arquitectura,
-            tecnologías, unidades o autor.
-
-        </div>
-
-    </div>
-
-
-    <div class="botInput">
-
-        <input
-            id="botInput"
-            placeholder="Escribe una pregunta..."
-            onkeydown="if(event.key==='Enter')sendBot()">
-
-        <button onclick="sendBot()">
-            →
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     TOP BUTTON
-===================================================== -->
-
-<button
-    id="topButton"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})">
-
-    ↑
-
-</button>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <div class="footerInner">
-
-        <div class="footerBrand">
-
-            MAYTA
-
-            <span>
-                SOFTWARE & SYSTEMS LAB
+            <span class="arch-index">
+                01
             </span>
 
+            <div class="arch-icon">
+                ◈
+            </div>
+
+            <div class="arch-name">
+                Arquitectura
+            </div>
+
+            <div class="arch-description">
+                Diseño de sistemas, componentes,
+                patrones y decisiones arquitectónicas.
+            </div>
+
+        </article>
+
+
+        <article class="arch-card">
+
+            <span class="arch-index">
+                02
+            </span>
+
+            <div class="arch-icon">
+                AI
+            </div>
+
+            <div class="arch-name">
+                Inteligencia Artificial
+            </div>
+
+            <div class="arch-description">
+                Modelos inteligentes, automatización
+                y aplicaciones basadas en IA.
+            </div>
+
+        </article>
+
+
+        <article class="arch-card">
+
+            <span class="arch-index">
+                03
+            </span>
+
+            <div class="arch-icon">
+                🔐
+            </div>
+
+            <div class="arch-name">
+                Ciberseguridad
+            </div>
+
+            <div class="arch-description">
+                Seguridad de sistemas, redes,
+                análisis y fundamentos de protección.
+            </div>
+
+        </article>
+
+
+        <article class="arch-card">
+
+            <span class="arch-index">
+                04
+            </span>
+
+            <div class="arch-icon">
+                ☁
+            </div>
+
+            <div class="arch-name">
+                Cloud / Azure
+            </div>
+
+            <div class="arch-description">
+                Servicios cloud, infraestructura,
+                despliegue y aplicaciones modernas.
+            </div>
+
+        </article>
+
+
+        <article class="arch-card">
+
+            <span class="arch-index">
+                05
+            </span>
+
+            <div class="arch-icon">
+                ◫
+            </div>
+
+            <div class="arch-name">
+                Datos
+            </div>
+
+            <div class="arch-description">
+                Bases de datos, información,
+                análisis y procesamiento de datos.
+            </div>
+
+        </article>
+
+
+        <article class="arch-card">
+
+            <span class="arch-index">
+                06
+            </span>
+
+            <div class="arch-icon">
+                ◎
+            </div>
+
+            <div class="arch-name">
+                Networking
+            </div>
+
+            <div class="arch-description">
+                Redes, comunicación, infraestructura
+                y sistemas conectados.
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     TECHNOLOGY STACK
+======================================================= -->
+
+<section
+    class="stack-section reveal"
+    id="stack"
+>
+
+    <div class="stack-header">
+
+        <div class="stack-title">
+            TECHNOLOGY STACK · TOOLS · PLATFORMS
         </div>
 
-        <div class="footerCopy">
+        <div class="stack-title">
+            DIGITAL LAB
+        </div>
 
-            © <span id="year"></span>
-            · PORTAFOLIO ACADÉMICO
-            · UPLA
+    </div>
+
+
+    <div class="stack-track">
+
+        <div class="stack-line">
+
+            <div class="tech">
+                <b>◆</b> HTML
+            </div>
+
+            <div class="tech">
+                <b>◆</b> CSS
+            </div>
+
+            <div class="tech">
+                <b>◆</b> JavaScript
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Python
+            </div>
+
+            <div class="tech">
+                <b>◆</b> SQL
+            </div>
+
+            <div class="tech">
+                <b>◆</b> PostgreSQL
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Azure
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Kali Linux
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Packet Tracer
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Wireshark
+            </div>
+
+            <div class="tech">
+                <b>◆</b> UML
+            </div>
+
+            <div class="tech">
+                <b>◆</b> BPMN
+            </div>
+
+            <div class="tech">
+                <b>◆</b> GitHub
+            </div>
+
+            <div class="tech">
+                <b>◆</b> VS Code
+            </div>
+
+            <!-- DUPLICADO PARA EL EFECTO MARQUEE -->
+
+            <div class="tech">
+                <b>◆</b> HTML
+            </div>
+
+            <div class="tech">
+                <b>◆</b> CSS
+            </div>
+
+            <div class="tech">
+                <b>◆</b> JavaScript
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Python
+            </div>
+
+            <div class="tech">
+                <b>◆</b> SQL
+            </div>
+
+            <div class="tech">
+                <b>◆</b> PostgreSQL
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Azure
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Kali Linux
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Packet Tracer
+            </div>
+
+            <div class="tech">
+                <b>◆</b> Wireshark
+            </div>
 
         </div>
 
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     EXPLORING
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="explorando"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-kicker">
+                CURRENTLY EXPLORING
+            </div>
+
+            <h2 class="section-title">
+                En evolución constante
+            </h2>
+
+        </div>
+
+        <p class="section-description">
+
+            La Ingeniería de Sistemas no termina en una tecnología.
+            Este espacio representa las áreas que continúan formando
+            parte de mi evolución profesional.
+
+        </p>
+
+    </div>
+
+
+    <div class="exploring">
+
+
+        <article class="explore-card">
+
+            <div class="explore-top">
+
+                <span class="explore-code">
+                    EXP_001
+                </span>
+
+                <span class="explore-status">
+                    ● ACTIVE
+                </span>
+
+            </div>
+
+            <h3>
+                Inteligencia Artificial
+            </h3>
+
+            <p>
+                Exploración de herramientas de IA,
+                automatización, análisis y aplicaciones
+                inteligentes dentro de sistemas de software.
+            </p>
+
+            <div class="progress">
+                <span style="width:78%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="explore-card">
+
+            <div class="explore-top">
+
+                <span class="explore-code">
+                    EXP_002
+                </span>
+
+                <span class="explore-status">
+                    ● ACTIVE
+                </span>
+
+            </div>
+
+            <h3>
+                Ciberseguridad
+            </h3>
+
+            <p>
+                Fortalecimiento de conocimientos en redes,
+                seguridad, Linux, análisis y fundamentos
+                de protección de sistemas.
+            </p>
+
+            <div class="progress">
+                <span style="width:68%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="explore-card">
+
+            <div class="explore-top">
+
+                <span class="explore-code">
+                    EXP_003
+                </span>
+
+                <span class="explore-status">
+                    ● ACTIVE
+                </span>
+
+            </div>
+
+            <h3>
+                Cloud Computing
+            </h3>
+
+            <p>
+                Desarrollo y despliegue de aplicaciones
+                utilizando servicios cloud y plataformas
+                como Microsoft Azure.
+            </p>
+
+            <div class="progress">
+                <span style="width:75%"></span>
+            </div>
+
+        </article>
+
+
+        <article class="explore-card">
+
+            <div class="explore-top">
+
+                <span class="explore-code">
+                    EXP_004
+                </span>
+
+                <span class="explore-status">
+                    ● ACTIVE
+                </span>
+
+            </div>
+
+            <h3>
+                Arquitectura de Software
+            </h3>
+
+            <p>
+                Patrones, decisiones arquitectónicas,
+                sistemas distribuidos, calidad y
+                diseño de soluciones escalables.
+            </p>
+
+            <div class="progress">
+                <span style="width:85%"></span>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     UNITS
+======================================================= -->
+
+<div id="units"></div>
+
+
+<!-- =======================================================
+     PROJECTS
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="proyectos"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-kicker">
+                ENGINEERING PROJECTS
+            </div>
+
+            <h2 class="section-title">
+                Ecosistema de proyectos
+            </h2>
+
+        </div>
+
+        <p class="section-description">
+
+            Espacio para destacar proyectos académicos,
+            experimentos tecnológicos y soluciones desarrolladas
+            durante mi formación.
+
+        </p>
+
+    </div>
+
+
+    <div class="projects">
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_01
+            </div>
+
+            <div class="project-icon">
+                ☁
+            </div>
+
+            <h3>
+                Cloud & Azure
+            </h3>
+
+            <p>
+                Despliegue y publicación de aplicaciones
+                utilizando infraestructura y servicios
+                de Microsoft Azure.
+            </p>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_02
+            </div>
+
+            <div class="project-icon">
+                ◈
+            </div>
+
+            <h3>
+                Arquitectura de Software
+            </h3>
+
+            <p>
+                Modelado, patrones, decisiones arquitectónicas,
+                componentes y diseño estructural de sistemas.
+            </p>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_03
+            </div>
+
+            <div class="project-icon">
+                🔐
+            </div>
+
+            <h3>
+                Networking & Security
+            </h3>
+
+            <p>
+                Prácticas de redes, infraestructura,
+                protocolos, seguridad y análisis
+                de comunicación de sistemas.
+            </p>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_04
+            </div>
+
+            <div class="project-icon">
+                🐍
+            </div>
+
+            <h3>
+                Python & Data
+            </h3>
+
+            <p>
+                Procesamiento, análisis y visualización
+                de información utilizando herramientas
+                del ecosistema Python.
+            </p>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_05
+            </div>
+
+            <div class="project-icon">
+                ◉
+            </div>
+
+            <h3>
+                Bases de Datos
+            </h3>
+
+            <p>
+                Diseño, administración y utilización
+                de bases de datos para soluciones
+                de información.
+            </p>
+
+        </article>
+
+
+        <article class="project">
+
+            <div class="project-number">
+                PROJECT_06
+            </div>
+
+            <div class="project-icon">
+                AI
+            </div>
+
+            <h3>
+                Inteligencia Artificial
+            </h3>
+
+            <p>
+                Investigación y experimentación con
+                tecnologías inteligentes aplicadas
+                a problemas tecnológicos.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     INFOGRAPHIC
+======================================================= -->
+
+<section
+    class="infographic reveal"
+    id="infografia"
+>
+
+    <div class="info-layout">
+
+        <div>
+
+            <div class="section-kicker">
+                SPECIAL VISUAL PROJECT
+            </div>
+
+            <h2 class="info-title">
+
+                Arquitectura
+
+                <span class="gradient-text">
+                    visualizada.
+                </span>
+
+            </h2>
+
+            <p class="info-text">
+
+                Espacio destinado para presentar la infografía
+                principal del curso, diagramas, modelos,
+                decisiones arquitectónicas y material visual.
+
+                Aquí posteriormente colocaremos tu trabajo real
+                de Canva, PDF, Drive o una imagen propia.
+
+            </p>
+
+            <a
+                href="#"
+                class="info-button"
+                onclick="
+                alert('Aquí colocaremos el enlace real de tu infografía.');
+                return false;
+                "
+            >
+                Abrir infografía →
+            </a>
+
+        </div>
+
+
+        <div class="info-visual">
+
+            <div class="info-network">
+
+                <div class="node">
+                    ☁
+                </div>
+
+                <div class="node">
+                    ⚡
+                </div>
+
+                <div class="node">
+                    🗄
+                </div>
+
+                <div class="node">
+                    🔐
+                </div>
+
+                <div class="node">
+                    AI
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer class="footer">
+
+    <div>
+
+        <div class="footer-name">
+            MAYTA · Ingeniería de Sistemas
+        </div>
+
+        <div class="footer-info">
+            Arquitectura · IA · Cloud · Security · Data
+        </div>
+
+    </div>
+
+    <div class="footer-tech">
+        DIGITAL ENGINEERING PORTFOLIO · 2026
     </div>
 
 </footer>
 
 
+</main>
+
+
+<!-- =======================================================
+     TOP
+======================================================= -->
+
+<button
+    id="top"
+    onclick="
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    })
+"
+>
+    ↑
+</button>
+
+
+<!-- =======================================================
+     AI BOT
+======================================================= -->
+
+<div class="ai-bot">
+
+    <div
+        class="bot-window"
+        id="botWindow"
+    >
+
+        <div class="bot-head">
+
+            <div class="bot-avatar">
+                AI
+            </div>
+
+            <div>
+
+                <div class="bot-name">
+                    ARQ-BOT
+                </div>
+
+                <div class="bot-status">
+                    ● SYSTEM ACTIVE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="bot-messages"
+            id="botMessages"
+        >
+
+            <div class="message bot">
+
+                Hola 👋
+
+                Soy <b>ARQ-BOT</b>, el asistente
+                inteligente de navegación del portafolio.
+
+                Puedo ayudarte a encontrar unidades,
+                semanas, arquitectura, IA, cloud,
+                proyectos o la infografía.
+
+            </div>
+
+        </div>
+
+
+        <div class="bot-suggestions">
+
+            <button
+                class="suggestion"
+                onclick="botCommand('inicio')"
+            >
+                Inicio
+            </button>
+
+            <button
+                class="suggestion"
+                onclick="botCommand('unidad 1')"
+            >
+                Unidad 1
+            </button>
+
+            <button
+                class="suggestion"
+                onclick="botCommand('unidad 3')"
+            >
+                Unidad 3
+            </button>
+
+            <button
+                class="suggestion"
+                onclick="botCommand('semana 10')"
+            >
+                Semana 10
+            </button>
+
+            <button
+                class="suggestion"
+                onclick="botCommand('infografia')"
+            >
+                Infografía
+            </button>
+
+        </div>
+
+
+        <div class="bot-input">
+
+            <input
+                id="botInput"
+                placeholder="Ej: semana 12..."
+                onkeydown="
+                if(event.key==='Enter')
+                sendBot()
+                "
+            >
+
+            <button onclick="sendBot()">
+                →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="bot-button"
+        onclick="toggleBot()"
+        title="Abrir asistente"
+    >
+        ✦
+    </button>
+
+</div>
+
+
 <script>
 
 /* =========================================================
-   CAROUSEL
-========================================================= */
-
-const slides =
-    document.querySelectorAll(".slide");
-
-const dots =
-    document.querySelectorAll(".dot");
-
-let currentSlide = 0;
-
-function goSlide(index){
-
-    slides[currentSlide].classList.remove("active");
-    dots[currentSlide].classList.remove("active");
-
-    currentSlide = index;
-
-    slides[currentSlide].classList.add("active");
-    dots[currentSlide].classList.add("active");
-}
-
-function nextSlide(){
-
-    goSlide(
-        (currentSlide + 1) % slides.length
-    );
-
-}
-
-function previousSlide(){
-
-    goSlide(
-        (currentSlide - 1 + slides.length)
-        % slides.length
-    );
-
-}
-
-let carouselTimer =
-    setInterval(nextSlide,6000);
-
-document
-.querySelector(".heroCarousel")
-.addEventListener("mouseenter",()=>{
-
-    clearInterval(carouselTimer);
-
-});
-
-document
-.querySelector(".heroCarousel")
-.addEventListener("mouseleave",()=>{
-
-    carouselTimer =
-        setInterval(nextSlide,6000);
-
-});
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="ArrowRight"){
-        nextSlide();
-    }
-
-    if(e.key==="ArrowLeft"){
-        previousSlide();
-    }
-
-});
-
-
-/* =========================================================
-   UNIDADES
+   DATOS ACADÉMICOS
 ========================================================= */
 
 const DATA = {
 
-    1:{
+    s1:{
         title:"Fundamentos de Arquitectura",
-        subtitle:"Bases conceptuales y arquitectura de sistemas",
-        weeks:[
-            "Fundamentos de Arquitectura",
-            "Cloud Computing",
-            "Administración de la Nube",
-            "Infraestructura Tecnológica"
+        docs:[
+            {
+                title:"Documento Semana 1",
+                url:"https://docs.google.com/document/d/1RtGCzT54LAxBmBBXdXRHdkBP0R1wGe_gQw88xeR_4mY/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Sistemas de Información",
+                url:"https://www.youtube.com/watch?v=NLvcamk5yiM"
+            },
+            {
+                title:"Información en la empresa",
+                url:"https://www.youtube.com/watch?v=TLRXTlYHpZA"
+            },
+            {
+                title:"Tipos de Sistemas",
+                url:"https://www.youtube.com/watch?v=oo3nMbM66nk"
+            },
+            {
+                title:"Componentes",
+                url:"https://youtu.be/xX6eVVtHg8c"
+            }
         ]
     },
 
-    2:{
-        title:"Diseño y Modelado",
-        subtitle:"Modelado, componentes y evaluación",
-        weeks:[
-            "Sistemas Empresariales",
-            "Modelado Arquitectónico",
-            "Componentes de Software",
-            "Evaluación Arquitectónica"
+    s2:{
+        title:"Cloud Computing",
+        docs:[
+            {
+                title:"Documento Semana 2",
+                url:"https://docs.google.com/document/d/19b2pac1YQaqjgHnR5BlGm24dArILDaf_ioLLy3J4ST8/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Cloud Computing",
+                url:"https://youtu.be/VR8aXePkQ5M"
+            },
+            {
+                title:"Explicación Cloud",
+                url:"https://youtu.be/iACzaUf1N84"
+            },
+            {
+                title:"Modelos nube",
+                url:"https://www.youtube.com/watch?v=36zducUX16w"
+            },
+            {
+                title:"IaaS PaaS SaaS",
+                url:"https://www.youtube.com/watch?v=2LaAJq1lB1Q"
+            }
         ]
     },
 
-    3:{
-        title:"Arquitecturas Modernas",
-        subtitle:"Patrones, distribución y evolución",
-        weeks:[
-            "Patrones Arquitectónicos",
-            "Arquitecturas de Software",
-            "Arquitecturas Distribuidas",
-            "Microservicios"
+    s3:{
+        title:"Administración de la Nube",
+        docs:[
+            {
+                title:"Documento Semana 3",
+                url:"https://docs.google.com/document/d/1tKElTzVv4hZQFz7jNu9QimReOC4UgQCo1k5oUoT9c6w/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Administración nube",
+                url:"https://youtu.be/F9pjgbWaOkw"
+            },
+            {
+                title:"Funciones nube",
+                url:"https://youtu.be/xT75e-G1eak"
+            },
+            {
+                title:"Tecnologías nube",
+                url:"https://www.youtube.com/watch?v=3hLmDS179YE"
+            }
         ]
     },
 
-    4:{
-        title:"Integración y Proyecto",
-        subtitle:"Integración, seguridad y proyecto final",
-        weeks:[
-            "Integración de Sistemas",
-            "Seguridad Arquitectónica",
-            "Proyecto Arquitectónico",
-            "Presentación Final"
+    s4:{
+        title:"Infraestructura Tecnológica",
+        docs:[
+            {
+                title:"Documento Semana 4",
+                url:"https://docs.google.com/document/d/1H6Fo0XDzLOQCg7d8yBQamqdcEaNifUfYf-AilDbNDbY/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Infraestructura TI",
+                url:"https://youtu.be/hRhl6HepzZc"
+            },
+            {
+                title:"Modelos de despliegue",
+                url:"https://www.youtube.com/watch?v=36zducUX16w"
+            },
+            {
+                title:"Componentes TI",
+                url:"https://youtu.be/P62mr2eQHfw"
+            },
+            {
+                title:"Tipos TI",
+                url:"https://youtu.be/hfvr521xmi0"
+            }
         ]
+    },
+
+    s5:{
+        title:"Sistemas Empresariales",
+        docs:[
+            {
+                title:"Documento Semana 5",
+                url:"https://docs.google.com/document/d/1zuRnlRVVVu-tMC6o1woJ23BVlG-YJs_jGqX1HLQJ-PI/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Sistemas de negocios",
+                url:"https://www.youtube.com/watch?v=TLRXTlYHpZA"
+            },
+            {
+                title:"Business Intelligence",
+                url:"https://youtu.be/Pmdps2kK_5M"
+            },
+            {
+                title:"Bases de datos",
+                url:"https://www.youtube.com/watch?v=HXV3zeQKqGY"
+            },
+            {
+                title:"Administración de información",
+                url:"https://youtu.be/T58e6fTXlJw"
+            }
+        ]
+    },
+
+    s6:{
+        title:"Modelado Arquitectónico",
+        docs:[
+            {
+                title:"Documento Semana 6",
+                url:"https://docs.google.com/document/d/11DZxVMJs1vtVZVqd3_XwkdvX_oUmmv50uI6TT-3R_RE/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 6",
+                url:"https://youtu.be/NLvcamk5yiM"
+            }
+        ]
+    },
+
+    s7:{
+        title:"Componentes de Software",
+        docs:[
+            {
+                title:"Documento Semana 7",
+                url:"https://docs.google.com/document/d/1QJ7RBwyfefph5kqk1w4Qh4GP0_wfF5Z8RHv2Dr0qWjY/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 7",
+                url:"https://www.youtube.com/live/Vxpbdj0uVww"
+            }
+        ]
+    },
+
+    s8:{
+        title:"Evaluación Arquitectónica",
+        docs:[
+            {
+                title:"Documento Semana 8",
+                url:"https://docs.google.com/document/d/1ADTVa50_nPAlegfoeDu3doXjOjemYhMglF1QghTlH1M/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 8",
+                url:"https://youtu.be/stYh9m7enyA"
+            }
+        ]
+    },
+
+    s9:{
+        title:"Patrones Arquitectónicos",
+        docs:[
+            {
+                title:"Documento Semana 9",
+                url:"https://docs.google.com/document/d/1PCq0j2XB4XquShS9BWbNyVkFwpxEKzHWTPn_JgGEUzo/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 9",
+                url:"https://youtu.be/IaOHdAvSUvI"
+            }
+        ]
+    },
+
+    s10:{
+        title:"Arquitecturas de Software",
+        docs:[
+            {
+                title:"Documento Semana 10",
+                url:"https://docs.google.com/document/d/1wfYFg3TxKlQIad_J7kVtXuWmAA1FhWoTZwECzCL5Ik8/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 10",
+                url:"https://youtu.be/raWtWF78v8w"
+            }
+        ]
+    },
+
+    s11:{
+        title:"Arquitecturas Distribuidas",
+        docs:[
+            {
+                title:"Documento Semana 11",
+                url:"https://docs.google.com/document/d/18MGV4cWCLIi0D6e3rhl1xzC_9zq0bqsqI2aZKW7W834/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 11",
+                url:"https://youtu.be/yciRj-m9PfE"
+            }
+        ]
+    },
+
+    s12:{
+        title:"Microservicios",
+        docs:[
+            {
+                title:"Documento Semana 12",
+                url:"https://docs.google.com/document/d/1yQTYFzStIC6uZsyoT4VNITPIb1gAIL_SnhSzllk7bqE/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 12",
+                url:"https://youtu.be/BtuWdQAkpBU"
+            }
+        ]
+    },
+
+    s13:{
+        title:"Integración de Sistemas",
+        docs:[
+            {
+                title:"Documento Semana 13",
+                url:"https://docs.google.com/document/d/1NuNmgwfah9xTg3pE4vzH_IBy0Eqrjqemv9_-bBlg6CE/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 13",
+                url:"https://youtu.be/TLVDBAo1aEY"
+            }
+        ]
+    },
+
+    s14:{
+        title:"Seguridad Arquitectónica",
+        docs:[
+            {
+                title:"Documento Semana 14",
+                url:"https://docs.google.com/document/d/1C_j35zPiVyhAk6zs1cPV8FJ8hJ8h5fBRxmyXW9pCMxc/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 14",
+                url:"https://youtu.be/MhKr_ZyEAZc"
+            }
+        ]
+    },
+
+    s15:{
+        title:"Proyecto Arquitectónico",
+        docs:[
+            {
+                title:"Documento Semana 15",
+                url:"https://docs.google.com/document/d/1VWmlUj8XVIASy9lEiu-ND71ym5z3VBycw5tcBzcYhME/edit?usp=sharing"
+            }
+        ],
+        vids:[
+            {
+                title:"Video 15",
+                url:"https://youtu.be/8rxHt2iTUMQ"
+            }
+        ]
+    },
+
+    s16:{
+        title:"Presentación Final",
+        docs:[],
+        vids:[]
     }
 
 };
 
 
+/* =========================================================
+   UNITS
+========================================================= */
+
+const units=[
+
+    {
+        id:1,
+        name:"Fundamentos de Arquitectura",
+        description:
+        "Conceptos esenciales para comprender la arquitectura de software."
+    },
+
+    {
+        id:2,
+        name:"Diseño y Modelado",
+        description:
+        "Diseño estructural, componentes y representación arquitectónica."
+    },
+
+    {
+        id:3,
+        name:"Arquitecturas Modernas",
+        description:
+        "Patrones, sistemas distribuidos y arquitecturas escalables."
+    },
+
+    {
+        id:4,
+        name:"Integración y Proyecto",
+        description:
+        "Seguridad, integración y consolidación del proyecto arquitectónico."
+    }
+
+];
+
+
+/* =========================================================
+   GENERATE UNITS
+========================================================= */
+
 function generateUnits(){
 
-    const container =
+    const container=
         document.getElementById("units");
 
-    container.innerHTML="";
+    let html="";
 
-    let weekCounter=1;
+    units.forEach(unit=>{
 
-    Object.entries(DATA).forEach(
-        ([number,unit],index)=>{
+        html+=`
 
-        const article =
-            document.createElement("article");
+        <section
+            class="unit reveal"
+            id="unidad-${unit.id}"
+        >
 
-        article.className =
-            "unit reveal";
+            <div class="unit-header">
 
-        article.innerHTML=`
+                <div class="unit-number">
+                    U0${unit.id}
+                </div>
 
-            <div
-                class="unitHeader"
-                onclick="toggleUnit(this)">
+                <div>
 
-                <div class="unitTitle">
+                    <h2 class="unit-title">
+                        ${unit.name}
+                    </h2>
 
-                    <div class="unitNumber">
-                        U${number}
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            ${unit.title}
-                        </h3>
-
-                        <span>
-                            ${unit.subtitle}
-                        </span>
-
+                    <div class="unit-subtitle">
+                        ${unit.description}
                     </div>
 
                 </div>
 
-                <div class="unitArrow">
-                    ↓
+                <div class="unit-meta">
+
+                    <div class="unit-meta-number">
+                        04
+                    </div>
+
+                    <div class="unit-meta-text">
+                        SEMANAS
+                    </div>
+
                 </div>
 
             </div>
@@ -3991,59 +4692,473 @@ function generateUnits(){
 
             <div class="weeks">
 
-                ${unit.weeks.map(
-                    week=>`
+        `;
 
-                    <div class="week">
 
-                        <div class="weekNumber">
-                            SEMANA ${weekCounter++}
-                        </div>
+        const start=(unit.id-1)*4+1;
 
-                        <h4>
-                            ${week}
-                        </h4>
 
-                        <p>
-                            Evidencias, documentos,
-                            recursos audiovisuales y
-                            trabajos desarrollados.
-                        </p>
+        for(let i=0;i<4;i++){
 
-                        <div class="weekActions">
+            const week=start+i;
 
-                            <a href="#">
-                                DOCUMENTO
-                            </a>
+            html+=createWeek(
+                `s${week}`,
+                week
+            );
 
-                            <a href="#">
-                                VIDEOS
-                            </a>
+        }
 
-                        </div>
 
-                    </div>
-
-                `
-                ).join("")}
+        html+=`
 
             </div>
 
+        </section>
+
         `;
 
-        container.appendChild(article);
-
     });
+
+
+    container.innerHTML=html;
+
+    initReveal();
 
 }
 
 
-function toggleUnit(element){
+/* =========================================================
+   CREATE WEEK
+========================================================= */
 
-    const unit =
-        element.parentElement;
+function createWeek(id,number){
 
-    unit.classList.toggle("open");
+    const data=DATA[id] || {
+
+        title:`Semana ${number}`,
+
+        docs:[],
+
+        vids:[]
+
+    };
+
+
+    return `
+
+    <article
+        class="week"
+        id="${id}"
+        data-search="
+        semana ${number}
+        ${data.title}
+        ${data.docs.map(x=>x.title).join(" ")}
+        ${data.vids.map(x=>x.title).join(" ")}
+        "
+    >
+
+        <div
+            class="week-head"
+            onclick="toggleWeek(this.parentElement)"
+        >
+
+            <div class="week-left">
+
+                <span class="week-number">
+                    SEM ${String(number).padStart(2,"0")}
+                </span>
+
+                <span class="week-name">
+                    ${data.title}
+                </span>
+
+            </div>
+
+            <span class="week-plus">
+                +
+            </span>
+
+        </div>
+
+
+        <div class="week-body">
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    onclick="switchTab(this,'docs-${id}')"
+                >
+                    DOCUMENTOS
+                </button>
+
+                <button
+                    class="tab"
+                    onclick="switchTab(this,'vids-${id}')"
+                >
+                    VIDEOS
+                </button>
+
+            </div>
+
+
+            <div
+                class="panel active"
+                id="docs-${id}"
+            >
+
+                <div class="content-list">
+
+                    ${
+                        data.docs.length
+
+                        ?
+
+                        data.docs.map(doc=>`
+
+                            <div class="content-item">
+
+                                <div class="content-icon">
+                                    📄
+                                </div>
+
+                                <div class="content-info">
+
+                                    <div class="content-title">
+                                        ${doc.title}
+                                    </div>
+
+                                    <div class="content-type">
+                                        DOCUMENTO ACADÉMICO
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    class="open-content"
+                                    href="${doc.url}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    ABRIR ↗
+                                </a>
+
+                            </div>
+
+                        `).join("")
+
+                        :
+
+                        `
+
+                        <div class="content-item">
+
+                            <div class="content-icon">
+                                +
+                            </div>
+
+                            <div class="content-info">
+
+                                <div class="content-title">
+                                    Espacio disponible
+                                </div>
+
+                                <div class="content-type">
+                                    CONTENIDO PENDIENTE
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        `
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="panel"
+                id="vids-${id}"
+            >
+
+                <div class="content-list">
+
+                    ${
+                        data.vids.length
+
+                        ?
+
+                        data.vids.map(video=>{
+
+                            const yt=
+                                getYoutubeId(video.url);
+
+                            return `
+
+                            <div class="content-item">
+
+                                <div class="content-icon">
+                                    ▶
+                                </div>
+
+                                <div class="content-info">
+
+                                    <div class="content-title">
+                                        ${video.title}
+                                    </div>
+
+                                    <div class="content-type">
+                                        VIDEO · YOUTUBE
+                                    </div>
+
+                                </div>
+
+                                ${
+                                    yt
+
+                                    ?
+
+                                    `<button
+                                        class="open-content"
+                                        onclick="
+                                        openVideo(
+                                            '${yt}',
+                                            '${escapeHtml(video.title)}'
+                                        )
+                                        "
+                                    >
+                                        VER ▶
+                                    </button>`
+
+                                    :
+
+                                    `<a
+                                        class="open-content"
+                                        href="${video.url}"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        ABRIR ↗
+                                    </a>`
+                                }
+
+                            </div>
+
+                            `;
+
+                        }).join("")
+
+                        :
+
+                        `
+
+                        <div class="content-item">
+
+                            <div class="content-icon">
+                                +
+                            </div>
+
+                            <div class="content-info">
+
+                                <div class="content-title">
+                                    No hay videos todavía
+                                </div>
+
+                                <div class="content-type">
+                                    CONTENIDO PENDIENTE
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        `
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   WEEK
+========================================================= */
+
+function toggleWeek(card){
+
+    card.classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+function switchTab(button,panelId){
+
+    const week=
+        button.closest(".week");
+
+    week
+        .querySelectorAll(".tab")
+        .forEach(tab=>
+            tab.classList.remove("active")
+        );
+
+    week
+        .querySelectorAll(".panel")
+        .forEach(panel=>
+            panel.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    document
+        .getElementById(panelId)
+        .classList.add("active");
+
+}
+
+
+/* =========================================================
+   YOUTUBE
+========================================================= */
+
+function getYoutubeId(url){
+
+    let match=
+        url.match(/[?&]v=([^&]+)/);
+
+    if(match)
+        return match[1];
+
+
+    match=
+        url.match(/youtu\.be\/([^?&]+)/);
+
+    if(match)
+        return match[1];
+
+
+    match=
+        url.match(
+            /youtube\.com\/live\/([^?&]+)/
+        );
+
+    if(match)
+        return match[1];
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   VIDEO MODAL
+========================================================= */
+
+function openVideo(id,title){
+
+    const modal=
+        document.createElement("div");
+
+    modal.style.cssText=`
+
+        position:fixed;
+        inset:0;
+        z-index:3000;
+        background:rgba(0,0,0,.9);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+
+    `;
+
+
+    modal.innerHTML=`
+
+        <div style="
+            width:min(950px,100%);
+            background:#0b101b;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow:0 40px 120px rgba(0,0,0,.7);
+        ">
+
+            <div style="
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                padding:13px 16px;
+                border-bottom:1px solid rgba(255,255,255,.08);
+                color:#fff;
+                font-size:11px;
+            ">
+
+                <span>
+                    ${title}
+                </span>
+
+                <button
+                    id="closeVideo"
+                    style="
+                        border:0;
+                        background:none;
+                        color:#58e6ff;
+                        font-size:20px;
+                    "
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <iframe
+                src="https://www.youtube.com/embed/${id}"
+                style="
+                    width:100%;
+                    aspect-ratio:16/9;
+                    border:0;
+                    display:block;
+                "
+                allowfullscreen
+            ></iframe>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(modal);
+
+
+    document
+        .getElementById("closeVideo")
+        .onclick=()=>modal.remove();
+
+
+    modal.onclick=e=>{
+
+        if(e.target===modal)
+            modal.remove();
+
+    };
 
 }
 
@@ -4052,29 +5167,38 @@ function toggleUnit(element){
    SEARCH
 ========================================================= */
 
-function searchProjects(){
+function searchPortfolio(value){
 
-    const value =
-        document
-        .getElementById("projectSearch")
-        .value
-        .toLowerCase();
+    value=
+        value
+        .toLowerCase()
+        .trim();
+
 
     document
-    .querySelectorAll(".project")
-    .forEach(project=>{
+        .querySelectorAll(".week")
+        .forEach(week=>{
 
-        const text =
-            project
-            .dataset
-            .search;
+            const text=
+                week.dataset.search
+                .toLowerCase();
 
-        project.style.display =
-            text.includes(value)
-            ? ""
-            : "none";
 
-    });
+            const visible=
+                !value ||
+                text.includes(value);
+
+
+            week.style.display=
+                visible
+                ? ""
+                : "none";
+
+
+            if(value && visible)
+                week.classList.add("open");
+
+        });
 
 }
 
@@ -4086,289 +5210,642 @@ function searchProjects(){
 function toggleSidebar(){
 
     document
-    .getElementById("sidebar")
-    .classList
-    .toggle("open");
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
 }
 
-document
-.querySelectorAll(".nav a")
-.forEach(link=>{
 
-    link.addEventListener("click",()=>{
-
-        document
-        .getElementById("sidebar")
-        .classList
-        .remove("open");
-
-    });
-
-});
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
-
-window.addEventListener("scroll",()=>{
-
-    const scrollTop =
-        window.scrollY;
-
-    const height =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
-
-    const progress =
-        (scrollTop / height) * 100;
+function closeSidebar(){
 
     document
-    .getElementById("scrollProgress")
-    .style.width =
-        progress + "%";
+        .getElementById("sidebar")
+        .classList.remove("open");
 
-
-    const topButton =
-        document.getElementById("topButton");
-
-    if(scrollTop > 500){
-
-        topButton.classList.add("show");
-
-    }else{
-
-        topButton.classList.remove("show");
-
-    }
-
-});
+}
 
 
 /* =========================================================
-   REVEAL
+   CAROUSEL
 ========================================================= */
 
-const observer =
-    new IntersectionObserver(
-        entries=>{
+let currentSlide=0;
 
-            entries.forEach(entry=>{
+const slides=
+    document.querySelectorAll(
+        ".carousel-slide"
+    );
 
-                if(entry.isIntersecting){
-
-                    entry
-                    .target
-                    .classList
-                    .add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.12
-        }
+const dots=
+    document.querySelectorAll(
+        ".dot"
     );
 
 
-function observeReveal(){
+function showSlide(index){
 
-    document
-    .querySelectorAll(".reveal")
-    .forEach(element=>{
+    if(!slides.length)
+        return;
 
-        observer.observe(element);
 
-    });
+    currentSlide=
+        (index + slides.length)
+        % slides.length;
+
+
+    slides.forEach(
+        slide=>
+        slide.classList.remove("active")
+    );
+
+
+    dots.forEach(
+        dot=>
+        dot.classList.remove("active")
+    );
+
+
+    slides[currentSlide]
+        .classList.add("active");
+
+
+    if(dots[currentSlide])
+        dots[currentSlide]
+            .classList.add("active");
 
 }
 
 
+function nextSlide(){
+
+    showSlide(
+        currentSlide+1
+    );
+
+}
+
+
+function prevSlide(){
+
+    showSlide(
+        currentSlide-1
+    );
+
+}
+
+
+function goSlide(index){
+
+    showSlide(index);
+
+}
+
+
+let carouselTimer=
+    setInterval(
+        nextSlide,
+        6000
+    );
+
+
+const carousel=
+    document.getElementById("carousel");
+
+
+carousel.addEventListener(
+    "mouseenter",
+    ()=>{
+        clearInterval(carouselTimer);
+    }
+);
+
+
+carousel.addEventListener(
+    "mouseleave",
+    ()=>{
+        carouselTimer=
+            setInterval(
+                nextSlide,
+                6000
+            );
+    }
+);
+
+
 /* =========================================================
-   ACTIVE NAV
+   KEYBOARD CAROUSEL
 ========================================================= */
 
-const sections =
-    document.querySelectorAll("main section");
+document.addEventListener(
+    "keydown",
+    e=>{
 
-const navLinks =
-    document.querySelectorAll(".nav a");
+        if(e.key==="ArrowRight")
+            nextSlide();
 
-window.addEventListener("scroll",()=>{
+        if(e.key==="ArrowLeft")
+            prevSlide();
 
-    let current="";
+        if(e.key==="Escape"){
 
-    sections.forEach(section=>{
+            const modal=
+                document.querySelector(
+                    'body > div[style*="z-index:3000"]'
+                );
 
-        const top =
-            section.offsetTop - 150;
-
-        if(window.scrollY >= top){
-
-            current =
-                section.getAttribute("id");
-
-        }
-
-    });
-
-    navLinks.forEach(link=>{
-
-        link.classList.remove("active");
-
-        if(
-            link.getAttribute("href")
-            ==="#"+current
-        ){
-
-            link.classList.add("active");
+            if(modal)
+                modal.remove();
 
         }
 
-    });
-
-});
+    }
+);
 
 
 /* =========================================================
-   ARQ BOT
+   BOT
 ========================================================= */
 
 function toggleBot(){
 
     document
-    .getElementById("botPanel")
-    .classList
-    .toggle("open");
-
-}
-
-
-function addBotMessage(text,type){
-
-    const box =
-        document
-        .getElementById("botMessages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message "+type;
-
-    message.textContent=text;
-
-    box.appendChild(message);
-
-    box.scrollTop =
-        box.scrollHeight;
+        .getElementById("botWindow")
+        .classList.toggle("open");
 
 }
 
 
 function sendBot(){
 
-    const input =
-        document
-        .getElementById("botInput");
+    const input=
+        document.getElementById("botInput");
 
-    const value =
+    const value=
         input.value.trim();
 
-    if(!value)return;
 
-    addBotMessage(
-        value,
-        "user"
-    );
+    if(!value)
+        return;
+
+
+    botCommand(value);
 
     input.value="";
 
-    setTimeout(()=>{
+}
 
-        const text =
-            value.toLowerCase();
 
-        let response =
-            "Puedes explorar las secciones de proyectos, unidades, tecnologías y arquitectura.";
+function addMessage(text,type){
 
-        if(
-            text.includes("proyecto")
-        ){
+    const box=
+        document.getElementById(
+            "botMessages"
+        );
 
-            response =
-                "En Proyectos encontrarás arquitectura de software, IA, ciberseguridad y cloud.";
 
-        }
+    const message=
+        document.createElement("div");
 
-        else if(
-            text.includes("tecnolog")
-        ){
 
-            response =
-                "El stack incluye Python, JavaScript, SQL, PostgreSQL, Azure, Linux, Kali, UML, BPMN, Wireshark y Packet Tracer.";
+    message.className=
+        `message ${type}`;
 
-        }
 
-        else if(
-            text.includes("autor")
-            ||
-            text.includes("mayta")
-        ){
+    message.innerHTML=text;
 
-            response =
-                "Mayta es estudiante de Ingeniería de Sistemas en la UPLA y este portafolio reúne su formación académica y tecnológica.";
 
-        }
+    box.appendChild(message);
 
-        else if(
-            text.includes("arquitect")
-        ){
 
-            response =
-                "La arquitectura es uno de los ejes principales del portafolio: UML, patrones, sistemas distribuidos, REST, componentes y decisiones arquitectónicas.";
+    box.scrollTop=
+        box.scrollHeight;
 
-        }
+}
 
-        else if(
-            text.includes("unidad")
-        ){
 
-            response =
-                "El portafolio está organizado en cuatro unidades y dieciséis semanas.";
+function botCommand(command){
 
-        }
+    const query=
+        command
+        .toLowerCase()
+        .trim();
 
-        addBotMessage(
-            response,
+
+    addMessage(
+        escapeHtml(command),
+        "user"
+    );
+
+
+    if(
+        query.includes("inicio") ||
+        query.includes("home")
+    ){
+
+        document
+            .getElementById("inicio")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+        addMessage(
+            "Te llevé al <b>inicio</b> del portafolio.",
             "bot"
         );
 
-    },500);
+        return;
+
+    }
+
+
+    if(
+        query.includes("infografia") ||
+        query.includes("infografía")
+    ){
+
+        document
+            .getElementById("infografia")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+        addMessage(
+            "Aquí tienes la sección de <b>Infografía</b>.",
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        query.includes("ia") ||
+        query.includes("inteligencia") ||
+        query.includes("artificial")
+    ){
+
+        document
+            .getElementById("arquitectura")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+        addMessage(
+            "Te llevé a las áreas relacionadas con <b>Inteligencia Artificial</b>.",
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        query.includes("azure") ||
+        query.includes("cloud") ||
+        query.includes("nube")
+    ){
+
+        document
+            .getElementById("explorando")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+        addMessage(
+            "Cloud Computing y Azure forman parte de las áreas que estoy explorando.",
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        query.includes("kali") ||
+        query.includes("seguridad") ||
+        query.includes("ciber")
+    ){
+
+        document
+            .getElementById("arquitectura")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+        addMessage(
+            "La sección de especialidades contiene el enfoque de <b>Ciberseguridad</b>.",
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    const unitMatch=
+        query.match(
+            /unidad\s*(\d)/
+        );
+
+
+    if(unitMatch){
+
+        const unit=
+            unitMatch[1];
+
+
+        const target=
+            document.getElementById(
+                `unidad-${unit}`
+            );
+
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+            addMessage(
+                `Abrí la <b>Unidad ${unit}</b>.`,
+                "bot"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    const weekMatch=
+        query.match(
+            /semana\s*(\d{1,2})/
+        );
+
+
+    if(weekMatch){
+
+        const week=
+            parseInt(
+                weekMatch[1]
+            );
+
+
+        const target=
+            document.getElementById(
+                `s${week}`
+            );
+
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+
+            target.classList.add("open");
+
+
+            addMessage(
+                `Encontré la <b>Semana ${week}</b>: ${DATA[`s${week}`]?.title || "contenido académico"}.`,
+                "bot"
+            );
+
+        }
+        else{
+
+            addMessage(
+                "El portafolio contiene semanas del 1 al 16.",
+                "bot"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    if(
+        query.includes("ayuda") ||
+        query.includes("qué puedes") ||
+        query.includes("que puedes")
+    ){
+
+        addMessage(
+
+            `
+            Puedo ayudarte con:
+
+            <br>• <b>inicio</b>
+            <br>• <b>unidad 1</b>
+            <br>• <b>semana 10</b>
+            <br>• <b>arquitectura</b>
+            <br>• <b>IA</b>
+            <br>• <b>Azure</b>
+            <br>• <b>ciberseguridad</b>
+            <br>• <b>infografía</b>
+            `,
+
+            "bot"
+        );
+
+        return;
+
+    }
+
+
+    addMessage(
+
+        `
+        No estoy seguro de lo que buscas.
+
+        Prueba con
+        <b>"semana 10"</b>,
+        <b>"unidad 3"</b>,
+        <b>"Azure"</b>,
+        <b>"IA"</b>
+        o
+        <b>"infografía"</b>.
+        `,
+
+        "bot"
+    );
 
 }
 
 
 /* =========================================================
-   YEAR
+   ESCAPE HTML
 ========================================================= */
 
-document
-.getElementById("year")
-.textContent =
-new Date().getFullYear();
+function escapeHtml(value){
+
+    return value
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
 
 
 /* =========================================================
-   INIT
+   REVEAL
+========================================================= */
+
+function initReveal(){
+
+    const elements=
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    const revealObserver=
+        new IntersectionObserver(
+            entries=>{
+
+                entries.forEach(entry=>{
+
+                    if(entry.isIntersecting){
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                    }
+
+                });
+
+            },
+            {
+                threshold:.08
+            }
+        );
+
+
+    elements.forEach(
+        element=>
+        revealObserver.observe(element)
+    );
+
+}
+
+
+/* =========================================================
+   ACTIVE SIDEBAR
+========================================================= */
+
+function initNavigation(){
+
+    const sections=
+        document.querySelectorAll(
+            "section[id]"
+        );
+
+
+    const links=
+        document.querySelectorAll(
+            ".side-link"
+        );
+
+
+    const navObserver=
+        new IntersectionObserver(
+            entries=>{
+
+                entries.forEach(entry=>{
+
+                    if(entry.isIntersecting){
+
+                        links.forEach(
+                            link=>
+                            link.classList.remove("active")
+                        );
+
+
+                        const active=
+                            document.querySelector(
+                                `.side-link[href="#${entry.target.id}"]`
+                            );
+
+
+                        if(active)
+                            active.classList.add("active");
+
+                    }
+
+                });
+
+            },
+            {
+                rootMargin:
+                    "-35% 0px -55% 0px"
+            }
+        );
+
+
+    sections.forEach(
+        section=>
+        navObserver.observe(section)
+    );
+
+
+    links.forEach(link=>{
+
+        link.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    ()=>{
+
+        document
+            .getElementById("top")
+            .style.display=
+                window.scrollY>500
+                ? "block"
+                : "none";
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
 ========================================================= */
 
 generateUnits();
 
-observeReveal();
+initReveal();
+
+initNavigation();
 
 </script>
 
