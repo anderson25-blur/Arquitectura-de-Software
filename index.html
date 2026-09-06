@@ -1,4015 +1,2930 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MAYTA | Portafolio Académico</title>
+<title>MAYTA — Software & Systems Lab</title>
 
-    <meta name="description"
-        content="Portafolio académico de Mayta, estudiante de Ingeniería de Sistemas en la Universidad Peruana Los Andes. Arquitectura de Software, Inteligencia Artificial, Ciberseguridad, Cloud y Datos.">
+<meta name="description"
+content="Portafolio académico y tecnológico de Mayta — Ingeniería de Sistemas, Arquitectura de Software, Inteligencia Artificial, Ciberseguridad y Cloud Computing.">
 
-    <meta name="theme-color" content="#05070d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+<style>
 
-    <style>
+/* =========================================================
+   RESET
+========================================================= */
 
-        /* =========================================================
-           VARIABLES
-        ========================================================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        :root {
-            --bg: #04060b;
-            --bg-soft: #080c14;
-            --surface: #0b111d;
-            --surface-2: #101827;
-            --surface-3: #151f31;
+html{
+    scroll-behavior:smooth;
+}
 
-            --text: #f5f7fb;
-            --muted: #8d99ae;
-            --dim: #526078;
+body{
+    background:#05070d;
+    color:#f3f7ff;
+    font-family:"Space Grotesk",sans-serif;
+    overflow-x:hidden;
+}
 
-            --cyan: #5ee7ff;
-            --blue: #668cff;
-            --purple: #a878ff;
-            --green: #69efbd;
-            --pink: #ff6fce;
-            --orange: #ffad66;
+button,
+input{
+    font-family:inherit;
+}
 
-            --border: rgba(255,255,255,.08);
-            --border-hover: rgba(94,231,255,.35);
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-            --sidebar: 285px;
-            --header: 74px;
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-            --radius: 20px;
-            --shadow: 0 25px 70px rgba(0,0,0,.35);
-        }
+:root{
 
+    --bg:#05070d;
+    --bg2:#080b14;
+    --bg3:#0d1320;
 
-        /* =========================================================
-           RESET
-        ========================================================= */
+    --surface:#101725;
+    --surface2:#151d2d;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    --text:#f3f7ff;
+    --muted:#8994aa;
+    --dim:#414b61;
 
-        html {
-            scroll-behavior: smooth;
-        }
+    --cyan:#5ee7ff;
+    --blue:#638cff;
+    --purple:#a77bff;
+    --green:#68f0bd;
+    --pink:#ff6fcf;
 
-        body {
-            background:
-                radial-gradient(circle at 70% 15%, rgba(102,140,255,.08), transparent 30%),
-                radial-gradient(circle at 15% 70%, rgba(167,120,255,.06), transparent 30%),
-                var(--bg);
+    --border:rgba(255,255,255,.09);
 
-            color: var(--text);
+    --sidebar:285px;
+    --header:74px;
+}
 
-            font-family: "Inter", sans-serif;
-
-            min-height: 100vh;
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
-            overflow-x: hidden;
-        }
+body::before{
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    content:"";
 
-        button,
-        input {
-            font: inherit;
-        }
+    position:fixed;
 
-        button {
-            border: 0;
-            cursor: pointer;
-        }
+    inset:0;
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
+    pointer-events:none;
 
+    z-index:-3;
 
-        /* =========================================================
-           SCROLL PROGRESS
-        ========================================================= */
+    background:
 
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-
-            height: 3px;
-            width: 0;
+    linear-gradient(
+        rgba(94,231,255,.025) 1px,
+        transparent 1px
+    ),
 
-            background: linear-gradient(
-                90deg,
-                var(--cyan),
-                var(--blue),
-                var(--purple),
-                var(--pink)
-            );
+    linear-gradient(
+        90deg,
+        rgba(94,231,255,.025) 1px,
+        transparent 1px
+    );
 
-            z-index: 9999;
-        }
+    background-size:60px 60px;
 
+    mask-image:linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
+}
 
-        /* =========================================================
-           BACKGROUND GRID
-        ========================================================= */
+body::after{
 
-        .background-grid {
-            position: fixed;
-            inset: 0;
+    content:"";
 
-            pointer-events: none;
-            z-index: -5;
+    position:fixed;
 
-            opacity: .25;
+    width:700px;
+    height:700px;
 
-            background-image:
-                linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    top:-300px;
+    right:-200px;
 
-            background-size: 45px 45px;
+    background:radial-gradient(
+        circle,
+        rgba(94,231,255,.08),
+        transparent 65%
+    );
 
-            mask-image: linear-gradient(
-                to bottom,
-                black,
-                transparent 85%
-            );
-        }
+    pointer-events:none;
 
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(100px);
-            opacity: .12;
-            z-index: -4;
-        }
+    z-index:-2;
+}
 
-        .orb-one {
-            width: 350px;
-            height: 350px;
-            background: var(--cyan);
-            top: 5%;
-            right: 5%;
-        }
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
 
-        .orb-two {
-            width: 300px;
-            height: 300px;
-            background: var(--purple);
-            bottom: 10%;
-            left: 5%;
-        }
+#scrollProgress{
 
+    position:fixed;
 
-        /* =========================================================
-           HEADER
-        ========================================================= */
+    top:0;
+    left:0;
 
-        .header {
-            position: fixed;
+    height:3px;
 
-            top: 0;
-            left: var(--sidebar);
-            right: 0;
+    width:0%;
 
-            height: var(--header);
+    background:linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--purple),
+        var(--pink)
+    );
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    z-index:9999;
+}
 
-            padding: 0 28px;
+/* =========================================================
+   HEADER
+========================================================= */
 
-            background: rgba(4,6,11,.72);
-            backdrop-filter: blur(18px);
+header{
 
-            border-bottom: 1px solid var(--border);
+    position:fixed;
 
-            z-index: 1000;
-        }
+    top:0;
+    left:0;
+    right:0;
 
-        .brand-mobile {
-            display: none;
-            align-items: center;
-            gap: 12px;
-        }
+    height:var(--header);
 
-        .brand-icon {
-            width: 38px;
-            height: 38px;
+    z-index:1000;
 
-            display: grid;
-            place-items: center;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-            border: 1px solid rgba(94,231,255,.35);
+    padding:0 35px;
 
-            border-radius: 12px;
+    background:rgba(5,7,13,.75);
 
-            color: var(--cyan);
+    border-bottom:1px solid var(--border);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(94,231,255,.15),
-                    rgba(167,120,255,.1)
-                );
+    backdrop-filter:blur(20px);
+}
 
-            font-family: "DM Mono";
-            font-weight: 500;
-        }
+.brand{
 
-        .header-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
 
-            font-family: "DM Mono";
-            font-size: 11px;
-            letter-spacing: .08em;
+.brandIcon{
 
-            color: var(--muted);
-        }
+    width:42px;
+    height:42px;
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
+    border:1px solid rgba(94,231,255,.4);
 
-            border-radius: 50%;
+    display:grid;
+    place-items:center;
 
-            background: var(--green);
+    color:var(--cyan);
 
-            box-shadow:
-                0 0 12px var(--green);
+    font-family:"DM Mono";
 
-            animation: pulse 2s infinite;
-        }
+    box-shadow:
+        0 0 25px rgba(94,231,255,.12);
+}
 
-        @keyframes pulse {
-            50% {
-                opacity: .4;
-            }
-        }
+.brandText strong{
 
-        .menu-button {
-            display: none;
+    display:block;
 
-            width: 42px;
-            height: 42px;
+    letter-spacing:2px;
 
-            border: 1px solid var(--border);
-            border-radius: 12px;
+    font-size:15px;
+}
 
-            background: var(--surface);
+.brandText span{
 
-            color: white;
-        }
+    display:block;
 
+    font-family:"DM Mono";
 
-        /* =========================================================
-           SIDEBAR
-        ========================================================= */
+    color:var(--muted);
 
-        .sidebar {
-            position: fixed;
+    font-size:9px;
 
-            left: 0;
-            top: 0;
-            bottom: 0;
+    letter-spacing:1.5px;
 
-            width: var(--sidebar);
+    margin-top:3px;
+}
 
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(10,15,25,.98),
-                    rgba(4,6,11,.98)
-                );
+.status{
 
-            border-right: 1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:8px;
 
-            padding: 28px 20px;
+    font-family:"DM Mono";
 
-            z-index: 1100;
-        }
+    font-size:10px;
 
-        .sidebar-brand {
-            display: flex;
-            align-items: center;
-            gap: 13px;
+    color:var(--muted);
+}
 
-            margin-bottom: 40px;
-        }
+.statusDot{
 
-        .sidebar-brand-icon {
-            width: 48px;
-            height: 48px;
+    width:7px;
+    height:7px;
 
-            display: grid;
-            place-items: center;
+    border-radius:50%;
 
-            border-radius: 15px;
+    background:var(--green);
 
-            color: var(--cyan);
+    box-shadow:0 0 12px var(--green);
+}
 
-            font-family: "DM Mono";
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(94,231,255,.14),
-                    rgba(167,120,255,.12)
-                );
+.sidebar{
 
-            border: 1px solid rgba(94,231,255,.25);
+    position:fixed;
 
-            box-shadow:
-                inset 0 0 30px rgba(94,231,255,.04);
-        }
+    top:var(--header);
+    left:0;
+    bottom:0;
 
-        .sidebar-brand h2 {
-            font-family: "Space Grotesk";
-            font-size: 16px;
-            letter-spacing: .08em;
-        }
+    width:var(--sidebar);
 
-        .sidebar-brand span {
-            display: block;
+    border-right:1px solid var(--border);
 
-            margin-top: 3px;
+    background:rgba(7,10,17,.9);
 
-            color: var(--dim);
+    backdrop-filter:blur(20px);
 
-            font-family: "DM Mono";
-            font-size: 9px;
+    padding:30px 18px;
 
-            letter-spacing: .12em;
-        }
+    z-index:900;
+}
 
-        .nav-title {
-            color: var(--dim);
+.sideLabel{
 
-            font-family: "DM Mono";
-            font-size: 9px;
+    font-family:"DM Mono";
 
-            letter-spacing: .16em;
+    font-size:9px;
 
-            margin: 22px 10px 10px;
-        }
+    color:var(--dim);
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+    letter-spacing:2px;
 
-            padding: 12px 13px;
+    margin:0 14px 15px;
+}
 
-            margin-bottom: 4px;
+.nav{
 
-            border: 1px solid transparent;
-            border-radius: 12px;
+    display:flex;
 
-            color: var(--muted);
+    flex-direction:column;
 
-            transition: .25s ease;
+    gap:5px;
+}
 
-            font-size: 13px;
-        }
+.nav a{
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: white;
+    display:flex;
+    align-items:center;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(94,231,255,.08),
-                    rgba(102,140,255,.04)
-                );
+    gap:12px;
 
-            border-color: var(--border);
-        }
+    padding:12px 14px;
 
-        .nav-icon {
-            width: 22px;
-            text-align: center;
-            font-size: 15px;
-        }
+    border-radius:10px;
 
-        .owner-mini {
-            position: absolute;
+    color:var(--muted);
 
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
+    font-size:13px;
 
-            padding: 14px;
+    transition:.3s;
+}
 
-            border-radius: 16px;
+.nav a:hover,
+.nav a.active{
 
-            background: rgba(255,255,255,.025);
+    color:white;
 
-            border: 1px solid var(--border);
-        }
+    background:rgba(94,231,255,.07);
 
-        .owner-mini-top {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    border-left:2px solid var(--cyan);
+}
 
-        .owner-mini-avatar {
-            width: 42px;
-            height: 42px;
+.navIcon{
 
-            overflow: hidden;
+    width:20px;
 
-            border-radius: 50%;
+    color:var(--cyan);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--cyan),
-                    var(--purple)
-                );
+    font-family:"DM Mono";
+}
 
-            border: 2px solid rgba(255,255,255,.12);
-        }
+.profileMini{
 
-        .owner-mini-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    position:absolute;
 
-        .owner-mini strong {
-            display: block;
-            font-size: 13px;
-        }
+    bottom:20px;
 
-        .owner-mini span {
-            display: block;
-            margin-top: 3px;
+    left:18px;
+    right:18px;
 
-            color: var(--muted);
-            font-size: 10px;
-        }
+    padding:18px;
 
+    border:1px solid var(--border);
 
-        /* =========================================================
-           MAIN
-        ========================================================= */
+    border-radius:15px;
 
-        main {
-            margin-left: var(--sidebar);
-            padding-top: var(--header);
-        }
+    background:linear-gradient(
+        135deg,
+        rgba(94,231,255,.06),
+        rgba(167,123,255,.04)
+    );
+}
 
-        .container {
-            width: min(1400px, calc(100% - 60px));
-            margin: auto;
-        }
+.profileMiniTop{
 
-        section {
-            padding: 100px 0;
-        }
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
+.avatar{
 
-        /* =========================================================
-           HERO
-        ========================================================= */
+    width:42px;
+    height:42px;
 
-        .hero {
-            min-height: calc(100vh - var(--header));
+    border-radius:12px;
 
-            display: flex;
-            align-items: center;
+    display:grid;
+    place-items:center;
 
-            position: relative;
-        }
+    background:linear-gradient(
+        135deg,
+        var(--cyan),
+        var(--purple)
+    );
 
-        .hero-grid {
-            display: grid;
+    color:#05070d;
 
-            grid-template-columns:
-                minmax(330px, .8fr)
-                minmax(550px, 1.2fr);
+    font-weight:700;
+}
 
-            gap: 50px;
+.profileMini strong{
 
-            align-items: center;
-        }
+    display:block;
+    font-size:14px;
+}
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+.profileMini span{
 
-            padding: 7px 11px;
+    font-size:10px;
+    color:var(--muted);
+}
 
-            border: 1px solid rgba(94,231,255,.2);
-            border-radius: 999px;
+/* =========================================================
+   MAIN
+========================================================= */
 
-            color: var(--cyan);
+main{
 
-            background: rgba(94,231,255,.045);
+    margin-left:var(--sidebar);
 
-            font-family: "DM Mono";
-            font-size: 10px;
+    padding-top:var(--header);
+}
 
-            letter-spacing: .08em;
-        }
+section{
 
-        .hero h1 {
-            margin-top: 20px;
+    padding:110px 6vw;
 
-            font-family: "Space Grotesk";
+    position:relative;
+}
 
-            font-size: clamp(48px, 6vw, 82px);
+.container{
 
-            line-height: .95;
+    max-width:1450px;
 
-            letter-spacing: -.055em;
-        }
+    margin:auto;
+}
 
-        .hero h1 span {
-            display: block;
+/* =========================================================
+   HERO
+========================================================= */
 
-            background:
-                linear-gradient(
-                    100deg,
-                    var(--cyan),
-                    #9eb4ff 45%,
-                    var(--purple)
-                );
+.hero{
 
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+    min-height:calc(100vh - var(--header));
 
-        .hero-role {
-            margin-top: 24px;
+    display:grid;
 
-            color: var(--muted);
+    grid-template-columns:
+        minmax(350px, .9fr)
+        minmax(500px, 1.1fr);
 
-            font-family: "DM Mono";
-            font-size: 13px;
-        }
+    align-items:center;
 
-        .hero-description {
-            max-width: 610px;
+    gap:50px;
 
-            margin-top: 22px;
+    padding-top:70px;
 
-            color: #aab4c6;
+    overflow:hidden;
+}
 
-            font-size: 15px;
+.hero::before{
 
-            line-height: 1.8;
-        }
+    content:"";
 
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
+    position:absolute;
 
-            gap: 12px;
+    width:500px;
+    height:500px;
 
-            margin-top: 30px;
-        }
+    left:-200px;
+    top:30%;
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
+    background:radial-gradient(
+        circle,
+        rgba(167,123,255,.12),
+        transparent 70%
+    );
+}
 
-            padding: 13px 18px;
+.eyebrow{
 
-            border-radius: 12px;
+    font-family:"DM Mono";
 
-            font-size: 12px;
-            font-weight: 700;
+    color:var(--cyan);
 
-            transition: .25s ease;
-        }
+    font-size:11px;
 
-        .btn-primary {
-            color: #031017;
+    letter-spacing:2px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--cyan),
-                    #91dfff
-                );
+    margin-bottom:20px;
+}
 
-            box-shadow:
-                0 10px 35px rgba(94,231,255,.12);
-        }
+.hero h1{
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
+    font-size:clamp(55px,7vw,105px);
 
-            box-shadow:
-                0 15px 45px rgba(94,231,255,.2);
-        }
+    line-height:.88;
 
-        .btn-secondary {
-            border: 1px solid var(--border);
+    letter-spacing:-5px;
 
-            background: rgba(255,255,255,.025);
+    margin-bottom:28px;
+}
 
-            color: white;
-        }
+.hero h1 span{
 
-        .btn-secondary:hover {
-            border-color: var(--border-hover);
-            background: rgba(94,231,255,.05);
-        }
+    color:transparent;
 
+    -webkit-text-stroke:1px rgba(255,255,255,.5);
+}
 
-        /* =========================================================
-           STATS
-        ========================================================= */
+.heroDescription{
 
-        .stats {
-            display: grid;
+    max-width:620px;
 
-            grid-template-columns: repeat(4, 1fr);
+    color:var(--muted);
 
-            gap: 10px;
+    font-size:16px;
 
-            margin-top: 40px;
-        }
+    line-height:1.8;
 
-        .stat {
-            padding: 16px;
+    margin-bottom:30px;
+}
 
-            border: 1px solid var(--border);
+.heroActions{
 
-            background: rgba(255,255,255,.02);
+    display:flex;
 
-            border-radius: 14px;
-        }
+    gap:12px;
 
-        .stat strong {
-            display: block;
+    flex-wrap:wrap;
+}
 
-            font-family: "Space Grotesk";
-            font-size: 25px;
-        }
+.btn{
 
-        .stat span {
-            display: block;
+    border:1px solid var(--border);
 
-            margin-top: 5px;
+    padding:13px 19px;
 
-            color: var(--dim);
+    border-radius:8px;
 
-            font-family: "DM Mono";
-            font-size: 9px;
+    font-family:"DM Mono";
 
-            text-transform: uppercase;
-        }
+    font-size:11px;
 
+    cursor:pointer;
 
-        /* =========================================================
-           HERO CAROUSEL
-        ========================================================= */
+    transition:.3s;
+}
 
-        .carousel {
-            position: relative;
+.btnPrimary{
 
-            min-height: 580px;
+    color:#061018;
 
-            border-radius: 28px;
+    background:var(--cyan);
 
-            overflow: hidden;
+    border-color:var(--cyan);
+}
 
-            border: 1px solid var(--border);
+.btnPrimary:hover{
 
-            background: var(--surface);
+    transform:translateY(-3px);
 
-            box-shadow: var(--shadow);
-        }
+    box-shadow:0 10px 30px rgba(94,231,255,.2);
+}
 
-        .slides {
-            position: absolute;
-            inset: 0;
-        }
+.btnSecondary{
 
-        .slide {
-            position: absolute;
-            inset: 0;
+    color:white;
 
-            opacity: 0;
+    background:rgba(255,255,255,.03);
+}
 
-            visibility: hidden;
+.btnSecondary:hover{
 
-            transition:
-                opacity .8s ease,
-                transform .8s ease;
+    background:rgba(255,255,255,.08);
+}
 
-            transform: scale(1.04);
-        }
+/* =========================================================
+   CAROUSEL
+========================================================= */
 
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
+.heroCarousel{
 
-            transform: scale(1);
-        }
+    position:relative;
 
-        .slide-image {
-            position: absolute;
-            inset: 0;
+    height:590px;
 
-            width: 100%;
-            height: 100%;
+    border:1px solid var(--border);
 
-            object-fit: cover;
-        }
+    border-radius:24px;
 
-        .slide::after {
-            content: "";
+    overflow:hidden;
 
-            position: absolute;
-            inset: 0;
+    background:#090d16;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(4,6,11,.96) 0%,
-                    rgba(4,6,11,.68) 40%,
-                    rgba(4,6,11,.15) 100%
-                ),
-                linear-gradient(
-                    0deg,
-                    rgba(4,6,11,.8),
-                    transparent 50%
-                );
-        }
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.5);
+}
 
-        .slide-content {
-            position: absolute;
+.slide{
 
-            z-index: 2;
+    position:absolute;
 
-            left: 38px;
-            right: 38px;
-            bottom: 42px;
-        }
+    inset:0;
 
-        .slide-number {
-            position: absolute;
+    opacity:0;
 
-            right: 32px;
-            top: 28px;
+    transform:scale(1.04);
 
-            color: rgba(255,255,255,.5);
+    transition:
+        opacity .8s ease,
+        transform 1.5s ease;
 
-            font-family: "DM Mono";
-            font-size: 11px;
-        }
+    background-size:cover;
 
-        .slide-label {
-            color: var(--cyan);
+    background-position:center;
+}
 
-            font-family: "DM Mono";
-            font-size: 10px;
+.slide.active{
 
-            letter-spacing: .12em;
-        }
+    opacity:1;
 
-        .slide h2 {
-            max-width: 500px;
+    transform:scale(1);
+}
 
-            margin-top: 10px;
+.slide::after{
 
-            font-family: "Space Grotesk";
+    content:"";
 
-            font-size: clamp(32px, 4vw, 56px);
+    position:absolute;
 
-            line-height: 1;
-        }
+    inset:0;
 
-        .slide p {
-            max-width: 500px;
+    background:
 
-            margin-top: 15px;
+        linear-gradient(
+            180deg,
+            rgba(5,7,13,.05),
+            rgba(5,7,13,.25) 35%,
+            rgba(5,7,13,.95)
+        );
+}
 
-            color: #c2cad8;
+.slideContent{
 
-            line-height: 1.6;
+    position:absolute;
 
-            font-size: 13px;
-        }
+    z-index:2;
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
+    left:35px;
+    right:35px;
+    bottom:40px;
+}
 
-            gap: 7px;
+.slideNumber{
 
-            margin-top: 18px;
-        }
+    font-family:"DM Mono";
 
-        .tag {
-            padding: 6px 9px;
+    color:var(--cyan);
 
-            border-radius: 8px;
+    font-size:10px;
 
-            border: 1px solid rgba(255,255,255,.12);
+    letter-spacing:2px;
 
-            background: rgba(255,255,255,.055);
+    margin-bottom:12px;
+}
 
-            color: #dfe7f5;
+.slideContent h2{
 
-            font-family: "DM Mono";
-            font-size: 9px;
-        }
+    font-size:42px;
 
-        .carousel-controls {
-            position: absolute;
+    line-height:1;
 
-            right: 28px;
-            bottom: 28px;
+    margin-bottom:15px;
+}
 
-            z-index: 5;
+.slideContent p{
 
-            display: flex;
-            gap: 7px;
-        }
+    color:#bdc7d9;
 
-        .carousel-btn {
-            width: 42px;
-            height: 42px;
+    max-width:500px;
 
-            border: 1px solid rgba(255,255,255,.12);
+    line-height:1.6;
 
-            border-radius: 11px;
+    font-size:14px;
+}
 
-            background: rgba(0,0,0,.35);
+.tags{
 
-            backdrop-filter: blur(10px);
+    display:flex;
 
-            color: white;
+    flex-wrap:wrap;
 
-            transition: .2s;
-        }
+    gap:7px;
 
-        .carousel-btn:hover {
-            border-color: var(--cyan);
-            color: var(--cyan);
-        }
+    margin-top:20px;
+}
 
-        .carousel-dots {
-            position: absolute;
+.tag{
 
-            top: 28px;
-            left: 38px;
+    padding:6px 9px;
 
-            z-index: 5;
+    border:1px solid rgba(255,255,255,.15);
 
-            display: flex;
-            gap: 6px;
-        }
+    border-radius:5px;
 
-        .dot {
-            width: 24px;
-            height: 3px;
+    background:rgba(0,0,0,.25);
 
-            border-radius: 5px;
+    backdrop-filter:blur(8px);
 
-            background: rgba(255,255,255,.2);
+    font-family:"DM Mono";
 
-            transition: .3s;
-        }
+    font-size:9px;
 
-        .dot.active {
-            width: 40px;
-            background: var(--cyan);
-        }
+    color:#d8e1f2;
+}
 
-        .carousel-progress {
-            position: absolute;
+.carouselControls{
 
-            left: 0;
-            bottom: 0;
+    position:absolute;
 
-            height: 3px;
-            width: 0;
+    z-index:5;
 
-            background: var(--cyan);
+    top:25px;
+    right:25px;
 
-            z-index: 10;
-        }
+    display:flex;
 
+    gap:8px;
+}
 
-        /* =========================================================
-           SEARCH
-        ========================================================= */
+.carouselBtn{
 
-        .search-box {
-            margin-top: 35px;
+    width:38px;
+    height:38px;
 
-            display: flex;
-            align-items: center;
-            gap: 12px;
+    border-radius:50%;
 
-            padding: 14px 16px;
+    border:1px solid rgba(255,255,255,.2);
 
-            border: 1px solid var(--border);
+    background:rgba(0,0,0,.35);
 
-            border-radius: 15px;
+    color:white;
 
-            background: rgba(255,255,255,.025);
+    cursor:pointer;
 
-            transition: .25s;
-        }
+    backdrop-filter:blur(10px);
+}
 
-        .search-box:focus-within {
-            border-color: rgba(94,231,255,.35);
+.carouselBtn:hover{
 
-            box-shadow:
-                0 0 0 4px rgba(94,231,255,.04);
-        }
+    border-color:var(--cyan);
 
-        .search-icon {
-            color: var(--cyan);
-        }
+    color:var(--cyan);
+}
 
-        .search-box input {
-            width: 100%;
+.carouselDots{
 
-            outline: none;
-            border: 0;
+    position:absolute;
 
-            color: white;
+    z-index:5;
 
-            background: transparent;
+    bottom:20px;
+    right:35px;
 
-            font-size: 13px;
-        }
+    display:flex;
 
-        .search-box input::placeholder {
-            color: var(--dim);
-        }
+    gap:7px;
+}
 
+.dot{
 
-        /* =========================================================
-           SECTION HEADER
-        ========================================================= */
+    width:25px;
+    height:3px;
 
-        .section-header {
-            display: flex;
+    background:rgba(255,255,255,.25);
 
-            align-items: flex-end;
-            justify-content: space-between;
+    cursor:pointer;
 
-            gap: 30px;
+    transition:.3s;
+}
 
-            margin-bottom: 35px;
-        }
+.dot.active{
 
-        .section-label {
-            color: var(--cyan);
+    width:45px;
 
-            font-family: "DM Mono";
-            font-size: 10px;
+    background:var(--cyan);
+}
 
-            letter-spacing: .13em;
-        }
+/* =========================================================
+   STATS
+========================================================= */
 
-        .section-header h2 {
-            margin-top: 8px;
+.stats{
 
-            font-family: "Space Grotesk";
+    display:grid;
 
-            font-size: clamp(30px, 4vw, 48px);
+    grid-template-columns:
+        repeat(4,1fr);
 
-            letter-spacing: -.04em;
-        }
+    border:1px solid var(--border);
 
-        .section-description {
-            max-width: 500px;
+    background:rgba(255,255,255,.02);
 
-            color: var(--muted);
+    border-radius:16px;
 
-            line-height: 1.7;
+    margin-top:35px;
 
-            font-size: 13px;
-        }
+    overflow:hidden;
+}
 
+.stat{
 
-        /* =========================================================
-           SPECIALTIES
-        ========================================================= */
+    padding:18px;
 
-        .specialties {
-            display: grid;
+    border-right:1px solid var(--border);
+}
 
-            grid-template-columns: repeat(3, 1fr);
+.stat:last-child{
 
-            gap: 14px;
-        }
+    border-right:0;
+}
 
-        .specialty {
-            position: relative;
+.stat strong{
 
-            min-height: 230px;
+    display:block;
 
-            padding: 25px;
+    font-size:24px;
 
-            overflow: hidden;
+    margin-bottom:4px;
+}
 
-            border: 1px solid var(--border);
+.stat span{
 
-            border-radius: var(--radius);
+    font-family:"DM Mono";
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.035),
-                    rgba(255,255,255,.01)
-                );
+    font-size:9px;
 
-            transition: .3s ease;
-        }
+    color:var(--muted);
 
-        .specialty:hover {
-            transform: translateY(-6px);
+    text-transform:uppercase;
+}
 
-            border-color: var(--border-hover);
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
-            box-shadow:
-                0 20px 50px rgba(0,0,0,.25);
-        }
+.sectionHeader{
 
-        .specialty-number {
-            position: absolute;
+    display:flex;
 
-            top: 20px;
-            right: 20px;
+    justify-content:space-between;
 
-            color: var(--dim);
+    align-items:end;
 
-            font-family: "DM Mono";
-            font-size: 10px;
-        }
+    gap:30px;
 
-        .specialty-icon {
-            width: 50px;
-            height: 50px;
+    margin-bottom:45px;
+}
 
-            display: grid;
-            place-items: center;
+.sectionNumber{
 
-            border-radius: 14px;
+    font-family:"DM Mono";
 
-            color: var(--cyan);
+    color:var(--cyan);
 
-            background: rgba(94,231,255,.07);
+    font-size:10px;
 
-            border: 1px solid rgba(94,231,255,.12);
+    margin-bottom:10px;
+}
 
-            font-size: 22px;
-        }
+.sectionHeader h2{
 
-        .specialty h3 {
-            margin-top: 25px;
+    font-size:clamp(35px,5vw,60px);
 
-            font-family: "Space Grotesk";
-            font-size: 20px;
-        }
+    letter-spacing:-3px;
+}
 
-        .specialty p {
-            margin-top: 10px;
+.sectionHeader p{
 
-            color: var(--muted);
+    max-width:500px;
 
-            line-height: 1.65;
+    color:var(--muted);
 
-            font-size: 12px;
-        }
+    line-height:1.7;
 
-        .specialty-line {
-            position: absolute;
+    font-size:14px;
+}
 
-            left: 25px;
-            bottom: 20px;
+/* =========================================================
+   SPECIALTIES
+========================================================= */
 
-            width: 40px;
-            height: 2px;
+.specialties{
 
-            background: var(--cyan);
+    display:grid;
 
-            opacity: .5;
-        }
+    grid-template-columns:
+        repeat(3,1fr);
 
+    gap:15px;
+}
 
-        /* =========================================================
-           OWNER / ABOUT
-        ========================================================= */
+.specialty{
 
-        .about-grid {
-            display: grid;
+    position:relative;
 
-            grid-template-columns: .7fr 1.3fr;
+    min-height:270px;
 
-            gap: 25px;
-        }
+    overflow:hidden;
 
-        .profile-card {
-            position: relative;
+    border:1px solid var(--border);
 
-            overflow: hidden;
+    border-radius:18px;
 
-            padding: 28px;
+    background:var(--surface);
 
-            border-radius: 24px;
+    transition:.4s;
+}
 
-            border: 1px solid var(--border);
+.specialty:hover{
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(94,231,255,.06),
-                    rgba(167,120,255,.04)
-                );
-        }
+    transform:translateY(-7px);
 
-        .profile-avatar {
-            width: 125px;
-            height: 125px;
+    border-color:rgba(94,231,255,.35);
 
-            margin-bottom: 25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
 
-            overflow: hidden;
+.specialtyImage{
 
-            border-radius: 30px;
+    height:145px;
 
-            border: 1px solid rgba(94,231,255,.25);
+    background-size:cover;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--cyan),
-                    var(--purple)
-                );
+    background-position:center;
 
-            box-shadow:
-                0 20px 60px rgba(94,231,255,.12);
-        }
+    position:relative;
+}
 
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
+.specialtyImage::after{
 
-            object-fit: cover;
-        }
+    content:"";
 
-        .profile-placeholder {
-            width: 100%;
-            height: 100%;
+    position:absolute;
 
-            display: grid;
-            place-items: center;
+    inset:0;
 
-            font-size: 42px;
-        }
+    background:linear-gradient(
+        transparent,
+        var(--surface)
+    );
+}
 
-        .profile-card .small {
-            color: var(--cyan);
+.specialtyBody{
 
-            font-family: "DM Mono";
-            font-size: 10px;
+    padding:0 22px 22px;
+}
 
-            letter-spacing: .1em;
-        }
+.specialtyIcon{
 
-        .profile-card h3 {
-            margin-top: 8px;
+    font-size:24px;
 
-            font-family: "Space Grotesk";
-            font-size: 32px;
-        }
+    margin-bottom:10px;
+}
 
-        .profile-card p {
-            margin-top: 8px;
+.specialty h3{
 
-            color: var(--muted);
+    font-size:19px;
 
-            line-height: 1.7;
+    margin-bottom:8px;
+}
 
-            font-size: 12px;
-        }
+.specialty p{
 
-        .profile-info {
-            display: grid;
+    color:var(--muted);
 
-            gap: 8px;
+    font-size:12px;
 
-            margin-top: 25px;
-        }
+    line-height:1.6;
+}
 
-        .profile-info-row {
-            display: flex;
-            justify-content: space-between;
+/* =========================================================
+   ABOUT
+========================================================= */
 
-            padding: 10px 0;
+.aboutGrid{
 
-            border-bottom: 1px solid var(--border);
+    display:grid;
 
-            font-size: 11px;
-        }
+    grid-template-columns:
+        .8fr 1.2fr;
 
-        .profile-info-row span:first-child {
-            color: var(--dim);
-        }
+    gap:50px;
 
-        .profile-info-row span:last-child {
-            color: #dfe6f2;
-        }
+    align-items:center;
+}
 
-        .about-content {
-            padding: 30px;
+.aboutVisual{
 
-            border: 1px solid var(--border);
+    min-height:480px;
 
-            border-radius: 24px;
+    border:1px solid var(--border);
 
-            background: rgba(255,255,255,.02);
-        }
+    border-radius:22px;
 
-        .about-content h3 {
-            font-family: "Space Grotesk";
-            font-size: 27px;
-        }
+    background:
 
-        .about-content > p {
-            margin-top: 15px;
+        linear-gradient(
+            145deg,
+            rgba(94,231,255,.08),
+            rgba(167,123,255,.04)
+        );
 
-            color: var(--muted);
+    display:flex;
 
-            line-height: 1.8;
+    align-items:center;
 
-            font-size: 13px;
-        }
+    justify-content:center;
 
-        .about-highlights {
-            display: grid;
+    position:relative;
 
-            grid-template-columns: repeat(2,1fr);
+    overflow:hidden;
+}
 
-            gap: 12px;
+.aboutVisual::before{
 
-            margin-top: 25px;
-        }
+    content:"SYSTEM";
 
-        .highlight {
-            padding: 17px;
+    position:absolute;
 
-            border-radius: 15px;
+    font-size:110px;
 
-            border: 1px solid var(--border);
+    font-weight:700;
 
-            background: rgba(255,255,255,.02);
-        }
+    color:rgba(255,255,255,.02);
 
-        .highlight strong {
-            display: block;
+    transform:rotate(-20deg);
+}
 
-            font-family: "Space Grotesk";
-            font-size: 18px;
-        }
+.aboutAvatar{
 
-        .highlight span {
-            display: block;
+    width:190px;
+    height:190px;
 
-            margin-top: 5px;
+    border-radius:50%;
 
-            color: var(--muted);
+    border:1px solid rgba(94,231,255,.5);
 
-            font-size: 10px;
-        }
+    display:grid;
 
+    place-items:center;
 
-        /* =========================================================
-           TECH STACK
-        ========================================================= */
+    font-size:65px;
 
-        .tech-wrapper {
-            overflow: hidden;
+    color:var(--cyan);
 
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+    background:rgba(94,231,255,.04);
 
-            padding: 20px 0;
-        }
+    box-shadow:
+        0 0 70px rgba(94,231,255,.1);
+}
 
-        .tech-track {
-            display: flex;
+.aboutContent h3{
 
-            width: max-content;
+    font-size:38px;
 
-            gap: 14px;
+    margin-bottom:20px;
+}
 
-            animation: marquee 35s linear infinite;
-        }
+.aboutContent p{
 
-        .tech-item {
-            padding: 9px 14px;
+    color:var(--muted);
 
-            border-radius: 10px;
+    line-height:1.9;
 
-            border: 1px solid var(--border);
+    font-size:15px;
 
-            color: #cdd6e6;
+    margin-bottom:18px;
+}
 
-            background: rgba(255,255,255,.025);
+.infoGrid{
 
-            font-family: "DM Mono";
-            font-size: 10px;
+    display:grid;
 
-            white-space: nowrap;
-        }
+    grid-template-columns:
+        repeat(2,1fr);
 
-        @keyframes marquee {
-            to {
-                transform: translateX(-50%);
-            }
-        }
+    gap:10px;
 
+    margin-top:30px;
+}
 
-        /* =========================================================
-           PROJECTS
-        ========================================================= */
+.infoBox{
 
-        .projects-grid {
-            display: grid;
+    padding:15px;
 
-            grid-template-columns: repeat(2, 1fr);
+    border:1px solid var(--border);
 
-            gap: 18px;
-        }
+    border-radius:10px;
 
-        .project-card {
-            position: relative;
+    background:rgba(255,255,255,.025);
+}
 
-            overflow: hidden;
+.infoBox span{
 
-            border: 1px solid var(--border);
+    display:block;
 
-            border-radius: 22px;
+    color:var(--dim);
 
-            background: var(--surface);
+    font-family:"DM Mono";
 
-            transition: .35s ease;
-        }
+    font-size:9px;
 
-        .project-card:hover {
-            transform: translateY(-7px);
+    margin-bottom:5px;
+}
 
-            border-color: var(--border-hover);
+.infoBox strong{
 
-            box-shadow:
-                0 25px 60px rgba(0,0,0,.3);
-        }
+    font-size:13px;
+}
 
-        .project-image {
-            position: relative;
+/* =========================================================
+   PROJECTS
+========================================================= */
 
-            height: 245px;
+.projects{
 
-            overflow: hidden;
-        }
+    display:grid;
 
-        .project-image img {
-            width: 100%;
-            height: 100%;
+    grid-template-columns:
+        repeat(2,1fr);
 
-            object-fit: cover;
+    gap:20px;
+}
 
-            transition: .6s ease;
-        }
+.project{
 
-        .project-card:hover .project-image img {
-            transform: scale(1.06);
-        }
+    border:1px solid var(--border);
 
-        .project-image::after {
-            content: "";
+    border-radius:18px;
 
-            position: absolute;
-            inset: 0;
+    overflow:hidden;
 
-            background:
-                linear-gradient(
-                    0deg,
-                    rgba(4,6,11,.8),
-                    transparent 60%
-                );
-        }
+    background:var(--surface);
 
-        .project-badge {
-            position: absolute;
+    transition:.4s;
+}
 
-            top: 16px;
-            left: 16px;
+.project:hover{
 
-            z-index: 2;
+    transform:translateY(-6px);
 
-            padding: 6px 9px;
+    border-color:rgba(94,231,255,.35);
+}
 
-            border-radius: 8px;
+.projectImage{
 
-            color: var(--cyan);
+    height:260px;
 
-            background: rgba(4,6,11,.75);
+    background-size:cover;
 
-            backdrop-filter: blur(10px);
+    background-position:center;
 
-            border: 1px solid rgba(94,231,255,.2);
+    position:relative;
+}
 
-            font-family: "DM Mono";
-            font-size: 9px;
-        }
+.projectImage::after{
 
-        .project-content {
-            padding: 23px;
-        }
+    content:"";
 
-        .project-content h3 {
-            font-family: "Space Grotesk";
-            font-size: 21px;
-        }
+    position:absolute;
 
-        .project-content p {
-            margin-top: 10px;
+    inset:0;
 
-            color: var(--muted);
+    background:
+        linear-gradient(
+            180deg,
+            transparent 45%,
+            rgba(5,7,13,.95)
+        );
+}
 
-            line-height: 1.7;
+.projectIndex{
 
-            font-size: 12px;
-        }
+    position:absolute;
 
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
+    z-index:2;
 
-            gap: 7px;
+    top:18px;
+    left:18px;
 
-            margin-top: 15px;
-        }
+    font-family:"DM Mono";
 
-        .project-meta span {
-            padding: 6px 8px;
+    font-size:10px;
 
-            border-radius: 7px;
+    color:var(--cyan);
 
-            color: var(--dim);
+    background:rgba(0,0,0,.4);
 
-            background: rgba(255,255,255,.035);
+    padding:7px 9px;
 
-            font-family: "DM Mono";
-            font-size: 8px;
-        }
+    border:1px solid rgba(255,255,255,.1);
 
-        .project-footer {
-            display: flex;
+    border-radius:5px;
+}
 
-            justify-content: space-between;
-            align-items: center;
+.projectBody{
 
-            margin-top: 20px;
+    padding:25px;
+}
 
-            padding-top: 17px;
+.projectCategory{
 
-            border-top: 1px solid var(--border);
-        }
+    font-family:"DM Mono";
 
-        .project-footer span {
-            color: var(--dim);
+    color:var(--cyan);
 
-            font-family: "DM Mono";
-            font-size: 9px;
-        }
+    font-size:9px;
 
-        .project-link {
-            color: var(--cyan);
+    letter-spacing:1px;
 
-            font-size: 11px;
-            font-weight: 700;
-        }
+    margin-bottom:10px;
+}
 
+.project h3{
 
-        /* =========================================================
-           EXPLORING
-        ========================================================= */
+    font-size:24px;
 
-        .exploring-grid {
-            display: grid;
+    margin-bottom:10px;
+}
 
-            grid-template-columns: repeat(3,1fr);
+.project p{
 
-            gap: 14px;
-        }
+    color:var(--muted);
 
-        .exploring-card {
-            padding: 23px;
+    line-height:1.7;
 
-            border: 1px solid var(--border);
+    font-size:13px;
 
-            border-radius: 18px;
+    margin-bottom:18px;
+}
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.035),
-                    transparent
-                );
-        }
+.projectFooter{
 
-        .exploring-card h3 {
-            font-family: "Space Grotesk";
-            font-size: 18px;
-        }
+    display:flex;
 
-        .exploring-card p {
-            margin-top: 9px;
+    justify-content:space-between;
 
-            color: var(--muted);
+    align-items:center;
+}
 
-            line-height: 1.6;
+.projectLink{
 
-            font-size: 11px;
-        }
+    color:var(--cyan);
 
-        .progress-line {
-            height: 4px;
+    font-family:"DM Mono";
 
-            margin-top: 18px;
+    font-size:10px;
+}
 
-            overflow: hidden;
+/* =========================================================
+   TECH STACK
+========================================================= */
 
-            border-radius: 10px;
+.techSection{
 
-            background: rgba(255,255,255,.06);
-        }
+    overflow:hidden;
 
-        .progress-line div {
-            height: 100%;
+    padding-left:0;
+    padding-right:0;
+}
 
-            border-radius: inherit;
+.techTitle{
 
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--cyan),
-                    var(--purple)
-                );
-        }
+    text-align:center;
 
+    margin-bottom:35px;
+}
 
-        /* =========================================================
-           UNITS
-        ========================================================= */
+.techTitle span{
 
-        .units-container {
-            display: grid;
+    color:var(--muted);
 
-            gap: 18px;
-        }
+    font-family:"DM Mono";
 
-        .unit {
-            border: 1px solid var(--border);
+    font-size:10px;
 
-            border-radius: 22px;
+    letter-spacing:2px;
+}
 
-            overflow: hidden;
+.techMarquee{
 
-            background: rgba(255,255,255,.018);
-        }
+    overflow:hidden;
 
-        .unit-header {
-            display: flex;
+    border-top:1px solid var(--border);
 
-            align-items: center;
-            justify-content: space-between;
+    border-bottom:1px solid var(--border);
 
-            padding: 23px;
+    padding:25px 0;
+}
 
-            cursor: pointer;
+.techTrack{
 
-            transition: .2s;
-        }
+    display:flex;
 
-        .unit-header:hover {
-            background: rgba(255,255,255,.025);
-        }
+    width:max-content;
 
-        .unit-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    animation:marquee 25s linear infinite;
+}
 
-        .unit-number {
-            width: 45px;
-            height: 45px;
+.techItem{
 
-            display: grid;
-            place-items: center;
+    padding:0 35px;
 
-            border-radius: 12px;
+    color:#69758c;
 
-            color: var(--cyan);
+    font-family:"DM Mono";
 
-            background: rgba(94,231,255,.06);
+    font-size:13px;
 
-            border: 1px solid rgba(94,231,255,.12);
+    white-space:nowrap;
 
-            font-family: "DM Mono";
-            font-size: 11px;
-        }
+    transition:.3s;
+}
 
-        .unit-title h3 {
-            font-family: "Space Grotesk";
-            font-size: 18px;
-        }
+.techItem:hover{
 
-        .unit-title span {
-            display: block;
+    color:var(--cyan);
+}
 
-            margin-top: 3px;
+@keyframes marquee{
 
-            color: var(--dim);
+    from{
+        transform:translateX(0);
+    }
 
-            font-family: "DM Mono";
-            font-size: 9px;
-        }
+    to{
+        transform:translateX(-50%);
+    }
+}
 
-        .unit-arrow {
-            color: var(--muted);
+/* =========================================================
+   UNITS
+========================================================= */
 
-            transition: .3s;
-        }
+.units{
 
-        .unit.open .unit-arrow {
-            transform: rotate(180deg);
-        }
+    display:grid;
 
-        .weeks {
-            display: none;
+    gap:20px;
+}
 
-            padding: 0 23px 23px;
+.unit{
 
-            grid-template-columns: repeat(4,1fr);
+    border:1px solid var(--border);
 
-            gap: 10px;
-        }
+    border-radius:20px;
 
-        .unit.open .weeks {
-            display: grid;
-        }
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.035),
+        rgba(255,255,255,.015)
+    );
 
-        .week {
-            padding: 16px;
+    overflow:hidden;
+}
 
-            min-height: 145px;
+.unitHeader{
 
-            border: 1px solid var(--border);
+    padding:25px;
 
-            border-radius: 14px;
+    display:flex;
 
-            background: rgba(255,255,255,.02);
+    justify-content:space-between;
 
-            transition: .25s;
-        }
+    align-items:center;
 
-        .week:hover {
-            border-color: rgba(94,231,255,.2);
-            transform: translateY(-3px);
-        }
+    cursor:pointer;
+}
 
-        .week-number {
-            color: var(--cyan);
+.unitTitle{
 
-            font-family: "DM Mono";
-            font-size: 9px;
-        }
+    display:flex;
 
-        .week h4 {
-            margin-top: 8px;
+    gap:16px;
 
-            font-size: 13px;
-        }
+    align-items:center;
+}
 
-        .week p {
-            margin-top: 7px;
+.unitNumber{
 
-            color: var(--muted);
+    width:48px;
+    height:48px;
 
-            line-height: 1.5;
+    display:grid;
 
-            font-size: 10px;
-        }
+    place-items:center;
 
-        .week-actions {
-            display: flex;
-            gap: 5px;
+    border-radius:12px;
 
-            margin-top: 12px;
-        }
+    border:1px solid rgba(94,231,255,.2);
 
-        .week-actions a,
-        .week-actions button {
-            padding: 6px 8px;
+    color:var(--cyan);
 
-            border-radius: 7px;
+    font-family:"DM Mono";
+}
 
-            border: 1px solid var(--border);
+.unitHeader h3{
 
-            background: rgba(255,255,255,.025);
+    font-size:20px;
+}
 
-            color: #cbd4e3;
+.unitHeader span{
 
-            font-size: 8px;
-        }
+    display:block;
 
-        .week-actions a:hover,
-        .week-actions button:hover {
-            color: var(--cyan);
-            border-color: rgba(94,231,255,.3);
-        }
+    color:var(--muted);
 
+    font-size:11px;
 
-        /* =========================================================
-           INFOGRAPHIC
-        ========================================================= */
+    margin-top:4px;
+}
 
-        .infographic {
-            position: relative;
+.unitArrow{
 
-            min-height: 400px;
+    font-size:20px;
 
-            display: flex;
-            align-items: center;
+    color:var(--muted);
 
-            padding: 50px;
+    transition:.3s;
+}
 
-            overflow: hidden;
+.unit.open .unitArrow{
 
-            border-radius: 28px;
+    transform:rotate(180deg);
 
-            border: 1px solid var(--border);
+    color:var(--cyan);
+}
 
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(94,231,255,.08),
-                    transparent 55%
-                ),
-                var(--surface);
-        }
+.weeks{
 
-        .network {
-            position: absolute;
-            inset: 0;
+    display:none;
 
-            opacity: .5;
-        }
+    padding:0 25px 25px;
 
-        .network::before,
-        .network::after {
-            content: "";
+    grid-template-columns:
+        repeat(4,1fr);
 
-            position: absolute;
+    gap:12px;
+}
 
-            width: 220px;
-            height: 220px;
+.unit.open .weeks{
 
-            border-radius: 50%;
+    display:grid;
+}
 
-            border: 1px solid rgba(94,231,255,.12);
+.week{
 
-            top: 50%;
-            left: 70%;
+    border:1px solid var(--border);
 
-            transform: translate(-50%, -50%);
+    border-radius:12px;
 
-            box-shadow:
-                0 0 0 35px rgba(94,231,255,.02),
-                0 0 0 70px rgba(94,231,255,.015);
-        }
+    padding:18px;
 
-        .network::after {
-            width: 10px;
-            height: 10px;
+    background:#0b101b;
 
-            background: var(--cyan);
+    transition:.3s;
+}
 
-            box-shadow:
-                0 0 25px var(--cyan);
-        }
+.week:hover{
 
-        .infographic-content {
-            position: relative;
+    border-color:rgba(94,231,255,.25);
 
-            z-index: 2;
+    transform:translateY(-3px);
+}
 
-            max-width: 650px;
-        }
+.weekNumber{
 
-        .infographic-content h2 {
-            margin-top: 10px;
+    font-family:"DM Mono";
 
-            font-family: "Space Grotesk";
+    font-size:9px;
 
-            font-size: clamp(34px,5vw,60px);
+    color:var(--cyan);
 
-            line-height: 1;
-        }
+    margin-bottom:12px;
+}
 
-        .infographic-content p {
-            margin-top: 17px;
+.week h4{
 
-            color: var(--muted);
+    font-size:14px;
 
-            line-height: 1.8;
+    margin-bottom:10px;
+}
 
-            font-size: 13px;
-        }
+.week p{
 
+    font-size:10px;
 
-        /* =========================================================
-           OWNER BADGE - ESQUINA
-        ========================================================= */
+    color:var(--muted);
 
-        .owner-floating {
-            position: fixed;
+    line-height:1.5;
 
-            right: 25px;
-            top: 90px;
+    margin-bottom:15px;
+}
 
-            z-index: 900;
+.weekActions{
 
-            display: flex;
-            align-items: center;
-            gap: 10px;
+    display:flex;
 
-            padding: 7px 12px 7px 7px;
+    gap:6px;
 
-            border-radius: 999px;
+    flex-wrap:wrap;
+}
 
-            border: 1px solid rgba(255,255,255,.1);
+.weekActions a{
 
-            background: rgba(8,12,20,.78);
+    font-family:"DM Mono";
 
-            backdrop-filter: blur(16px);
+    font-size:8px;
 
-            box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    padding:6px 8px;
 
-            cursor: pointer;
+    border:1px solid var(--border);
 
-            transition: .3s;
-        }
+    border-radius:5px;
 
-        .owner-floating:hover {
-            border-color: rgba(94,231,255,.3);
-            transform: translateY(-2px);
-        }
+    color:var(--muted);
+}
 
-        .owner-floating-avatar {
-            width: 34px;
-            height: 34px;
+.weekActions a:hover{
 
-            overflow: hidden;
+    color:var(--cyan);
 
-            border-radius: 50%;
+    border-color:var(--cyan);
+}
 
-            border: 1px solid rgba(94,231,255,.3);
+/* =========================================================
+   EXPLORING
+========================================================= */
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--cyan),
-                    var(--purple)
-                );
-        }
+.exploring{
 
-        .owner-floating-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    display:grid;
 
-        .owner-floating-info strong {
-            display: block;
+    grid-template-columns:
+        repeat(4,1fr);
 
-            font-family: "Space Grotesk";
-            font-size: 11px;
-        }
+    gap:12px;
+}
 
-        .owner-floating-info span {
-            display: block;
+.explore{
 
-            color: var(--muted);
+    padding:25px;
 
-            font-family: "DM Mono";
-            font-size: 8px;
-        }
+    border:1px solid var(--border);
 
+    border-radius:15px;
 
-        /* =========================================================
-           FOOTER
-        ========================================================= */
+    background:var(--surface);
 
-        footer {
-            padding: 55px 0 30px;
+    position:relative;
 
-            border-top: 1px solid var(--border);
-        }
+    overflow:hidden;
+}
 
-        .footer-content {
-            display: flex;
+.explore::after{
 
-            justify-content: space-between;
+    content:"";
 
-            gap: 30px;
-        }
+    position:absolute;
 
-        .footer-brand h2 {
-            font-family: "Space Grotesk";
-            font-size: 20px;
-        }
+    width:100px;
+    height:100px;
 
-        .footer-brand p {
-            margin-top: 7px;
+    right:-50px;
+    bottom:-50px;
 
-            color: var(--dim);
+    border-radius:50%;
 
-            font-size: 10px;
-        }
+    background:rgba(94,231,255,.07);
+}
 
-        .footer-right {
-            text-align: right;
+.explore span{
 
-            color: var(--dim);
+    font-family:"DM Mono";
 
-            font-family: "DM Mono";
-            font-size: 9px;
+    color:var(--cyan);
 
-            line-height: 1.8;
-        }
+    font-size:10px;
+}
 
+.explore h3{
 
-        /* =========================================================
-           BACK TO TOP
-        ========================================================= */
+    margin-top:20px;
 
-        .top-button {
-            position: fixed;
+    font-size:17px;
+}
 
-            right: 25px;
-            bottom: 25px;
+.explore p{
 
-            width: 45px;
-            height: 45px;
+    margin-top:8px;
 
-            z-index: 800;
+    color:var(--muted);
 
-            border-radius: 13px;
+    font-size:11px;
 
-            background: var(--surface-2);
+    line-height:1.6;
+}
 
-            border: 1px solid var(--border);
+/* =========================================================
+   INFOGRAPHIC
+========================================================= */
 
-            color: var(--cyan);
+.architectureVisual{
 
-            opacity: 0;
-            pointer-events: none;
+    min-height:520px;
 
-            transform: translateY(15px);
+    border:1px solid var(--border);
 
-            transition: .3s;
-        }
+    border-radius:25px;
 
-        .top-button.show {
-            opacity: 1;
-            pointer-events: auto;
+    position:relative;
 
-            transform: translateY(0);
-        }
+    overflow:hidden;
 
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(94,231,255,.08),
+            transparent 35%
+        ),
+        #070b13;
+}
 
-        /* =========================================================
-           BOT
-        ========================================================= */
+.architectureVisual::before{
 
-        .bot-button {
-            position: fixed;
+    content:"";
 
-            right: 25px;
-            bottom: 85px;
+    position:absolute;
 
-            width: 52px;
-            height: 52px;
+    inset:0;
 
-            z-index: 850;
+    background-image:
+        linear-gradient(
+            rgba(94,231,255,.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(94,231,255,.04) 1px,
+            transparent 1px
+        );
 
-            border-radius: 16px;
+    background-size:45px 45px;
+}
 
-            color: var(--cyan);
+.archCore{
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(94,231,255,.14),
-                    rgba(167,120,255,.13)
-                );
+    position:absolute;
 
-            border: 1px solid rgba(94,231,255,.25);
+    left:50%;
+    top:50%;
 
-            box-shadow:
-                0 15px 40px rgba(0,0,0,.35);
+    transform:translate(-50%,-50%);
 
-            font-size: 20px;
-        }
+    width:160px;
+    height:160px;
 
-        .bot-window {
-            position: fixed;
+    border-radius:50%;
 
-            right: 25px;
-            bottom: 150px;
+    border:1px solid var(--cyan);
 
-            width: 350px;
+    display:grid;
 
-            max-width: calc(100vw - 30px);
+    place-items:center;
 
-            z-index: 900;
+    color:var(--cyan);
 
-            overflow: hidden;
+    font-family:"DM Mono";
 
-            border-radius: 20px;
+    font-size:11px;
 
-            border: 1px solid var(--border);
+    box-shadow:
+        0 0 60px rgba(94,231,255,.1);
+}
 
-            background: rgba(8,12,20,.96);
+.archNode{
 
-            backdrop-filter: blur(20px);
+    position:absolute;
 
-            box-shadow: 0 30px 90px rgba(0,0,0,.5);
+    padding:13px 18px;
 
-            opacity: 0;
-            pointer-events: none;
+    border:1px solid var(--border);
 
-            transform: translateY(15px) scale(.97);
+    border-radius:10px;
 
-            transition: .25s;
-        }
+    background:rgba(8,11,20,.85);
 
-        .bot-window.open {
-            opacity: 1;
-            pointer-events: auto;
+    backdrop-filter:blur(10px);
 
-            transform: translateY(0) scale(1);
-        }
+    font-family:"DM Mono";
 
-        .bot-header {
-            display: flex;
+    font-size:10px;
 
-            align-items: center;
-            justify-content: space-between;
+    color:#b9c4d6;
+}
 
-            padding: 16px;
+.node1{
+    left:10%;
+    top:20%;
+}
 
-            border-bottom: 1px solid var(--border);
-        }
+.node2{
+    right:10%;
+    top:20%;
+}
 
-        .bot-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.node3{
+    left:10%;
+    bottom:20%;
+}
 
-        .bot-avatar {
-            width: 35px;
-            height: 35px;
+.node4{
+    right:10%;
+    bottom:20%;
+}
 
-            display: grid;
-            place-items: center;
+/* =========================================================
+   OWNER CARD
+========================================================= */
 
-            border-radius: 10px;
+.ownerCard{
 
-            color: var(--cyan);
+    position:fixed;
 
-            background: rgba(94,231,255,.08);
+    right:25px;
+    bottom:25px;
 
-            border: 1px solid rgba(94,231,255,.15);
-        }
+    width:275px;
 
-        .bot-title strong {
-            display: block;
-            font-size: 12px;
-        }
+    padding:17px;
 
-        .bot-title span {
-            color: var(--green);
-            font-family: "DM Mono";
-            font-size: 8px;
-        }
+    border-radius:16px;
 
-        .bot-close {
-            color: var(--muted);
-            background: transparent;
-        }
+    background:rgba(10,15,25,.88);
 
-        .bot-messages {
-            height: 290px;
+    border:1px solid rgba(94,231,255,.2);
 
-            padding: 15px;
+    backdrop-filter:blur(22px);
 
-            overflow-y: auto;
-        }
+    z-index:950;
 
-        .message {
-            max-width: 85%;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
 
-            padding: 10px 12px;
+    transition:.4s;
+}
 
-            margin-bottom: 9px;
+.ownerCard:hover{
 
-            border-radius: 11px;
+    border-color:rgba(94,231,255,.45);
 
-            background: rgba(255,255,255,.04);
+    transform:translateY(-4px);
+}
 
-            color: #cbd4e2;
+.ownerTop{
 
-            font-size: 10px;
+    display:flex;
 
-            line-height: 1.55;
-        }
+    align-items:center;
 
-        .message.user {
-            margin-left: auto;
+    gap:12px;
+}
 
-            background: rgba(94,231,255,.08);
+.ownerAvatar{
 
-            color: #dff9ff;
-        }
+    width:48px;
+    height:48px;
 
-        .bot-suggestions {
-            display: flex;
+    border-radius:14px;
 
-            gap: 6px;
+    background:linear-gradient(
+        135deg,
+        rgba(94,231,255,.2),
+        rgba(167,123,255,.2)
+    );
 
-            padding: 0 15px 12px;
+    border:1px solid rgba(94,231,255,.25);
 
-            overflow-x: auto;
-        }
+    display:grid;
 
-        .bot-suggestions button {
-            flex-shrink: 0;
+    place-items:center;
 
-            padding: 7px 9px;
+    font-size:20px;
 
-            border-radius: 8px;
+    color:var(--cyan);
+}
 
-            color: var(--muted);
+.ownerTitle{
 
-            background: rgba(255,255,255,.035);
+    font-family:"DM Mono";
 
-            border: 1px solid var(--border);
+    color:var(--cyan);
 
-            font-size: 8px;
-        }
+    font-size:8px;
 
-        .bot-input {
-            display: flex;
+    letter-spacing:2px;
 
-            gap: 7px;
+    margin-bottom:4px;
+}
 
-            padding: 12px;
+.ownerName{
 
-            border-top: 1px solid var(--border);
-        }
+    font-weight:600;
 
-        .bot-input input {
-            flex: 1;
+    font-size:15px;
+}
 
-            min-width: 0;
+.ownerInfo{
 
-            padding: 10px;
+    display:grid;
 
-            border-radius: 9px;
+    gap:7px;
 
-            border: 1px solid var(--border);
+    margin-top:15px;
 
-            outline: none;
+    padding-top:15px;
 
-            background: rgba(255,255,255,.025);
+    border-top:1px solid var(--border);
+}
 
-            color: white;
+.ownerRow{
 
-            font-size: 10px;
-        }
+    display:flex;
 
-        .bot-input button {
-            width: 38px;
+    justify-content:space-between;
 
-            border-radius: 9px;
+    gap:10px;
 
-            background: var(--cyan);
+    font-size:9px;
+}
 
-            color: #061017;
-        }
+.ownerRow span:first-child{
 
+    color:var(--dim);
 
-        /* =========================================================
-           VIDEO MODAL
-        ========================================================= */
+    font-family:"DM Mono";
+}
 
-        .modal {
-            position: fixed;
-            inset: 0;
+.ownerRow span:last-child{
 
-            z-index: 5000;
+    color:#cbd4e3;
 
-            display: none;
-            place-items: center;
+    text-align:right;
+}
 
-            padding: 20px;
+.ownerStatus{
 
-            background: rgba(0,0,0,.82);
+    margin-top:13px;
 
-            backdrop-filter: blur(12px);
-        }
+    display:flex;
 
-        .modal.open {
-            display: grid;
-        }
+    align-items:center;
 
-        .modal-content {
-            width: min(900px,100%);
+    gap:7px;
 
-            border-radius: 20px;
+    color:var(--green);
 
-            overflow: hidden;
+    font-family:"DM Mono";
 
-            border: 1px solid var(--border);
+    font-size:8px;
+}
 
-            background: var(--surface);
-        }
+/* =========================================================
+   SEARCH
+========================================================= */
 
-        .modal-header {
-            display: flex;
+.searchBox{
 
-            justify-content: space-between;
+    max-width:650px;
 
-            padding: 15px 18px;
+    margin:0 auto 55px;
 
-            border-bottom: 1px solid var(--border);
-        }
+    position:relative;
+}
 
-        .modal-header strong {
-            font-size: 12px;
-        }
+.searchBox input{
 
-        .modal-close {
-            background: transparent;
-            color: var(--muted);
-        }
+    width:100%;
 
-        .video-container {
-            position: relative;
+    padding:17px 20px 17px 48px;
 
-            padding-top: 56.25%;
-        }
+    border:1px solid var(--border);
 
-        .video-container iframe {
-            position: absolute;
+    border-radius:12px;
 
-            inset: 0;
+    background:rgba(255,255,255,.03);
 
-            width: 100%;
-            height: 100%;
+    color:white;
 
-            border: 0;
-        }
+    outline:none;
 
+    font-size:13px;
+}
 
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
+.searchBox input:focus{
 
-        @media(max-width:1100px) {
+    border-color:rgba(94,231,255,.4);
 
-            :root {
-                --sidebar: 240px;
-            }
+    box-shadow:
+        0 0 30px rgba(94,231,255,.05);
+}
 
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
+.searchIcon{
 
-            .carousel {
-                min-height: 500px;
-            }
+    position:absolute;
 
-            .specialties {
-                grid-template-columns: repeat(2,1fr);
-            }
+    left:18px;
+    top:50%;
 
-            .weeks {
-                grid-template-columns: repeat(2,1fr);
-            }
+    transform:translateY(-50%);
 
-        }
+    color:var(--cyan);
+}
 
+/* =========================================================
+   BOT
+========================================================= */
 
-        @media(max-width:800px) {
+.botButton{
 
-            :root {
-                --sidebar: 0px;
-            }
+    position:fixed;
 
-            .sidebar {
-                transform: translateX(-100%);
+    right:25px;
+    bottom:210px;
 
-                transition: .3s;
+    width:55px;
+    height:55px;
 
-                width: 285px;
-            }
+    border-radius:50%;
 
-            .sidebar.open {
-                transform: translateX(0);
-            }
+    border:1px solid rgba(94,231,255,.35);
 
-            .header {
-                left: 0;
-            }
+    background:#0a111c;
 
-            .brand-mobile {
-                display: flex;
-            }
+    color:var(--cyan);
 
-            .menu-button {
-                display: block;
-            }
+    display:grid;
 
-            .header-status {
-                display: none;
-            }
+    place-items:center;
 
-            .container {
-                width: min(100% - 30px, 700px);
-            }
+    cursor:pointer;
 
-            section {
-                padding: 75px 0;
-            }
+    z-index:1000;
 
-            .owner-floating {
-                top: 88px;
-                right: 15px;
-            }
+    box-shadow:
+        0 0 30px rgba(94,231,255,.12);
+}
 
-            .hero {
-                padding-top: 30px;
-            }
+.botPanel{
 
-            .hero h1 {
-                font-size: 52px;
-            }
+    position:fixed;
 
-            .stats {
-                grid-template-columns: repeat(2,1fr);
-            }
+    right:25px;
+    bottom:280px;
 
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
+    width:340px;
 
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+    border:1px solid var(--border);
 
-            .exploring-grid {
-                grid-template-columns: 1fr;
-            }
+    border-radius:18px;
 
-            .infographic {
-                padding: 35px;
-            }
+    background:#080d17;
 
-            .footer-content {
-                flex-direction: column;
-            }
+    overflow:hidden;
 
-            .footer-right {
-                text-align: left;
-            }
+    z-index:1001;
 
-        }
+    display:none;
 
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.6);
+}
 
-        @media(max-width:550px) {
+.botPanel.open{
 
-            .carousel {
-                min-height: 460px;
-                border-radius: 20px;
-            }
+    display:block;
+}
 
-            .slide-content {
-                left: 22px;
-                right: 22px;
-                bottom: 25px;
-            }
+.botHeader{
 
-            .carousel-dots {
-                left: 22px;
-            }
+    padding:16px;
 
-            .carousel-controls {
-                right: 20px;
-                bottom: 20px;
-            }
+    border-bottom:1px solid var(--border);
 
-            .slide h2 {
-                font-size: 34px;
-            }
+    display:flex;
 
-            .specialties {
-                grid-template-columns: 1fr;
-            }
+    justify-content:space-between;
 
-            .weeks {
-                grid-template-columns: 1fr;
-            }
+    align-items:center;
+}
 
-            .unit-header {
-                padding: 18px;
-            }
+.botHeader strong{
 
-            .weeks {
-                padding: 0 18px 18px;
-            }
+    font-family:"DM Mono";
 
-            .about-highlights {
-                grid-template-columns: 1fr;
-            }
+    color:var(--cyan);
 
-            .profile-card,
-            .about-content {
-                padding: 22px;
-            }
+    font-size:11px;
+}
 
-            .bot-window {
-                right: 15px;
-                bottom: 145px;
-            }
+.botMessages{
 
-        }
+    height:300px;
 
+    overflow:auto;
 
-        /* =========================================================
-           REVEAL
-        ========================================================= */
+    padding:15px;
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(25px);
+    display:flex;
 
-            transition:
-                opacity .7s ease,
-                transform .7s ease;
-        }
+    flex-direction:column;
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    gap:10px;
+}
 
+.message{
 
-        /* =========================================================
-           REDUCED MOTION
-        ========================================================= */
+    padding:10px 12px;
 
-        @media(prefers-reduced-motion: reduce) {
+    border-radius:10px;
 
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: .01ms !important;
-                transition-duration: .01ms !important;
-            }
+    font-size:11px;
 
-        }
+    line-height:1.5;
 
-    </style>
+    max-width:85%;
+}
+
+.message.bot{
+
+    background:#111827;
+
+    color:#c6d0df;
+
+    align-self:flex-start;
+}
+
+.message.user{
+
+    background:rgba(94,231,255,.12);
+
+    color:#eafcff;
+
+    align-self:flex-end;
+}
+
+.botInput{
+
+    display:flex;
+
+    border-top:1px solid var(--border);
+}
+
+.botInput input{
+
+    flex:1;
+
+    border:0;
+
+    outline:0;
+
+    background:transparent;
+
+    color:white;
+
+    padding:14px;
+
+    font-size:11px;
+}
+
+.botInput button{
+
+    border:0;
+
+    background:var(--cyan);
+
+    color:#071018;
+
+    width:50px;
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+#topButton{
+
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:#0b111d;
+
+    color:white;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:999;
+}
+
+#topButton.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    padding:50px 6vw;
+
+    border-top:1px solid var(--border);
+
+    background:#04060b;
+}
+
+.footerInner{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    align-items:center;
+}
+
+.footerBrand{
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+.footerBrand span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-family:"DM Mono";
+
+    font-size:9px;
+
+    font-weight:400;
+
+    margin-top:5px;
+}
+
+.footerCopy{
+
+    color:var(--dim);
+
+    font-family:"DM Mono";
+
+    font-size:9px;
+}
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobileMenu{
+
+    display:none;
+
+    width:40px;
+    height:40px;
+
+    border:1px solid var(--border);
+
+    background:transparent;
+
+    color:white;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+@media(max-width:1100px){
+
+    .sidebar{
+
+        transform:translateX(-100%);
+
+        transition:.3s;
+    }
+
+    .sidebar.open{
+
+        transform:translateX(0);
+    }
+
+    main{
+
+        margin-left:0;
+    }
+
+    .mobileMenu{
+
+        display:block;
+    }
+
+    .hero{
+
+        grid-template-columns:1fr;
+    }
+
+    .heroCarousel{
+
+        height:520px;
+    }
+
+    .specialties{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .weeks{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .exploring{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .ownerCard{
+
+        display:none;
+    }
+
+    .botButton{
+
+        bottom:25px;
+    }
+
+    .botPanel{
+
+        bottom:90px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+
+        padding:0 18px;
+    }
+
+    .status{
+
+        display:none;
+    }
+
+    section{
+
+        padding:80px 22px;
+    }
+
+    .hero{
+
+        padding-top:45px;
+    }
+
+    .hero h1{
+
+        font-size:55px;
+
+        letter-spacing:-3px;
+    }
+
+    .heroCarousel{
+
+        height:460px;
+    }
+
+    .slideContent h2{
+
+        font-size:30px;
+    }
+
+    .stats{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat{
+
+        border-bottom:1px solid var(--border);
+    }
+
+    .specialties,
+    .projects,
+    .aboutGrid{
+
+        grid-template-columns:1fr;
+    }
+
+    .exploring{
+
+        grid-template-columns:1fr;
+    }
+
+    .weeks{
+
+        grid-template-columns:1fr;
+    }
+
+    .sectionHeader{
+
+        display:block;
+    }
+
+    .sectionHeader p{
+
+        margin-top:15px;
+    }
+
+    .infoGrid{
+
+        grid-template-columns:1fr;
+    }
+
+    .botPanel{
+
+        left:15px;
+        right:15px;
+
+        width:auto;
+    }
+
+    .footerInner{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        scroll-behavior:auto !important;
+
+        transition-duration:.01ms !important;
+    }
+}
+
+</style>
 </head>
-
 
 <body>
 
-    <!-- =========================================================
-         BACKGROUND
-    ========================================================= -->
+<div id="scrollProgress"></div>
 
-    <div class="scroll-progress" id="scrollProgress"></div>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <div class="background-grid"></div>
-    <div class="orb orb-one"></div>
-    <div class="orb orb-two"></div>
+<header>
 
+    <div class="brand">
 
-    <!-- =========================================================
-         SIDEBAR
-    ========================================================= -->
+        <div class="brandIcon">
+            &lt;/&gt;
+        </div>
 
-    <aside class="sidebar" id="sidebar">
+        <div class="brandText">
 
-        <div class="sidebar-brand">
+            <strong>MAYTA</strong>
 
-            <div class="sidebar-brand-icon">
-                AI
-            </div>
-
-            <div>
-                <h2>MAYTA</h2>
-                <span>SYSTEMS ARCHITECT</span>
-            </div>
+            <span>SOFTWARE & SYSTEMS LAB</span>
 
         </div>
 
+    </div>
 
-        <div class="nav-title">
-            NAVEGACIÓN
-        </div>
+    <div class="status">
 
-        <a class="nav-link active" href="#inicio">
-            <span class="nav-icon">⌂</span>
+        <span class="statusDot"></span>
+
+        PORTAFOLIO ONLINE · 2026
+
+    </div>
+
+    <button
+        class="mobileMenu"
+        onclick="toggleSidebar()"
+        aria-label="Abrir menú">
+
+        ☰
+
+    </button>
+
+</header>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sideLabel">
+        NAVEGACIÓN
+    </div>
+
+    <nav class="nav">
+
+        <a href="#inicio" class="active">
+            <span class="navIcon">01</span>
             Inicio
         </a>
 
-        <a class="nav-link" href="#especialidades">
-            <span class="nav-icon">◈</span>
-            Especialidades
-        </a>
-
-        <a class="nav-link" href="#perfil">
-            <span class="nav-icon">◉</span>
+        <a href="#sobre-mi">
+            <span class="navIcon">02</span>
             Sobre mí
         </a>
 
-        <a class="nav-link" href="#proyectos">
-            <span class="nav-icon">▣</span>
+        <a href="#especialidades">
+            <span class="navIcon">03</span>
+            Especialidades
+        </a>
+
+        <a href="#proyectos">
+            <span class="navIcon">04</span>
             Proyectos
         </a>
 
-        <a class="nav-link" href="#unidades">
-            <span class="nav-icon">▤</span>
-            Portafolio académico
+        <a href="#unidades">
+            <span class="navIcon">05</span>
+            Unidades
         </a>
 
-        <a class="nav-link" href="#explorando">
-            <span class="nav-icon">⌁</span>
-            Explorando
+        <a href="#tecnologias">
+            <span class="navIcon">06</span>
+            Tecnologías
         </a>
 
-        <a class="nav-link" href="#infografia">
-            <span class="nav-icon">◎</span>
-            Infografía
+        <a href="#arquitectura">
+            <span class="navIcon">07</span>
+            Arquitectura
         </a>
 
+    </nav>
 
-        <!-- MINI PERFIL -->
 
-        <div class="owner-mini">
+    <div class="profileMini">
 
-            <div class="owner-mini-top">
+        <div class="profileMiniTop">
 
-                <div class="owner-mini-avatar">
+            <div class="avatar">
+                M
+            </div>
 
-                    <img
-                        src="assets/images/perfil.jpg"
-                        alt="Foto de Mayta"
-                        onerror="this.style.display='none';"
-                    >
+            <div>
 
-                </div>
+                <strong>Mayta</strong>
 
-                <div>
-                    <strong>MAYTA</strong>
-                    <span>Estudiante de Ingeniería de Sistemas</span>
-                </div>
+                <span>
+                    Ingeniería de Sistemas
+                </span>
 
             </div>
 
         </div>
 
-    </aside>
+    </div>
+
+</aside>
 
 
-    <!-- =========================================================
-         HEADER
-    ========================================================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-    <header class="header">
+<main>
 
-        <div class="brand-mobile">
 
-            <div class="brand-icon">
-                AI
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section id="inicio" class="hero">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            ◉ INGENIERÍA DE SISTEMAS · UPLA
+        </div>
+
+        <h1>
+            SOFTWARE<br>
+            <span>& SYSTEMS</span>
+        </h1>
+
+        <p class="heroDescription">
+
+            Portafolio académico y tecnológico de
+            <strong>Mayta</strong>, estudiante de Ingeniería
+            de Sistemas enfocado en arquitectura de software,
+            inteligencia artificial, ciberseguridad,
+            cloud computing y desarrollo de soluciones modernas.
+
+        </p>
+
+        <div class="heroActions">
+
+            <a
+                href="#proyectos"
+                class="btn btnPrimary">
+
+                EXPLORAR PROYECTOS →
+
+            </a>
+
+            <a
+                href="#sobre-mi"
+                class="btn btnSecondary">
+
+                CONOCER AL AUTOR
+
+            </a>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>04</strong>
+                <span>Unidades</span>
             </div>
 
-            <strong>MAYTA</strong>
+            <div class="stat">
+                <strong>16</strong>
+                <span>Semanas</span>
+            </div>
+
+            <div class="stat">
+                <strong>08</strong>
+                <span>Ciclo</span>
+            </div>
+
+            <div class="stat">
+                <strong>AI</strong>
+                <span>Enfoque</span>
+            </div>
 
         </div>
-
-
-        <div class="header-status">
-
-            <span class="status-dot"></span>
-
-            PORTAFOLIO ONLINE · 2026
-
-        </div>
-
-
-        <button
-            class="menu-button"
-            onclick="toggleSidebar()"
-            aria-label="Abrir menú">
-            ☰
-        </button>
-
-    </header>
-
-
-    <!-- =========================================================
-         OWNER FLOATING
-    ========================================================= -->
-
-    <div
-        class="owner-floating"
-        onclick="document.querySelector('#perfil').scrollIntoView({behavior:'smooth'})">
-
-        <div class="owner-floating-avatar">
-
-            <img
-                src="assets/images/perfil.jpg"
-                alt="Mayta"
-                onerror="this.style.display='none';"
-            >
-
-        </div>
-
-        <div class="owner-floating-info">
-
-            <strong>MAYTA</strong>
-
-            <span>PROPIETARIO · UPLA</span>
-
-        </div>
-
-        <span>⌄</span>
 
     </div>
 
 
-    <!-- =========================================================
-         MAIN
-    ========================================================= -->
-
-    <main>
-
-
-        <!-- =====================================================
-             HERO
-        ===================================================== -->
-
-        <section class="hero" id="inicio">
-
-            <div class="container">
-
-                <div class="hero-grid">
-
-
-                    <!-- HERO TEXT -->
-
-                    <div class="hero-text reveal">
-
-                        <div class="eyebrow">
-                            ◉ ARQUITECTURA · IA · CYBERSECURITY
-                        </div>
-
-                        <h1>
-                            Ingeniería
-                            <span>de Sistemas.</span>
-                        </h1>
-
-                        <div class="hero-role">
-                            8.º CICLO · UPLA · ARQUITECTURA DE SOFTWARE
-                        </div>
-
-                        <p class="hero-description">
-
-                            Portafolio académico y tecnológico de
-                            <strong>Mayta</strong>, estudiante de Ingeniería
-                            de Sistemas. Un espacio donde convergen
-                            arquitectura de software, inteligencia artificial,
-                            ciberseguridad, cloud computing, datos y sistemas
-                            distribuidos.
-
-                        </p>
-
-
-                        <div class="hero-actions">
-
-                            <a
-                                href="#proyectos"
-                                class="btn btn-primary">
-                                Explorar proyectos →
-                            </a>
-
-                            <a
-                                href="#perfil"
-                                class="btn btn-secondary">
-                                Conocer al autor
-                            </a>
-
-                        </div>
-
-
-                        <div class="stats">
-
-                            <div class="stat">
-                                <strong>04</strong>
-                                <span>Unidades</span>
-                            </div>
-
-                            <div class="stat">
-                                <strong>16</strong>
-                                <span>Semanas</span>
-                            </div>
-
-                            <div class="stat">
-                                <strong>08</strong>
-                                <span>Ciclo</span>
-                            </div>
-
-                            <div class="stat">
-                                <strong>AI</strong>
-                                <span>Enfoque</span>
-                            </div>
-
-                        </div>
-
-
-                        <div class="search-box">
-
-                            <span class="search-icon">
-                                ⌕
-                            </span>
-
-                            <input
-                                id="searchInput"
-                                type="text"
-                                placeholder="Buscar proyectos, semanas, arquitectura, IA..."
-                                oninput="searchPortfolio()">
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- CAROUSEL -->
-
-                    <div class="carousel reveal" id="techCarousel">
-
-                        <div class="slides">
-
-
-                            <!-- SLIDE 1 -->
-
-                            <article class="slide active">
-
-                                <img
-                                    class="slide-image"
-                                    src="assets/images/ia.jpg"
-                                    alt="Inteligencia Artificial">
-
-                                <span class="slide-number">
-                                    01 / 05
-                                </span>
-
-                                <div class="slide-content">
-
-                                    <div class="slide-label">
-                                        INTELLIGENCE SYSTEMS
-                                    </div>
-
-                                    <h2>
-                                        Inteligencia Artificial
-                                    </h2>
-
-                                    <p>
-                                        Exploración de modelos inteligentes,
-                                        automatización, análisis de datos,
-                                        Python y tecnologías emergentes.
-                                    </p>
-
-                                    <div class="tags">
-                                        <span class="tag">AI</span>
-                                        <span class="tag">PYTHON</span>
-                                        <span class="tag">DATA</span>
-                                        <span class="tag">LLM</span>
-                                    </div>
-
-                                </div>
-
-                            </article>
-
-
-                            <!-- SLIDE 2 -->
-
-                            <article class="slide">
-
-                                <img
-                                    class="slide-image"
-                                    src="assets/images/kali.jpg"
-                                    alt="Ciberseguridad y Kali Linux">
-
-                                <span class="slide-number">
-                                    02 / 05
-                                </span>
-
-                                <div class="slide-content">
-
-                                    <div class="slide-label">
-                                        CYBERSECURITY
-                                    </div>
-
-                                    <h2>
-                                        Ciberseguridad
-                                    </h2>
-
-                                    <p>
-                                        Linux, redes, análisis de seguridad,
-                                        Wireshark y fundamentos de protección
-                                        de sistemas.
-                                    </p>
-
-                                    <div class="tags">
-                                        <span class="tag">KALI</span>
-                                        <span class="tag">LINUX</span>
-                                        <span class="tag">NETWORK</span>
-                                        <span class="tag">SECURITY</span>
-                                    </div>
-
-                                </div>
-
-                            </article>
-
-
-                            <!-- SLIDE 3 -->
-
-                            <article class="slide">
-
-                                <img
-                                    class="slide-image"
-                                    src="assets/images/azure.jpg"
-                                    alt="Cloud Computing">
-
-                                <span class="slide-number">
-                                    03 / 05
-                                </span>
-
-                                <div class="slide-content">
-
-                                    <div class="slide-label">
-                                        CLOUD ARCHITECTURE
-                                    </div>
-
-                                    <h2>
-                                        Cloud Computing
-                                    </h2>
-
-                                    <p>
-                                        Diseño y despliegue de soluciones
-                                        tecnológicas utilizando servicios
-                                        cloud y Microsoft Azure.
-                                    </p>
-
-                                    <div class="tags">
-                                        <span class="tag">AZURE</span>
-                                        <span class="tag">CLOUD</span>
-                                        <span class="tag">APP SERVICE</span>
-                                        <span class="tag">DEVOPS</span>
-                                    </div>
-
-                                </div>
-
-                            </article>
-
-
-                            <!-- SLIDE 4 -->
-
-                            <article class="slide">
-
-                                <img
-                                    class="slide-image"
-                                    src="assets/images/arquitectura.jpg"
-                                    alt="Arquitectura de Software">
-
-                                <span class="slide-number">
-                                    04 / 05
-                                </span>
-
-                                <div class="slide-content">
-
-                                    <div class="slide-label">
-                                        SOFTWARE ARCHITECTURE
-                                    </div>
-
-                                    <h2>
-                                        Arquitectura de Software
-                                    </h2>
-
-                                    <p>
-                                        Modelado, patrones arquitectónicos,
-                                        sistemas distribuidos, microservicios
-                                        y diseño de soluciones.
-                                    </p>
-
-                                    <div class="tags">
-                                        <span class="tag">UML</span>
-                                        <span class="tag">MICROSERVICES</span>
-                                        <span class="tag">API</span>
-                                        <span class="tag">SYSTEMS</span>
-                                    </div>
-
-                                </div>
-
-                            </article>
-
-
-                            <!-- SLIDE 5 -->
-
-                            <article class="slide">
-
-                                <img
-                                    class="slide-image"
-                                    src="assets/images/python.jpg"
-                                    alt="Python y análisis de datos">
-
-                                <span class="slide-number">
-                                    05 / 05
-                                </span>
-
-                                <div class="slide-content">
-
-                                    <div class="slide-label">
-                                        DATA ENGINEERING
-                                    </div>
-
-                                    <h2>
-                                        Python & Datos
-                                    </h2>
-
-                                    <p>
-                                        Programación, bases de datos,
-                                        análisis de información y construcción
-                                        de soluciones orientadas a datos.
-                                    </p>
-
-                                    <div class="tags">
-                                        <span class="tag">PYTHON</span>
-                                        <span class="tag">SQL</span>
-                                        <span class="tag">POSTGRESQL</span>
-                                        <span class="tag">PANDAS</span>
-                                    </div>
-
-                                </div>
-
-                            </article>
-
-                        </div>
-
-
-                        <div class="carousel-dots">
-
-                            <span class="dot active"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-
-                        </div>
-
-
-                        <div class="carousel-controls">
-
-                            <button
-                                class="carousel-btn"
-                                onclick="previousSlide()">
-                                ←
-                            </button>
-
-                            <button
-                                class="carousel-btn"
-                                onclick="nextSlide()">
-                                →
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            class="carousel-progress"
-                            id="carouselProgress">
-                        </div>
-
-                    </div>
-
+    <!-- CARRUSEL -->
+
+    <div class="heroCarousel" id="carousel">
+
+        <div
+            class="slide active"
+            style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=85')">
+
+            <div class="slideContent">
+
+                <div class="slideNumber">
+                    SYSTEM 01 / AI
+                </div>
+
+                <h2>
+                    Inteligencia<br>Artificial
+                </h2>
+
+                <p>
+                    Exploración de sistemas inteligentes,
+                    modelos de IA, automatización y nuevas
+                    formas de interacción entre personas y tecnología.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">LLM</span>
+                    <span class="tag">PYTHON</span>
+                    <span class="tag">AUTOMATION</span>
                 </div>
 
             </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             SPECIALTIES
-        ===================================================== -->
-
-        <section id="especialidades">
-
-            <div class="container">
-
-                <div class="section-header reveal">
-
-                    <div>
-                        <div class="section-label">
-                            01 · ÁREAS DE ESPECIALIZACIÓN
-                        </div>
-
-                        <h2>
-                            Un perfil construido
-                            para sistemas modernos.
-                        </h2>
-                    </div>
-
-                    <p class="section-description">
-                        Tecnologías y disciplinas que forman parte de mi
-                        formación académica y de los proyectos que desarrollo.
-                    </p>
-
-                </div>
-
-
-                <div class="specialties">
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">01</span>
-
-                        <div class="specialty-icon">◈</div>
-
-                        <h3>Inteligencia Artificial</h3>
-
-                        <p>
-                            Python, análisis de datos, automatización,
-                            aprendizaje automático y exploración de
-                            tecnologías inteligentes.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">02</span>
-
-                        <div class="specialty-icon">⌁</div>
-
-                        <h3>Ciberseguridad</h3>
-
-                        <p>
-                            Fundamentos de seguridad, Linux, Kali,
-                            redes, monitoreo y análisis de infraestructura.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">03</span>
-
-                        <div class="specialty-icon">☁</div>
-
-                        <h3>Cloud Computing</h3>
-
-                        <p>
-                            Servicios cloud, despliegue de aplicaciones,
-                            infraestructura y Microsoft Azure.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">04</span>
-
-                        <div class="specialty-icon">◇</div>
-
-                        <h3>Arquitectura de Software</h3>
-
-                        <p>
-                            Patrones, UML, componentes, sistemas distribuidos,
-                            microservicios y decisiones arquitectónicas.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">05</span>
-
-                        <div class="specialty-icon">▦</div>
-
-                        <h3>Datos & Bases de Datos</h3>
-
-                        <p>
-                            SQL, PostgreSQL, modelado de información,
-                            análisis y gestión de datos.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-
-                    <article class="specialty reveal">
-
-                        <span class="specialty-number">06</span>
-
-                        <div class="specialty-icon">⌘</div>
-
-                        <h3>Redes</h3>
-
-                        <p>
-                            TCP/IP, VLAN, routing, Packet Tracer,
-                            Wireshark, infraestructura y conectividad.
-                        </p>
-
-                        <div class="specialty-line"></div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             ABOUT / OWNER
-        ===================================================== -->
-
-        <section id="perfil">
-
-            <div class="container">
-
-                <div class="section-header reveal">
-
-                    <div>
-                        <div class="section-label">
-                            02 · IDENTIDAD
-                        </div>
-
-                        <h2>
-                            El autor detrás
-                            del sistema.
-                        </h2>
-                    </div>
-
-                </div>
-
-
-                <div class="about-grid">
-
-
-                    <article class="profile-card reveal">
-
-                        <div class="profile-avatar">
-
-                            <img
-                                src="assets/images/perfil.jpg"
-                                alt="Foto de Mayta"
-                                onerror="this.style.display='none'; document.getElementById('profileFallback').style.display='grid';">
-
-                            <div
-                                id="profileFallback"
-                                class="profile-placeholder"
-                                style="display:none;">
-                                ◉
-                            </div>
-
-                        </div>
-
-
-                        <div class="small">
-                            PROPIETARIO DEL PORTAFOLIO
-                        </div>
-
-                        <h3>
-                            MAYTA
-                        </h3>
-
-                        <p>
-                            Estudiante de Ingeniería de Sistemas,
-                            apasionado por la tecnología, arquitectura,
-                            inteligencia artificial, datos y seguridad.
-                        </p>
-
-
-                        <div class="profile-info">
-
-                            <div class="profile-info-row">
-                                <span>Universidad</span>
-                                <span>UPLA</span>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <span>Carrera</span>
-                                <span>Ingeniería de Sistemas</span>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <span>Ciclo</span>
-                                <span>VIII</span>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <span>Ubicación</span>
-                                <span>Huancayo · Perú</span>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <span>Portafolio</span>
-                                <span>2026</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="about-content reveal">
-
-                        <h3>
-                            Ingeniería con visión tecnológica.
-                        </h3>
-
-                        <p>
-                            Este portafolio representa mi proceso de
-                            formación como estudiante de Ingeniería de
-                            Sistemas. Cada proyecto, modelo, investigación
-                            y práctica documentada refleja una etapa de
-                            aprendizaje y construcción de soluciones.
-                        </p>
-
-                        <p>
-                            Mi enfoque combina arquitectura de software,
-                            infraestructura, cloud computing, inteligencia
-                            artificial, bases de datos, redes y
-                            ciberseguridad para comprender los sistemas
-                            tecnológicos desde una perspectiva integral.
-                        </p>
-
-
-                        <div class="about-highlights">
-
-                            <div class="highlight">
-                                <strong>Arquitectura</strong>
-                                <span>Diseño y evaluación de sistemas</span>
-                            </div>
-
-                            <div class="highlight">
-                                <strong>IA</strong>
-                                <span>Exploración de tecnologías inteligentes</span>
-                            </div>
-
-                            <div class="highlight">
-                                <strong>Cloud</strong>
-                                <span>Despliegue e infraestructura</span>
-                            </div>
-
-                            <div class="highlight">
-                                <strong>Security</strong>
-                                <span>Redes y seguridad informática</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             TECH STACK
-        ===================================================== -->
-
-        <section style="padding-top:20px;padding-bottom:80px;">
-
-            <div class="tech-wrapper">
-
-                <div class="tech-track">
-
-                    <span class="tech-item">HTML5</span>
-                    <span class="tech-item">CSS3</span>
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">SQL</span>
-                    <span class="tech-item">PostgreSQL</span>
-                    <span class="tech-item">Azure</span>
-                    <span class="tech-item">Linux</span>
-                    <span class="tech-item">Kali Linux</span>
-                    <span class="tech-item">Wireshark</span>
-                    <span class="tech-item">Packet Tracer</span>
-                    <span class="tech-item">UML</span>
-                    <span class="tech-item">BPMN</span>
-                    <span class="tech-item">Git</span>
-                    <span class="tech-item">VS Code</span>
-
-                    <!-- DUPLICADO PARA MARQUEE -->
-
-                    <span class="tech-item">HTML5</span>
-                    <span class="tech-item">CSS3</span>
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">SQL</span>
-                    <span class="tech-item">PostgreSQL</span>
-                    <span class="tech-item">Azure</span>
-                    <span class="tech-item">Linux</span>
-                    <span class="tech-item">Kali Linux</span>
-                    <span class="tech-item">Wireshark</span>
-                    <span class="tech-item">Packet Tracer</span>
-                    <span class="tech-item">UML</span>
-                    <span class="tech-item">BPMN</span>
-                    <span class="tech-item">Git</span>
-                    <span class="tech-item">VS Code</span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PROJECTS
-        ===================================================== -->
-
-        <section id="proyectos">
-
-            <div class="container">
-
-                <div class="section-header reveal">
-
-                    <div>
-                        <div class="section-label">
-                            03 · PROYECTOS
-                        </div>
-
-                        <h2>
-                            Proyectos que
-                            construyen el perfil.
-                        </h2>
-                    </div>
-
-                    <p class="section-description">
-                        Una selección de trabajos académicos y tecnológicos
-                        desarrollados durante mi formación.
-                    </p>
-
-                </div>
-
-
-                <div class="projects-grid" id="projectsGrid">
-
-
-                    <!-- PROYECTO 1 -->
-
-                    <article
-                        class="project-card reveal"
-                        data-search="monitoreo certificados talleres técnicos sistema">
-
-                        <div class="project-image">
-
-                            <img
-                                src="assets/images/proyecto-1.jpg"
-                                alt="Monitoreo y Gestión de Certificados"
-                                loading="lazy">
-
-                            <span class="project-badge">
-                                SISTEMAS
-                            </span>
-
-                        </div>
-
-                        <div class="project-content">
-
-                            <h3>
-                                Monitoreo y Gestión de Certificados
-                            </h3>
-
-                            <p>
-                                Sistema orientado al seguimiento y gestión
-                                de certificados de talleres técnicos,
-                                considerando procesos, información y
-                                arquitectura de solución.
-                            </p>
-
-                            <div class="project-meta">
-                                <span>SOFTWARE</span>
-                                <span>DATABASE</span>
-                                <span>ARCHITECTURE</span>
-                            </div>
-
-                            <div class="project-footer">
-                                <span>PROYECTO ACADÉMICO</span>
-                                <a href="#unidades" class="project-link">
-                                    Ver evidencias →
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 2 -->
-
-                    <article
-                        class="project-card reveal"
-                        data-search="sistema horarios laboratorios upla universidad">
-
-                        <div class="project-image">
-
-                            <img
-                                src="assets/images/proyecto-2.jpg"
-                                alt="Sistema de horarios y laboratorios"
-                                loading="lazy">
-
-                            <span class="project-badge">
-                                UPLA
-                            </span>
-
-                        </div>
-
-                        <div class="project-content">
-
-                            <h3>
-                                Sistema de Horarios y Laboratorios
-                            </h3>
-
-                            <p>
-                                Propuesta de sistema para organizar horarios,
-                                disponibilidad de laboratorios y gestión de
-                                recursos académicos.
-                            </p>
-
-                            <div class="project-meta">
-                                <span>WEB</span>
-                                <span>DATABASE</span>
-                                <span>UPLA</span>
-                            </div>
-
-                            <div class="project-footer">
-                                <span>PROYECTO UNIVERSITARIO</span>
-                                <a href="#unidades" class="project-link">
-                                    Ver evidencias →
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 3 -->
-
-                    <article
-                        class="project-card reveal"
-                        data-search="atención integral pedido comercial optired bpmn">
-
-                        <div class="project-image">
-
-                            <img
-                                src="assets/images/proyecto-3.jpg"
-                                alt="Proceso de Atención Integral de Pedido Comercial"
-                                loading="lazy">
-
-                            <span class="project-badge">
-                                BPMN
-                            </span>
-
-                        </div>
-
-                        <div class="project-content">
-
-                            <h3>
-                                Atención Integral de Pedido Comercial
-                            </h3>
-
-                            <p>
-                                Modelado del proceso comercial mediante BPMN,
-                                analizando actividades, responsables,
-                                decisiones y flujo de información.
-                            </p>
-
-                            <div class="project-meta">
-                                <span>BPMN</span>
-                                <span>BIZAGI</span>
-                                <span>PROCESS</span>
-                            </div>
-
-                            <div class="project-footer">
-                                <span>MODELADO DE PROCESOS</span>
-                                <a href="#unidades" class="project-link">
-                                    Ver evidencias →
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- PROYECTO 4 -->
-
-                    <article
-                        class="project-card reveal"
-                        data-search="reembolso gastos bpmn proceso empresarial">
-
-                        <div class="project-image">
-
-                            <img
-                                src="assets/images/proyecto-4.jpg"
-                                alt="Proceso de Reembolso de Gastos"
-                                loading="lazy">
-
-                            <span class="project-badge">
-                                PROCESS
-                            </span>
-
-                        </div>
-
-                        <div class="project-content">
-
-                            <h3>
-                                Proceso de Reembolso de Gastos
-                            </h3>
-
-                            <p>
-                                Análisis y modelado de un proceso empresarial
-                                para representar solicitudes, validaciones,
-                                aprobaciones y gestión administrativa.
-                            </p>
-
-                            <div class="project-meta">
-                                <span>BPMN</span>
-                                <span>BIZAGI</span>
-                                <span>ANALYSIS</span>
-                            </div>
-
-                            <div class="project-footer">
-                                <span>INGENIERÍA DE PROCESOS</span>
-                                <a href="#unidades" class="project-link">
-                                    Ver evidencias →
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             EXPLORANDO
-        ===================================================== -->
-
-        <section id="explorando">
-
-            <div class="container">
-
-                <div class="section-header reveal">
-
-                    <div>
-                        <div class="section-label">
-                            04 · CURRENTLY EXPLORING
-                        </div>
-
-                        <h2>
-                            Tecnología que estoy
-                            explorando.
-                        </h2>
-                    </div>
-
-                </div>
-
-
-                <div class="exploring-grid">
-
-
-                    <article class="exploring-card reveal">
-
-                        <h3>
-                            IA Generativa
-                        </h3>
-
-                        <p>
-                            Comprensión de modelos de inteligencia artificial,
-                            automatización y aplicaciones inteligentes.
-                        </p>
-
-                        <div class="progress-line">
-                            <div style="width:72%"></div>
-                        </div>
-
-                    </article>
-
-
-                    <article class="exploring-card reveal">
-
-                        <h3>
-                            Cloud Architecture
-                        </h3>
-
-                        <p>
-                            Diseño de soluciones escalables y despliegue
-                            utilizando infraestructura cloud.
-                        </p>
-
-                        <div class="progress-line">
-                            <div style="width:68%"></div>
-                        </div>
-
-                    </article>
-
-
-                    <article class="exploring-card reveal">
-
-                        <h3>
-                            Cybersecurity
-                        </h3>
-
-                        <p>
-                            Linux, redes, seguridad y fundamentos de
-                            análisis de infraestructura.
-                        </p>
-
-                        <div class="progress-line">
-                            <div style="width:64%"></div>
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             UNITS
-        ===================================================== -->
-
-        <section id="unidades">
-
-            <div class="container">
-
-                <div class="section-header reveal">
-
-                    <div>
-                        <div class="section-label">
-                            05 · PORTAFOLIO ACADÉMICO
-                        </div>
-
-                        <h2>
-                            Unidades y semanas.
-                        </h2>
-                    </div>
-
-                    <p class="section-description">
-                        Accede a los trabajos, documentos, videos y evidencias
-                        organizados por unidad y semana.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="units-container"
-                    id="unitsContainer">
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             INFOGRAPHIC
-        ===================================================== -->
-
-        <section id="infografia">
-
-            <div class="container">
-
-                <div class="infographic reveal">
-
-                    <div class="network"></div>
-
-                    <div class="infographic-content">
-
-                        <div class="section-label">
-                            06 · ARQUITECTURA VISUAL
-                        </div>
-
-                        <h2>
-                            Del problema
-                            a la arquitectura.
-                        </h2>
-
-                        <p>
-                            La arquitectura de software permite transformar
-                            necesidades, restricciones y objetivos en una
-                            estructura tecnológica capaz de evolucionar.
-                            Este espacio reúne modelos, diagramas,
-                            decisiones y representaciones visuales.
-                        </p>
-
-                        <div class="hero-actions">
-
-                            <a
-                                href="#unidades"
-                                class="btn btn-primary">
-                                Explorar evidencias →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             FOOTER
-        ===================================================== -->
-
-        <footer>
-
-            <div class="container">
-
-                <div class="footer-content">
-
-                    <div class="footer-brand">
-
-                        <h2>
-                            MAYTA<span style="color:var(--cyan)">.</span>
-                        </h2>
-
-                        <p>
-                            Ingeniería de Sistemas · UPLA · 2026
-                        </p>
-
-                    </div>
-
-                    <div class="footer-right">
-
-                        <div>
-                            PORTAFOLIO ACADÉMICO
-                        </div>
-
-                        <div>
-                            SOFTWARE · AI · CYBERSECURITY · CLOUD
-                        </div>
-
-                        <div>
-                            © <span id="year"></span> MAYTA
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </footer>
-
-    </main>
-
-
-    <!-- =========================================================
-         BACK TO TOP
-    ========================================================= -->
-
-    <button
-        class="top-button"
-        id="topButton"
-        onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        ↑
-    </button>
-
-
-    <!-- =========================================================
-         ARQ-BOT
-    ========================================================= -->
-
-    <button
-        class="bot-button"
-        onclick="toggleBot()">
-        AI
-    </button>
-
-
-    <div
-        class="bot-window"
-        id="botWindow">
-
-
-        <div class="bot-header">
-
-            <div class="bot-title">
-
-                <div class="bot-avatar">
-                    AI
-                </div>
-
-                <div>
-
-                    <strong>
-                        ARQ-BOT
-                    </strong>
-
-                    <span>
-                        ● ONLINE
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button
-                class="bot-close"
-                onclick="toggleBot()">
-                ✕
-            </button>
 
         </div>
 
 
         <div
-            class="bot-messages"
-            id="botMessages">
+            class="slide"
+            style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1600&q=85')">
 
-            <div class="message">
-                Hola. Soy ARQ-BOT. Puedo ayudarte a explorar el portafolio
-                académico de Mayta.
-            </div>
+            <div class="slideContent">
 
-            <div class="message">
-                Puedes preguntarme por proyectos, arquitectura,
-                inteligencia artificial, semanas o tecnologías.
+                <div class="slideNumber">
+                    SYSTEM 02 / CYBER
+                </div>
+
+                <h2>
+                    Cybersecurity<br>& Linux
+                </h2>
+
+                <p>
+                    Interés en seguridad informática,
+                    sistemas Linux, análisis de redes,
+                    defensa y fundamentos de ciberseguridad.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">KALI LINUX</span>
+                    <span class="tag">NETWORK</span>
+                    <span class="tag">SECURITY</span>
+                    <span class="tag">WIRESHARK</span>
+                </div>
+
             </div>
 
         </div>
 
 
-        <div class="bot-suggestions">
+        <div
+            class="slide"
+            style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=85')">
 
-            <button onclick="botCommand('proyectos')">
-                Proyectos
-            </button>
+            <div class="slideContent">
 
-            <button onclick="botCommand('arquitectura')">
-                Arquitectura
-            </button>
+                <div class="slideNumber">
+                    SYSTEM 03 / CLOUD
+                </div>
 
-            <button onclick="botCommand('ia')">
-                IA
-            </button>
+                <h2>
+                    Cloud<br>Computing
+                </h2>
 
-            <button onclick="botCommand('semanas')">
-                Semanas
-            </button>
+                <p>
+                    Diseño y comprensión de infraestructura
+                    tecnológica moderna y servicios desplegados
+                    en la nube.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">AZURE</span>
+                    <span class="tag">CLOUD</span>
+                    <span class="tag">APP SERVICE</span>
+                    <span class="tag">DEVOPS</span>
+                </div>
+
+            </div>
 
         </div>
 
 
-        <div class="bot-input">
+        <div
+            class="slide"
+            style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85')">
 
-            <input
-                id="botInput"
-                type="text"
-                placeholder="Escribe una pregunta..."
-                onkeydown="if(event.key==='Enter') sendBot()">
+            <div class="slideContent">
 
-            <button onclick="sendBot()">
+                <div class="slideNumber">
+                    SYSTEM 04 / ARCHITECTURE
+                </div>
+
+                <h2>
+                    Software<br>Architecture
+                </h2>
+
+                <p>
+                    Diseño de sistemas modulares, arquitecturas
+                    distribuidas, patrones, componentes,
+                    decisiones arquitectónicas y calidad.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">UML</span>
+                    <span class="tag">REST</span>
+                    <span class="tag">MICROSERVICES</span>
+                    <span class="tag">SOLID</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="slide"
+            style="background-image:url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=85')">
+
+            <div class="slideContent">
+
+                <div class="slideNumber">
+                    SYSTEM 05 / DATA
+                </div>
+
+                <h2>
+                    Python<br>& Data
+                </h2>
+
+                <p>
+                    Programación, análisis de datos,
+                    bases de datos y construcción de
+                    soluciones orientadas a información.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">PYTHON</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">POSTGRESQL</span>
+                    <span class="tag">DATA</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="carouselControls">
+
+            <button
+                class="carouselBtn"
+                onclick="previousSlide()">
+                ←
+            </button>
+
+            <button
+                class="carouselBtn"
+                onclick="nextSlide()">
                 →
             </button>
 
         </div>
 
+
+        <div class="carouselDots">
+
+            <span class="dot active"
+                onclick="goSlide(0)">
+            </span>
+
+            <span class="dot"
+                onclick="goSlide(1)">
+            </span>
+
+            <span class="dot"
+                onclick="goSlide(2)">
+            </span>
+
+            <span class="dot"
+                onclick="goSlide(3)">
+            </span>
+
+            <span class="dot"
+                onclick="goSlide(4)">
+            </span>
+
+        </div>
+
     </div>
 
+</section>
 
-    <!-- =========================================================
-         VIDEO MODAL
-    ========================================================= -->
 
-    <div
-        class="modal"
-        id="videoModal"
-        onclick="closeVideo(event)">
+<!-- =====================================================
+     SOBRE MI
+===================================================== -->
 
-        <div class="modal-content">
+<section id="sobre-mi">
 
-            <div class="modal-header">
+    <div class="container">
 
-                <strong id="videoTitle">
-                    Video académico
-                </strong>
+        <div class="sectionHeader reveal">
 
-                <button
-                    class="modal-close"
-                    onclick="closeVideo()">
-                    ✕
-                </button>
+            <div>
+
+                <div class="sectionNumber">
+                    01 / PERFIL
+                </div>
+
+                <h2>
+                    Sobre el<br>autor.
+                </h2>
 
             </div>
 
-            <div class="video-container">
+            <p>
+                Un espacio para presentar la identidad,
+                formación y dirección profesional detrás
+                del laboratorio tecnológico.
+            </p>
 
-                <iframe
-                    id="videoFrame"
-                    src=""
-                    allowfullscreen>
-                </iframe>
+        </div>
+
+
+        <div class="aboutGrid">
+
+            <div class="aboutVisual reveal">
+
+                <div class="aboutAvatar">
+                    M
+                </div>
+
+            </div>
+
+
+            <div class="aboutContent reveal">
+
+                <h3>
+                    Hola, soy Mayta.
+                </h3>
+
+                <p>
+                    Soy estudiante de Ingeniería de Sistemas
+                    en la Universidad Peruana Los Andes (UPLA).
+                    Mi formación está orientada al diseño,
+                    análisis y construcción de soluciones
+                    tecnológicas.
+                </p>
+
+                <p>
+                    Este portafolio reúne mis trabajos,
+                    evidencias académicas, proyectos y
+                    conocimientos desarrollados durante
+                    mi formación universitaria.
+                </p>
+
+                <p>
+                    Mis principales áreas de interés son la
+                    arquitectura de software, inteligencia
+                    artificial, ciberseguridad, cloud computing,
+                    datos y sistemas distribuidos.
+                </p>
+
+
+                <div class="infoGrid">
+
+                    <div class="infoBox">
+                        <span>UNIVERSIDAD</span>
+                        <strong>UPLA</strong>
+                    </div>
+
+                    <div class="infoBox">
+                        <span>CARRERA</span>
+                        <strong>Ingeniería de Sistemas</strong>
+                    </div>
+
+                    <div class="infoBox">
+                        <span>CICLO</span>
+                        <strong>8.º Ciclo</strong>
+                    </div>
+
+                    <div class="infoBox">
+                        <span>UBICACIÓN</span>
+                        <strong>Huancayo · Perú</strong>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -4017,952 +2932,1445 @@
 
     </div>
 
-
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================= -->
-
-    <script>
-
-        /* =========================================================
-           DATOS ACADÉMICOS
-        ========================================================= */
-
-        const DATA = {
-
-            s1: {
-                title: "Fundamentos de Arquitectura",
-                doc: "#",
-                vids: []
-            },
-
-            s2: {
-                title: "Cloud Computing",
-                doc: "#",
-                vids: []
-            },
-
-            s3: {
-                title: "Administración de la Nube",
-                doc: "#",
-                vids: []
-            },
-
-            s4: {
-                title: "Infraestructura Tecnológica",
-                doc: "#",
-                vids: []
-            },
-
-            s5: {
-                title: "Sistemas Empresariales",
-                doc: "#",
-                vids: []
-            },
-
-            s6: {
-                title: "Modelado Arquitectónico",
-                doc: "#",
-                vids: []
-            },
-
-            s7: {
-                title: "Componentes de Software",
-                doc: "#",
-                vids: []
-            },
-
-            s8: {
-                title: "Evaluación Arquitectónica",
-                doc: "#",
-                vids: []
-            },
-
-            s9: {
-                title: "Patrones Arquitectónicos",
-                doc: "#",
-                vids: []
-            },
-
-            s10: {
-                title: "Arquitecturas de Software",
-                doc: "#",
-                vids: []
-            },
-
-            s11: {
-                title: "Arquitecturas Distribuidas",
-                doc: "#",
-                vids: []
-            },
-
-            s12: {
-                title: "Microservicios",
-                doc: "#",
-                vids: []
-            },
-
-            s13: {
-                title: "Integración de Sistemas",
-                doc: "#",
-                vids: []
-            },
-
-            s14: {
-                title: "Seguridad Arquitectónica",
-                doc: "#",
-                vids: []
-            },
-
-            s15: {
-                title: "Proyecto Arquitectónico",
-                doc: "#",
-                vids: []
-            },
-
-            s16: {
-                title: "Presentación Final",
-                doc: "#",
-                vids: []
-            }
-
-        };
+</section>
 
 
-        const UNITS = [
+<!-- =====================================================
+     ESPECIALIDADES
+===================================================== -->
 
-            {
-                number: "01",
-                title: "Fundamentos de Arquitectura",
-                weeks: ["s1","s2","s3","s4"]
-            },
+<section id="especialidades">
 
-            {
-                number: "02",
-                title: "Diseño y Modelado",
-                weeks: ["s5","s6","s7","s8"]
-            },
+    <div class="container">
 
-            {
-                number: "03",
-                title: "Arquitecturas Modernas",
-                weeks: ["s9","s10","s11","s12"]
-            },
+        <div class="sectionHeader reveal">
 
-            {
-                number: "04",
-                title: "Integración y Proyecto",
-                weeks: ["s13","s14","s15","s16"]
-            }
+            <div>
 
-        ];
+                <div class="sectionNumber">
+                    02 / ESPECIALIDADES
+                </div>
 
+                <h2>
+                    Áreas de<br>exploración.
+                </h2>
 
-        /* =========================================================
-           GENERAR UNIDADES
-        ========================================================= */
+            </div>
 
-        function generateUnits() {
+            <p>
+                Tecnologías y disciplinas que forman parte
+                de mi desarrollo académico y profesional.
+            </p>
 
-            const container =
-                document.getElementById("unitsContainer");
-
-            container.innerHTML = "";
+        </div>
 
 
-            UNITS.forEach((unit, index) => {
+        <div class="specialties">
 
-                const unitElement =
-                    document.createElement("article");
+            <article class="specialty reveal">
 
-                unitElement.className =
-                    "unit reveal";
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80')">
+                </div>
+
+                <div class="specialtyBody">
+
+                    <div class="specialtyIcon">
+                        ◈
+                    </div>
+
+                    <h3>
+                        Inteligencia Artificial
+                    </h3>
+
+                    <p>
+                        IA, automatización, modelos inteligentes
+                        y aplicaciones emergentes.
+                    </p>
+
+                </div>
+
+            </article>
 
 
-                let weeksHTML = "";
+            <article class="specialty reveal">
+
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1000&q=80')">
+                </div>
+
+                <div class="specialtyBody">
+
+                    <div class="specialtyIcon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        Ciberseguridad
+                    </h3>
+
+                    <p>
+                        Linux, Kali, redes, análisis y fundamentos
+                        de seguridad informática.
+                    </p>
+
+                </div>
+
+            </article>
 
 
-                unit.weeks.forEach((weekId, i) => {
+            <article class="specialty reveal">
 
-                    const data = DATA[weekId];
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80')">
+                </div>
 
-                    weeksHTML += `
+                <div class="specialtyBody">
 
-                        <div
-                            class="week"
-                            data-search="${data.title.toLowerCase()}">
+                    <div class="specialtyIcon">
+                        ☁
+                    </div>
 
-                            <div class="week-number">
-                                SEMANA ${i + 1 + index * 4}
-                            </div>
+                    <h3>
+                        Cloud Computing
+                    </h3>
 
-                            <h4>
-                                ${data.title}
-                            </h4>
+                    <p>
+                        Azure, infraestructura, servicios cloud
+                        y despliegue de aplicaciones.
+                    </p>
 
-                            <p>
-                                Evidencias y recursos académicos
-                                correspondientes a esta semana.
-                            </p>
+                </div>
 
-                            <div class="week-actions">
+            </article>
 
-                                ${
-                                    data.doc !== "#"
-                                    ?
-                                    `<a href="${data.doc}" target="_blank">
-                                        Documento
-                                    </a>`
-                                    :
-                                    `<a href="#" onclick="return false;">
-                                        Documento
-                                    </a>`
-                                }
 
-                                ${
-                                    data.vids.length
-                                    ?
-                                    `<button onclick="openVideo('${data.vids[0]}','${data.title}')">
-                                        Video
-                                    </button>`
-                                    :
-                                    ""
-                                }
+            <article class="specialty reveal">
 
-                            </div>
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80')">
+                </div>
 
+                <div class="specialtyBody">
+
+                    <div class="specialtyIcon">
+                        ◫
+                    </div>
+
+                    <h3>
+                        Arquitectura
+                    </h3>
+
+                    <p>
+                        Diseño modular, patrones, UML,
+                        sistemas distribuidos y decisiones arquitectónicas.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="specialty reveal">
+
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80')">
+                </div>
+
+                <div class="specialtyBody">
+
+                    <div class="specialtyIcon">
+                        ◇
+                    </div>
+
+                    <h3>
+                        Datos & Python
+                    </h3>
+
+                    <p>
+                        Programación, SQL, PostgreSQL,
+                        análisis y visualización de datos.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="specialty reveal">
+
+                <div
+                    class="specialtyImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1000&q=80')">
+                </div>
+
+                <div class="specialtyBody">
+
+                    <div class="specialtyIcon">
+                        ⌁
+                    </div>
+
+                    <h3>
+                        Redes
+                    </h3>
+
+                    <p>
+                        Packet Tracer, Wireshark, TCP/IP,
+                        infraestructura y comunicación.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROYECTOS
+===================================================== -->
+
+<section id="proyectos">
+
+    <div class="container">
+
+        <div class="sectionHeader reveal">
+
+            <div>
+
+                <div class="sectionNumber">
+                    03 / PROYECTOS
+                </div>
+
+                <h2>
+                    Trabajo<br>académico.
+                </h2>
+
+            </div>
+
+            <p>
+                Una selección visual de proyectos,
+                investigaciones y soluciones desarrolladas
+                durante mi formación.
+            </p>
+
+        </div>
+
+
+        <div class="searchBox reveal">
+
+            <span class="searchIcon">
+                ⌕
+            </span>
+
+            <input
+                id="projectSearch"
+                type="text"
+                placeholder="Buscar proyecto, tecnología o concepto..."
+                oninput="searchProjects()">
+
+        </div>
+
+
+        <div class="projects" id="projectGrid">
+
+
+            <article class="project reveal"
+                data-search="arquitectura software uml sistemas distribuidos">
+
+                <div
+                    class="projectImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=85')">
+
+                    <div class="projectIndex">
+                        PROJECT 01
+                    </div>
+
+                </div>
+
+                <div class="projectBody">
+
+                    <div class="projectCategory">
+                        SOFTWARE ARCHITECTURE
+                    </div>
+
+                    <h3>
+                        Diseño de Arquitectura de Software
+                    </h3>
+
+                    <p>
+                        Modelamiento arquitectónico,
+                        componentes, vistas, responsabilidades,
+                        integración y decisiones de diseño.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">UML</span>
+                        <span class="tag">REST</span>
+                        <span class="tag">POSTGRESQL</span>
+
+                    </div>
+
+                    <div class="projectFooter">
+
+                        <span class="projectLink">
+                            VER PROYECTO →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="project reveal"
+                data-search="inteligencia artificial python datos">
+
+                <div
+                    class="projectImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1400&q=85')">
+
+                    <div class="projectIndex">
+                        PROJECT 02
+                    </div>
+
+                </div>
+
+                <div class="projectBody">
+
+                    <div class="projectCategory">
+                        ARTIFICIAL INTELLIGENCE
+                    </div>
+
+                    <h3>
+                        Exploración de Inteligencia Artificial
+                    </h3>
+
+                    <p>
+                        Conceptos y aplicaciones de IA,
+                        automatización y herramientas
+                        utilizadas en soluciones modernas.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">AI</span>
+                        <span class="tag">PYTHON</span>
+                        <span class="tag">DATA</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="project reveal"
+                data-search="ciberseguridad kali linux redes">
+
+                <div
+                    class="projectImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1400&q=85')">
+
+                    <div class="projectIndex">
+                        PROJECT 03
+                    </div>
+
+                </div>
+
+                <div class="projectBody">
+
+                    <div class="projectCategory">
+                        CYBERSECURITY
+                    </div>
+
+                    <h3>
+                        Laboratorio de Seguridad
+                    </h3>
+
+                    <p>
+                        Exploración académica de Linux,
+                        redes, seguridad informática y
+                        herramientas de análisis.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">KALI</span>
+                        <span class="tag">LINUX</span>
+                        <span class="tag">WIRESHARK</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="project reveal"
+                data-search="cloud azure infraestructura">
+
+                <div
+                    class="projectImage"
+                    style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=85')">
+
+                    <div class="projectIndex">
+                        PROJECT 04
+                    </div>
+
+                </div>
+
+                <div class="projectBody">
+
+                    <div class="projectCategory">
+                        CLOUD COMPUTING
+                    </div>
+
+                    <h3>
+                        Despliegue en Azure
+                    </h3>
+
+                    <p>
+                        Implementación de un portafolio web
+                        utilizando infraestructura cloud
+                        mediante Azure App Service.
+                    </p>
+
+                    <div class="tags">
+
+                        <span class="tag">AZURE</span>
+                        <span class="tag">CLOUD</span>
+                        <span class="tag">WEB</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TECH STACK
+===================================================== -->
+
+<section id="tecnologias" class="techSection">
+
+    <div class="techTitle">
+
+        <span>
+            TECHNOLOGY STACK
+        </span>
+
+    </div>
+
+    <div class="techMarquee">
+
+        <div class="techTrack">
+
+            <div class="techItem">PYTHON</div>
+            <div class="techItem">JAVASCRIPT</div>
+            <div class="techItem">HTML</div>
+            <div class="techItem">CSS</div>
+            <div class="techItem">SQL</div>
+            <div class="techItem">POSTGRESQL</div>
+            <div class="techItem">AZURE</div>
+            <div class="techItem">LINUX</div>
+            <div class="techItem">KALI LINUX</div>
+            <div class="techItem">UML</div>
+            <div class="techItem">BPMN</div>
+            <div class="techItem">WIRESHARK</div>
+            <div class="techItem">PACKET TRACER</div>
+            <div class="techItem">GIT</div>
+
+            <div class="techItem">PYTHON</div>
+            <div class="techItem">JAVASCRIPT</div>
+            <div class="techItem">HTML</div>
+            <div class="techItem">CSS</div>
+            <div class="techItem">SQL</div>
+            <div class="techItem">POSTGRESQL</div>
+            <div class="techItem">AZURE</div>
+            <div class="techItem">LINUX</div>
+            <div class="techItem">KALI LINUX</div>
+            <div class="techItem">UML</div>
+            <div class="techItem">BPMN</div>
+            <div class="techItem">WIRESHARK</div>
+            <div class="techItem">PACKET TRACER</div>
+            <div class="techItem">GIT</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     UNIDADES
+===================================================== -->
+
+<section id="unidades">
+
+    <div class="container">
+
+        <div class="sectionHeader reveal">
+
+            <div>
+
+                <div class="sectionNumber">
+                    04 / PORTAFOLIO ACADÉMICO
+                </div>
+
+                <h2>
+                    Unidades<br>académicas.
+                </h2>
+
+            </div>
+
+            <p>
+                Accede a las cuatro unidades y revisa
+                el contenido desarrollado durante las
+                dieciséis semanas.
+            </p>
+
+        </div>
+
+
+        <div class="units" id="units">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPLORANDO
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="sectionHeader reveal">
+
+            <div>
+
+                <div class="sectionNumber">
+                    05 / FUTURO
+                </div>
+
+                <h2>
+                    Actualmente<br>explorando.
+                </h2>
+
+            </div>
+
+            <p>
+                El aprendizaje tecnológico no termina
+                con una asignatura. Estas son las áreas
+                que continúan despertando mi interés.
+            </p>
+
+        </div>
+
+
+        <div class="exploring">
+
+            <div class="explore reveal">
+
+                <span>01</span>
+
+                <h3>
+                    Inteligencia Artificial
+                </h3>
+
+                <p>
+                    Modelos generativos, agentes y
+                    automatización inteligente.
+                </p>
+
+            </div>
+
+
+            <div class="explore reveal">
+
+                <span>02</span>
+
+                <h3>
+                    Ciberseguridad
+                </h3>
+
+                <p>
+                    Seguridad de sistemas, redes
+                    y fundamentos de ethical hacking.
+                </p>
+
+            </div>
+
+
+            <div class="explore reveal">
+
+                <span>03</span>
+
+                <h3>
+                    Cloud
+                </h3>
+
+                <p>
+                    Arquitecturas cloud y despliegue
+                    de aplicaciones.
+                </p>
+
+            </div>
+
+
+            <div class="explore reveal">
+
+                <span>04</span>
+
+                <h3>
+                    Sistemas Distribuidos
+                </h3>
+
+                <p>
+                    Microservicios, comunicación
+                    y escalabilidad.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ARQUITECTURA
+===================================================== -->
+
+<section id="arquitectura">
+
+    <div class="container">
+
+        <div class="sectionHeader reveal">
+
+            <div>
+
+                <div class="sectionNumber">
+                    06 / ARQUITECTURA
+                </div>
+
+                <h2>
+                    Pensar en<br>sistemas.
+                </h2>
+
+            </div>
+
+            <p>
+                La arquitectura conecta requisitos,
+                componentes, datos, procesos e
+                infraestructura en una solución coherente.
+            </p>
+
+        </div>
+
+
+        <div class="architectureVisual reveal">
+
+            <div class="archCore">
+                SYSTEM<br>CORE
+            </div>
+
+            <div class="archNode node1">
+                FRONTEND
+            </div>
+
+            <div class="archNode node2">
+                BACKEND
+            </div>
+
+            <div class="archNode node3">
+                DATABASE
+            </div>
+
+            <div class="archNode node4">
+                CLOUD
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     OWNER CARD
+===================================================== -->
+
+<div class="ownerCard">
+
+    <div class="ownerTop">
+
+        <div class="ownerAvatar">
+            ◉
+        </div>
+
+        <div>
+
+            <div class="ownerTitle">
+                PROPIETARIO
+            </div>
+
+            <div class="ownerName">
+                MAYTA
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="ownerInfo">
+
+        <div class="ownerRow">
+            <span>ROL</span>
+            <span>Estudiante</span>
+        </div>
+
+        <div class="ownerRow">
+            <span>CARRERA</span>
+            <span>Ingeniería de Sistemas</span>
+        </div>
+
+        <div class="ownerRow">
+            <span>UNIVERSIDAD</span>
+            <span>UPLA</span>
+        </div>
+
+        <div class="ownerRow">
+            <span>CICLO</span>
+            <span>8.º Ciclo · 2026</span>
+        </div>
+
+        <div class="ownerRow">
+            <span>UBICACIÓN</span>
+            <span>Huancayo · Perú</span>
+        </div>
+
+    </div>
+
+
+    <div class="ownerStatus">
+
+        <span class="statusDot"></span>
+
+        ESTUDIANTE ACTIVO
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ARQ BOT
+===================================================== -->
+
+<button
+    class="botButton"
+    onclick="toggleBot()">
+
+    ◈
+
+</button>
+
+
+<div class="botPanel" id="botPanel">
+
+    <div class="botHeader">
+
+        <strong>
+            ARQ-BOT
+        </strong>
+
+        <span class="status">
+            <span class="statusDot"></span>
+            ONLINE
+        </span>
+
+    </div>
+
+
+    <div
+        class="botMessages"
+        id="botMessages">
+
+        <div class="message bot">
+
+            Hola. Soy ARQ-BOT,
+            el asistente del laboratorio
+            tecnológico de Mayta.
+
+            ¿Qué quieres explorar?
+
+        </div>
+
+        <div class="message bot">
+
+            Puedes preguntar por:
+            proyectos, arquitectura,
+            tecnologías, unidades o autor.
+
+        </div>
+
+    </div>
+
+
+    <div class="botInput">
+
+        <input
+            id="botInput"
+            placeholder="Escribe una pregunta..."
+            onkeydown="if(event.key==='Enter')sendBot()">
+
+        <button onclick="sendBot()">
+            →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOP BUTTON
+===================================================== -->
+
+<button
+    id="topButton"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+    ↑
+
+</button>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footerInner">
+
+        <div class="footerBrand">
+
+            MAYTA
+
+            <span>
+                SOFTWARE & SYSTEMS LAB
+            </span>
+
+        </div>
+
+        <div class="footerCopy">
+
+            © <span id="year"></span>
+            · PORTAFOLIO ACADÉMICO
+            · UPLA
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   CAROUSEL
+========================================================= */
+
+const slides =
+    document.querySelectorAll(".slide");
+
+const dots =
+    document.querySelectorAll(".dot");
+
+let currentSlide = 0;
+
+function goSlide(index){
+
+    slides[currentSlide].classList.remove("active");
+    dots[currentSlide].classList.remove("active");
+
+    currentSlide = index;
+
+    slides[currentSlide].classList.add("active");
+    dots[currentSlide].classList.add("active");
+}
+
+function nextSlide(){
+
+    goSlide(
+        (currentSlide + 1) % slides.length
+    );
+
+}
+
+function previousSlide(){
+
+    goSlide(
+        (currentSlide - 1 + slides.length)
+        % slides.length
+    );
+
+}
+
+let carouselTimer =
+    setInterval(nextSlide,6000);
+
+document
+.querySelector(".heroCarousel")
+.addEventListener("mouseenter",()=>{
+
+    clearInterval(carouselTimer);
+
+});
+
+document
+.querySelector(".heroCarousel")
+.addEventListener("mouseleave",()=>{
+
+    carouselTimer =
+        setInterval(nextSlide,6000);
+
+});
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="ArrowRight"){
+        nextSlide();
+    }
+
+    if(e.key==="ArrowLeft"){
+        previousSlide();
+    }
+
+});
+
+
+/* =========================================================
+   UNIDADES
+========================================================= */
+
+const DATA = {
+
+    1:{
+        title:"Fundamentos de Arquitectura",
+        subtitle:"Bases conceptuales y arquitectura de sistemas",
+        weeks:[
+            "Fundamentos de Arquitectura",
+            "Cloud Computing",
+            "Administración de la Nube",
+            "Infraestructura Tecnológica"
+        ]
+    },
+
+    2:{
+        title:"Diseño y Modelado",
+        subtitle:"Modelado, componentes y evaluación",
+        weeks:[
+            "Sistemas Empresariales",
+            "Modelado Arquitectónico",
+            "Componentes de Software",
+            "Evaluación Arquitectónica"
+        ]
+    },
+
+    3:{
+        title:"Arquitecturas Modernas",
+        subtitle:"Patrones, distribución y evolución",
+        weeks:[
+            "Patrones Arquitectónicos",
+            "Arquitecturas de Software",
+            "Arquitecturas Distribuidas",
+            "Microservicios"
+        ]
+    },
+
+    4:{
+        title:"Integración y Proyecto",
+        subtitle:"Integración, seguridad y proyecto final",
+        weeks:[
+            "Integración de Sistemas",
+            "Seguridad Arquitectónica",
+            "Proyecto Arquitectónico",
+            "Presentación Final"
+        ]
+    }
+
+};
+
+
+function generateUnits(){
+
+    const container =
+        document.getElementById("units");
+
+    container.innerHTML="";
+
+    let weekCounter=1;
+
+    Object.entries(DATA).forEach(
+        ([number,unit],index)=>{
+
+        const article =
+            document.createElement("article");
+
+        article.className =
+            "unit reveal";
+
+        article.innerHTML=`
+
+            <div
+                class="unitHeader"
+                onclick="toggleUnit(this)">
+
+                <div class="unitTitle">
+
+                    <div class="unitNumber">
+                        U${number}
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${unit.title}
+                        </h3>
+
+                        <span>
+                            ${unit.subtitle}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="unitArrow">
+                    ↓
+                </div>
+
+            </div>
+
+
+            <div class="weeks">
+
+                ${unit.weeks.map(
+                    week=>`
+
+                    <div class="week">
+
+                        <div class="weekNumber">
+                            SEMANA ${weekCounter++}
                         </div>
 
-                    `;
+                        <h4>
+                            ${week}
+                        </h4>
 
-                });
+                        <p>
+                            Evidencias, documentos,
+                            recursos audiovisuales y
+                            trabajos desarrollados.
+                        </p>
 
+                        <div class="weekActions">
 
-                unitElement.innerHTML = `
+                            <a href="#">
+                                DOCUMENTO
+                            </a>
 
-                    <div
-                        class="unit-header"
-                        onclick="toggleUnit(this)">
+                            <a href="#">
+                                VIDEOS
+                            </a>
 
-                        <div class="unit-title">
-
-                            <div class="unit-number">
-                                ${unit.number}
-                            </div>
-
-                            <div>
-
-                                <h3>
-                                    ${unit.title}
-                                </h3>
-
-                                <span>
-                                    04 SEMANAS · EVIDENCIAS ACADÉMICAS
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="unit-arrow">
-                            ▼
                         </div>
 
                     </div>
 
+                `
+                ).join("")}
 
-                    <div class="weeks">
+            </div>
 
-                        ${weeksHTML}
+        `;
 
-                    </div>
+        container.appendChild(article);
 
-                `;
+    });
 
-
-                container.appendChild(unitElement);
-
-            });
-
-
-            observeReveal();
-
-        }
+}
 
 
-        function toggleUnit(header) {
+function toggleUnit(element){
 
-            const unit =
-                header.parentElement;
+    const unit =
+        element.parentElement;
 
-            unit.classList.toggle("open");
+    unit.classList.toggle("open");
 
-        }
-
-
-        /* =========================================================
-           CAROUSEL
-        ========================================================= */
-
-        let currentSlide = 0;
-
-        const slides =
-            document.querySelectorAll(".slide");
-
-        const dots =
-            document.querySelectorAll(".dot");
-
-        const progress =
-            document.getElementById("carouselProgress");
+}
 
 
-        function showSlide(index) {
+/* =========================================================
+   SEARCH
+========================================================= */
 
-            currentSlide =
-                (index + slides.length) % slides.length;
+function searchProjects(){
 
+    const value =
+        document
+        .getElementById("projectSearch")
+        .value
+        .toLowerCase();
 
-            slides.forEach((slide, i) => {
+    document
+    .querySelectorAll(".project")
+    .forEach(project=>{
 
-                slide.classList.toggle(
-                    "active",
-                    i === currentSlide
-                );
+        const text =
+            project
+            .dataset
+            .search;
 
-            });
+        project.style.display =
+            text.includes(value)
+            ? ""
+            : "none";
 
+    });
 
-            dots.forEach((dot, i) => {
-
-                dot.classList.toggle(
-                    "active",
-                    i === currentSlide
-                );
-
-            });
-
-
-            progress.style.width = "0%";
-
-            void progress.offsetWidth;
-
-            progress.style.transition =
-                "width 6s linear";
-
-            progress.style.width = "100%";
-
-        }
+}
 
 
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
+function toggleSidebar(){
 
-        function previousSlide() {
-            showSlide(currentSlide - 1);
-        }
+    document
+    .getElementById("sidebar")
+    .classList
+    .toggle("open");
 
+}
 
-        let carouselInterval =
-            setInterval(nextSlide, 6000);
+document
+.querySelectorAll(".nav a")
+.forEach(link=>{
 
+    link.addEventListener("click",()=>{
 
         document
-            .getElementById("techCarousel")
-            .addEventListener("mouseenter", () => {
-                clearInterval(carouselInterval);
+        .getElementById("sidebar")
+        .classList
+        .remove("open");
+
+    });
+
+});
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+window.addEventListener("scroll",()=>{
+
+    const scrollTop =
+        window.scrollY;
+
+    const height =
+        document.documentElement.scrollHeight
+        - window.innerHeight;
+
+    const progress =
+        (scrollTop / height) * 100;
+
+    document
+    .getElementById("scrollProgress")
+    .style.width =
+        progress + "%";
+
+
+    const topButton =
+        document.getElementById("topButton");
+
+    if(scrollTop > 500){
+
+        topButton.classList.add("show");
+
+    }else{
+
+        topButton.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry
+                    .target
+                    .classList
+                    .add("visible");
+
+                }
+
             });
 
+        },
+        {
+            threshold:.12
+        }
+    );
 
+
+function observeReveal(){
+
+    document
+    .querySelectorAll(".reveal")
+    .forEach(element=>{
+
+        observer.observe(element);
+
+    });
+
+}
+
+
+/* =========================================================
+   ACTIVE NAV
+========================================================= */
+
+const sections =
+    document.querySelectorAll("main section");
+
+const navLinks =
+    document.querySelectorAll(".nav a");
+
+window.addEventListener("scroll",()=>{
+
+    let current="";
+
+    sections.forEach(section=>{
+
+        const top =
+            section.offsetTop - 150;
+
+        if(window.scrollY >= top){
+
+            current =
+                section.getAttribute("id");
+
+        }
+
+    });
+
+    navLinks.forEach(link=>{
+
+        link.classList.remove("active");
+
+        if(
+            link.getAttribute("href")
+            ==="#"+current
+        ){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   ARQ BOT
+========================================================= */
+
+function toggleBot(){
+
+    document
+    .getElementById("botPanel")
+    .classList
+    .toggle("open");
+
+}
+
+
+function addBotMessage(text,type){
+
+    const box =
         document
-            .getElementById("techCarousel")
-            .addEventListener("mouseleave", () => {
+        .getElementById("botMessages");
 
-                carouselInterval =
-                    setInterval(nextSlide, 6000);
+    const message =
+        document.createElement("div");
 
-            });
+    message.className =
+        "message "+type;
 
+    message.textContent=text;
 
-        dots.forEach((dot, index) => {
+    box.appendChild(message);
 
-            dot.addEventListener(
-                "click",
-                () => showSlide(index)
-            );
+    box.scrollTop =
+        box.scrollHeight;
 
-        });
-
-
-        showSlide(0);
+}
 
 
-        /* =========================================================
-           KEYBOARD CAROUSEL
-        ========================================================= */
+function sendBot(){
 
-        document.addEventListener(
-            "keydown",
-            event => {
+    const input =
+        document
+        .getElementById("botInput");
 
-                if (
-                    event.key === "ArrowRight"
-                ) {
-                    nextSlide();
-                }
+    const value =
+        input.value.trim();
 
-                if (
-                    event.key === "ArrowLeft"
-                ) {
-                    previousSlide();
-                }
+    if(!value)return;
 
-                if (
-                    event.key === "Escape"
-                ) {
-                    closeVideo();
-                }
+    addBotMessage(
+        value,
+        "user"
+    );
 
-            }
+    input.value="";
+
+    setTimeout(()=>{
+
+        const text =
+            value.toLowerCase();
+
+        let response =
+            "Puedes explorar las secciones de proyectos, unidades, tecnologías y arquitectura.";
+
+        if(
+            text.includes("proyecto")
+        ){
+
+            response =
+                "En Proyectos encontrarás arquitectura de software, IA, ciberseguridad y cloud.";
+
+        }
+
+        else if(
+            text.includes("tecnolog")
+        ){
+
+            response =
+                "El stack incluye Python, JavaScript, SQL, PostgreSQL, Azure, Linux, Kali, UML, BPMN, Wireshark y Packet Tracer.";
+
+        }
+
+        else if(
+            text.includes("autor")
+            ||
+            text.includes("mayta")
+        ){
+
+            response =
+                "Mayta es estudiante de Ingeniería de Sistemas en la UPLA y este portafolio reúne su formación académica y tecnológica.";
+
+        }
+
+        else if(
+            text.includes("arquitect")
+        ){
+
+            response =
+                "La arquitectura es uno de los ejes principales del portafolio: UML, patrones, sistemas distribuidos, REST, componentes y decisiones arquitectónicas.";
+
+        }
+
+        else if(
+            text.includes("unidad")
+        ){
+
+            response =
+                "El portafolio está organizado en cuatro unidades y dieciséis semanas.";
+
+        }
+
+        addBotMessage(
+            response,
+            "bot"
         );
 
+    },500);
 
-        /* =========================================================
-           SEARCH
-        ========================================================= */
+}
 
-        function searchPortfolio() {
 
-            const query =
-                document
-                    .getElementById("searchInput")
-                    .value
-                    .toLowerCase()
-                    .trim();
+/* =========================================================
+   YEAR
+========================================================= */
 
+document
+.getElementById("year")
+.textContent =
+new Date().getFullYear();
 
-            document
-                .querySelectorAll(
-                    ".project-card, .week"
-                )
-                .forEach(item => {
 
-                    const text =
-                        item.innerText.toLowerCase()
-                        + " "
-                        + (
-                            item.dataset.search || ""
-                        );
+/* =========================================================
+   INIT
+========================================================= */
 
-                    item.style.display =
-                        !query || text.includes(query)
-                        ? ""
-                        : "none";
+generateUnits();
 
-                });
+observeReveal();
 
-        }
-
-
-        /* =========================================================
-           SIDEBAR
-        ========================================================= */
-
-        function toggleSidebar() {
-
-            document
-                .getElementById("sidebar")
-                .classList.toggle("open");
-
-        }
-
-
-        document
-            .querySelectorAll(".nav-link")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        document
-                            .getElementById("sidebar")
-                            .classList.remove("open");
-
-                    }
-                );
-
-            });
-
-
-        /* =========================================================
-           SCROLL PROGRESS + TOP BUTTON
-        ========================================================= */
-
-        const topButton =
-            document.getElementById("topButton");
-
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                const scrollTop =
-                    window.scrollY;
-
-                const height =
-                    document.documentElement.scrollHeight
-                    - window.innerHeight;
-
-                const percentage =
-                    height > 0
-                    ? (scrollTop / height) * 100
-                    : 0;
-
-                document
-                    .getElementById("scrollProgress")
-                    .style.width =
-                    percentage + "%";
-
-
-                if (scrollTop > 500) {
-
-                    topButton
-                        .classList.add("show");
-
-                } else {
-
-                    topButton
-                        .classList.remove("show");
-
-                }
-
-            }
-        );
-
-
-        /* =========================================================
-           ACTIVE NAVIGATION
-        ========================================================= */
-
-        const sections =
-            document.querySelectorAll(
-                "main section[id]"
-            );
-
-
-        const navLinks =
-            document.querySelectorAll(
-                ".nav-link"
-            );
-
-
-        const navObserver =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            navLinks.forEach(link => {
-
-                                link.classList.remove(
-                                    "active"
-                                );
-
-                            });
-
-
-                            const active =
-                                document.querySelector(
-                                    `.nav-link[href="#${entry.target.id}"]`
-                                );
-
-
-                            if (active) {
-                                active.classList.add(
-                                    "active"
-                                );
-                            }
-
-                        }
-
-                    });
-
-                },
-                {
-                    rootMargin:
-                        "-35% 0px -55% 0px"
-                }
-            );
-
-
-        sections.forEach(
-            section =>
-                navObserver.observe(section)
-        );
-
-
-        /* =========================================================
-           REVEAL ANIMATION
-        ========================================================= */
-
-        let revealObserver;
-
-
-        function observeReveal() {
-
-            if (!revealObserver) {
-
-                revealObserver =
-                    new IntersectionObserver(
-                        entries => {
-
-                            entries.forEach(
-                                entry => {
-
-                                    if (
-                                        entry.isIntersecting
-                                    ) {
-
-                                        entry.target
-                                            .classList
-                                            .add("visible");
-
-                                        revealObserver
-                                            .unobserve(
-                                                entry.target
-                                            );
-
-                                    }
-
-                                },
-                        {
-                            threshold: .1
-                        });
-
-            }
-
-
-            document
-                .querySelectorAll(".reveal")
-                .forEach(element => {
-
-                    if (
-                        !element.classList.contains(
-                            "visible"
-                        )
-                    ) {
-                        revealObserver.observe(
-                            element
-                        );
-                    }
-
-                });
-
-        }
-
-
-        /* =========================================================
-           BOT
-        ========================================================= */
-
-        function toggleBot() {
-
-            document
-                .getElementById("botWindow")
-                .classList.toggle("open");
-
-        }
-
-
-        function addMessage(text, type = "bot") {
-
-            const messages =
-                document.getElementById(
-                    "botMessages"
-                );
-
-
-            const message =
-                document.createElement("div");
-
-            message.className =
-                "message " +
-                (type === "user" ? "user" : "");
-
-
-            message.textContent =
-                text;
-
-
-            messages.appendChild(message);
-
-
-            messages.scrollTop =
-                messages.scrollHeight;
-
-        }
-
-
-        function sendBot() {
-
-            const input =
-                document.getElementById(
-                    "botInput"
-                );
-
-
-            const value =
-                input.value.trim();
-
-
-            if (!value) return;
-
-
-            addMessage(value, "user");
-
-            input.value = "";
-
-
-            setTimeout(
-                () => {
-
-                    const text =
-                        value.toLowerCase();
-
-
-                    let response =
-                        "Puedes preguntarme por los proyectos, las unidades, arquitectura, inteligencia artificial o tecnologías del portafolio.";
-
-
-                    if (
-                        text.includes("proyecto")
-                    ) {
-
-                        response =
-                            "El portafolio presenta proyectos de sistemas, procesos BPMN, gestión de certificados, horarios y laboratorios.";
-
-                    }
-
-
-                    if (
-                        text.includes("arquitect")
-                    ) {
-
-                        response =
-                            "La arquitectura de software es uno de los ejes principales del portafolio: patrones, componentes, sistemas distribuidos, microservicios y decisiones arquitectónicas.";
-
-                    }
-
-
-                    if (
-                        text.includes("ia")
-                        ||
-                        text.includes("inteligencia")
-                    ) {
-
-                        response =
-                            "El área de IA está enfocada en Python, datos, automatización y exploración de tecnologías inteligentes.";
-
-                    }
-
-
-                    if (
-                        text.includes("semana")
-                    ) {
-
-                        response =
-                            "El portafolio está organizado en 4 unidades y 16 semanas de trabajo académico.";
-
-                    }
-
-
-                    if (
-                        text.includes("azure")
-                        ||
-                        text.includes("cloud")
-                    ) {
-
-                        response =
-                            "El portafolio está preparado para desplegarse en Microsoft Azure App Service y explorar arquitectura cloud.";
-
-                    }
-
-
-                    addMessage(response);
-
-                },
-                500
-            );
-
-        }
-
-
-        function botCommand(command) {
-
-            addMessage(command, "user");
-
-
-            let response = "";
-
-
-            switch(command) {
-
-                case "proyectos":
-                    response =
-                        "Puedes encontrar los proyectos principales en la sección Proyectos.";
-                    break;
-
-                case "arquitectura":
-                    response =
-                        "La arquitectura de software es uno de los principales ejes académicos de Mayta.";
-                    break;
-
-                case "ia":
-                    response =
-                        "La Inteligencia Artificial, Python y los datos forman parte del enfoque tecnológico.";
-                    break;
-
-                case "semanas":
-                    response =
-                        "Hay 4 unidades organizadas en 16 semanas.";
-                    break;
-
-            }
-
-
-            setTimeout(
-                () => addMessage(response),
-                350
-            );
-
-        }
-
-
-        /* =========================================================
-           VIDEO
-        ========================================================= */
-
-        function getYoutubeId(url) {
-
-            if (!url) return null;
-
-
-            const patterns = [
-
-                /youtu\.be\/([^?]+)/,
-
-                /youtube\.com\/watch\?v=([^&]+)/,
-
-                /youtube\.com\/embed\/([^?]+)/
-
-            ];
-
-
-            for (
-                const pattern
-                of patterns
-            ) {
-
-                const match =
-                    url.match(pattern);
-
-                if (match) {
-                    return match[1];
-                }
-
-            }
-
-
-            return null;
-
-        }
-
-
-        function openVideo(url, title) {
-
-            const id =
-                getYoutubeId(url);
-
-
-            if (!id) {
-
-                alert(
-                    "Este recurso todavía no tiene un video configurado."
-                );
-
-                return;
-
-            }
-
-
-            document
-                .getElementById("videoTitle")
-                .textContent =
-                title;
-
-
-            document
-                .getElementById("videoFrame")
-                .src =
-                "https://www.youtube.com/embed/" +
-                id;
-
-
-            document
-                .getElementById("videoModal")
-                .classList.add("open");
-
-        }
-
-
-        function closeVideo(event) {
-
-            if (
-                event &&
-                event.target !==
-                document.getElementById(
-                    "videoModal"
-                )
-            ) {
-                return;
-            }
-
-
-            document
-                .getElementById("videoModal")
-                .classList.remove("open");
-
-
-            document
-                .getElementById("videoFrame")
-                .src = "";
-
-        }
-
-
-        /* =========================================================
-           YEAR
-        ========================================================= */
-
-        document
-            .getElementById("year")
-            .textContent =
-            new Date().getFullYear();
-
-
-        /* =========================================================
-           INIT
-        ========================================================= */
-
-        generateUnits();
-
-        observeReveal();
-
-    </script>
+</script>
 
 </body>
 </html>
